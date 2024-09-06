@@ -1,0 +1,47 @@
+Prepare the following interview question. We can have a mock on Monday. 
+
+Tell me about yourself
+average salary per grade
+which employee got highest hike in feb
+which grade has got maximum salary
+who are the new employee who are joined in feb
+
+puzzels
+there are 50 white socks and 50 black socks
+1.what are the minimum number of socks you should pick so that u get any one pair
+2.what are the minimum number of socks you should pick so that u get one pair of black socks
+
+there are 8 pebbles which are identical, among them 7 weigh same but 8th pebble weigh more. by using a balance in how many minimum iterations we can find the 8th pebbble
+‐-----------
+1) Introduce yourself
+2) Explain about your projects and roles and responsibilities
+3) What are the libraries you have imported to connect to AWS s3 and converting that file to dataframe and syntax.
+4) Imported one file from s3 then how will you verify the number of records by using dataframe and syntax.
+5) How to remove unwanted column from a table?
+6) How to remove duplicate values.
+7) How to replace empty places.
+8) Verify the number of records by using dataframe in pandas.
+9) What are the libraries you have used.
+10) write a code to convert to datetime with the format of(yy-mm-dd)
+11) Difference between delete and Truncate.
+12) Difference between List and Tuple
+13) Given scenario on count occurrences of a character in string.
+14) Joins types
+15) What is DML and DDL
+16) Give one scenario on mysql sub query(detail of employees whose salary is greater than average salary)
+17) How can you add a new column to existing table?
+18) What is set
+19) Difference between union and intersection
+20) What is PySpark and it will work
+21) what is RDD
+22) Difference between dataframe and RDD
+23) What is filter
+24) what is map
+25) what is groupby given one scenario and syntax
+26) What is lambda and type of function you have used on that
+27) Verify the number of records by using dataframe in PySpark.
+28) What are the transformation operation you have used.
+29) What are the action operation you have used.
+30) Difference between map and flatmap.
+31) Aggregation function on pyspark.
+32) Given one scenario on groupby and aggregate function.

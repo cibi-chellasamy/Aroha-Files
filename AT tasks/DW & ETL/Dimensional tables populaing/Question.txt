@@ -1,0 +1,1 @@
+Populating type 1 dimension table, type 2 dimension table and type3 dimension table based on product related tables 

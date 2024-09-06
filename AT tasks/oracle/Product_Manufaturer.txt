@@ -1,0 +1,158 @@
+
+CREATE TABLE MANUFACTURES
+(M_CODE NUMBER PRIMARY KEY, M_NAME VARCHAR2(20));
+
+INSERT ALL
+INTO MANUFACTURES VALUES (100, 'TATA')
+INTO MANUFACTURES VALUES (101, 'BAJAJ')
+INTO MANUFACTURES VALUES (102, 'SAMSUNG')
+SELECT * FROM DUAL;
+
+CREATE TABLE PRODUCT
+(P_ID NUMBER PRIMARY KEY, P_NAME VARCHAR2(20),P_PRICE NUMBER, M_CODE NUMBER REFERENCES MANUFACTURES(M_CODE));
+
+INSERT ALL
+INTO PRODUCT VALUES (1, 'NANO', 155000, 100)
+INTO PRODUCT VALUES (2, 'INDICA', 750000, 100)
+INTO PRODUCT VALUES (3, 'BAJAJ AUTO', 29000, 101)
+INTO PRODUCT VALUES (4, 'PULSAR', 78000, 101)
+INTO PRODUCT VALUES (5, 'T TRUCK', 4500000, 100)
+INTO PRODUCT VALUES (6, 'E PULSAR', 100000, 101)
+INTO PRODUCT VALUES (7, 'SUMO', 1200000, 100)
+INTO PRODUCT VALUES (8, 'PULSAR++', 155000, 101)
+SELECT * FROM DUAL;
+
+-------------------Simple and Sub Query on two Tables-----------------------------------
+select * from product
+
+select * from manufactures
+insert into manufactures values(101,'BAJAJ')
+update product set m_code = 101 where m_code is null
+commit
+
+--Display product name which costs more than 200000					
+select p_name 
+from product
+where p_price > 200000
+
+--product name which costs more than 100000 and product name begins with N or end with 'o'						
+select p_name 
+from product
+where p_price > 100000 and p_name like 'N%'or  p_name like '%O'
+
+--Find product names which has the price between 100000 and 300000						
+select p_name 
+from product 
+where p_price >= 100000 and p_price <= 300000;
+
+select p_name 
+from product 
+where p_price between 100000 and 300000;
+--
+--Find all the product names which is costlier than Indica							
+select p_name
+from product 
+where p_price > (select p_price from product where p_name = 'INDICA');
+--
+--We want to see the price of Sumo			
+select p_price
+from product
+where p_name = 'SUMO'
+
+--Find all the products where name starts with B or P and price between 30000 and 90000								
+select p_name,p_price 
+from product
+where (p_price between 30000 and 90000) and (p_name like 'B%' or  p_name like 'P%')
+
+--Find the manufacturer who does not have any products		
+select m_name
+from manufactures
+where m_code not in (select distinct m_code
+from product)
+
+
+select * from customer
+
+---Display customer name either from TN or KA'
+
+select cust_name
+from customer 
+where cust_state = 'TN' or cust_state = 'KA' 
+
+select cust_name
+from customer 
+where cust_state not in ('KA','TN')
+
+
+--Display which product as highest cost			
+select p_name
+from product
+where p_price = (select max(p_price)
+from product)
+
+
+select p_name,p_price
+from product
+order by p_price desc
+fetch first row only
+--
+--Display count of product belong to "TATA"				
+select count(p_id) as total_product
+from product
+where m_code = (select m_code
+from manufactures
+where m_name = 'TATA')
+
+--Display Product name which costs similar to 'Nano'		
+select p_name
+from product
+where p_price = 
+(select p_price
+from product
+where p_name = 'NANO')
+
+--
+--11	Diplay the product name as lowest cost			
+select p_name
+from product
+where p_price = (select min(p_price)
+from product)
+
+
+select p_name,p_price
+from product
+order by p_price asc
+fetch first row only
+
+
+--12	Display product name belong to bajaj'\
+select p_name
+from product
+where m_code = (select m_code
+from manufactures
+where m_name = 'BAJAJ')
+
+--13	Display the product name belongs to "BAJAJ" and the price is greater than 100000								
+select p_name
+from product
+where m_code = (select m_code
+from manufactures
+where m_name = 'BAJAJ') and p_price > 100000
+--
+--Display the Manufacture name of SUMO--	
+select m_name
+from manufactures
+where m_code = 
+(select m_code
+from product
+where p_name = 'SUMO')
+--
+--Display which manufacture have highest cost product --					
+select m_name
+from manufactures
+where m_code = 
+(select m_code
+from product
+where p_price = (select max(p_price)
+from product))
+	

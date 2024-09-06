@@ -1,0 +1,13 @@
+1. introduce your self.
+2. what is collection and types of collections.
+3. what are all the analytical functions list them.
+4. difference between rank and dense_rank.
+	write a query for displaying emp_name,salary and rank them based on their salary.
+5. what is global variable.
+6. difference between unique key and primary key.
+7. what is partion tables, and types of partions explain.
+8. what is sequence.
+9. trigger and types of trigger.
+10.explain about dbliks
+
+

@@ -1,0 +1,22 @@
+If I were to start learning hashtag#python again for analytics, this is how I would prioritize topics for learning:
+
+Week 1: Learning python basics + Control flow Statement
+⏩ Syntax, data types, variables, and basic operations
+⏩If-Else condition, For and While loop ,Functions
+
+Week 2: Data structures and data manipulations
+⏩Lists and dictionaries
+⏩Working with Text Data
+
+Week 3 &4: Data Analysis Libraries
+⏩Reading from and writing to files (CSV, XLSX)
+⏩Introduction to Numpy, Pandas & Matplotlib
+
+Data Manipulations using pandas:
+⏩Working with data frames and series
+⏩Basic operations Filtering, Merging, Sorting, Aggregating data
+
+Data Visualization using Matplotlib/Seaborn:
+⏩Creating Histograms, Scatterplot, Charts (Line, Bar, Pie)
+
+Now start building mini projects.

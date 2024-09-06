@@ -1,0 +1,13 @@
+MRP 
+GST
+
+
+
+# Formatting Indian Currency -
+VAR currentsales SUM('Orders $FilterDatabase (Sales))
+VAR Result    SWITCH(TRUE(),
+currentsales> 10000000, ROUND (DIVIDE (currentsales, 10000000),1) & "Cr",
+currentsales> 100000,ROUND(DIVIDE(currentsales, 10000000),1) & "Laks",
+currentsales> 1000, ROUND (DIVIDE(currentsales, 10000000),1) & "K",
+currentsales
+return Result

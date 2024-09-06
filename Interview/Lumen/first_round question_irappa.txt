@@ -1,0 +1,19 @@
+1. self introduction?
+2. project explation?
+3. what is flashback?
+4. what is purge?
+5. what are joins in orcle? 
+6. difference between delete,truncate,drop?
+7. example of self join?
+8. what is view? types of views?
+9. what is materialized view?
+10. what is refresssh methods ?
+11. difference between type and rowtype?
+12. how many types we can call a function?
+13. what is pragma?
+14. can we do ddl operation in procedure?
+15. what is cursor?
+16. what is ref cursor? 
+17. you have 2 table copy the record from 1 table to another table ?
+
+

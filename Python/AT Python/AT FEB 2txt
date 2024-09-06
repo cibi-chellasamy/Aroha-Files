@@ -1,0 +1,188 @@
+1) data1 = { 67,34,19,50,5,124,77,89,190,29,45}
+   data2 = { 21,7,43,91,51,160,15,24,67,89,75,180,29,45,2,8}
+   find the summed value after the union
+   what is the avg of the unioned value?
+   of the common elements between data1 and data2 ...find the
+   highest and lowest
+    
+   ---------------
+data1 = { 67,34,19,50,5,124,77,89,190,29,45}
+data2 = { 21,7,43,91,51,160,15,24,67,89,75,180,29,45,2,8}
+
+a = data1.union(data2)
+print(a)
+print('Sum of give numbers ',sum(a))
+
+
+avg_value = sum_d/len(union_set)
+
+print(avg_value)
+
+
+common_value = data1.intersection(data2)
+
+print(common_value)
+print('Max',max(union_set))
+print('Min',min(union_set))
+
+==========================================
+
+use the qs 1) data1 and data2
+   create data3 - add all the elements of data1 , data2 
+   sort the data3 in DESC order - how many ele are there..
+   delete/remove all the found elements of data1 in data2
+
+
+data1 = { 67,34,19,50,5,124,77,89,190,29,45}
+data2 = { 21,7,43,91,51,160,15,24,67,89,75,180,29,45,2,8}
+
+data3 = data1.union(data2)
+
+sorted_d3 = sorted(data3,reverse=True)
+print(sorted_d3)
+
+print('No of elements in sorted data3 - ' ,len(sorted_d3))
+
+data2 = data2-data1
+data2
+print('After removed',data2)
+======================================================
+
+set1 = { 23,4,(50,12,9),18,(5,2,-6,-19,27),-18,-50,(-3,15,-10),25 }
+   sum all the positive numbers
+   find the avg
+
+set1 = { 23,4,(50,12,9),18,(5,2,-6,-19,27),-18,-50,(-3,15,-10),25 }
+
+Positive_ = 0
+count_pos = 0
+
+for num in set1:
+    if isinstance(num,(int,float)) and num >0:
+        Positive_ = Positive_+num
+        count_pos = count_pos+1
+        
+if count_pos >1:
+    avg = Positive_/count_pos
+    print("Sum of positive numbers:", Positive_)
+    print("Average of positive numbers:", avg)
+    
+else:
+    print("No positive numbers found in the set.")
+
+find the sum of all the numbers in the tuple only (as above)
+   which is the highest,lowest value
+
+sum_tup = 0
+
+highest = float('-inf')
+lowest = float('inf')
+
+for element in set1:
+    if isinstance(element,tuple):
+        for num in element:
+            if isinstance(num, (int, float)):
+                sum_tup = sum_tup+num
+                highest = max(highest,num)
+                lowest = min(lowest,num)
+        
+        
+print("Sum of numbers in tuples:", sum_tup)
+print("Highest value in tuples:", highest)
+print("Lowest value in tuples:", lowest)
+
+
+
+=========================================================
+
+
+this is little challenging...
+   we wish to delete the negitive numbers in the set1
+   how it can be done ?
+   final o/p will be (all -ive removed)
+   set1 = { 23,4,(50,12,9),18,(5,2,27),(15),25 }
+
+for element in set1.copy():
+    if isinstance(element, (int, float)) and element < 0:
+        set1.discard(element)
+    elif isinstance(element, tuple):
+        set1.remove(element)
+        set1.add(tuple(num for num in element if num >= 0))
+
+print("set after removing negative numbers:")
+print(set1)
+
+
+==========================================================
+5) Given... (if you wish you could add more items to item dict
+   like how i have done...)
+
+             Id      name   price qty
+              |       |       |   |
+   item = { 100 : ['Laptop',56500, 5], 201: ['Mobile',23500,10],
+            400 : ['charger',2500, 4], 221: ['Earpods',4500,8] }
+   process the dict in such a way we display the o/p as 
+   100  Laptop 56500
+   200  Mobile 23500
+
+
+
+item = {
+    100: ['Laptop', 56500, 5],
+    201: ['Mobile', 23500, 10],
+    221: ['charger', 2500, 4],
+    400: ['Earpods', 4500, 8],
+    401:['pendrive',500,3],
+    405:['mosue',600,3]
+}
+
+print("Id\tName\t\tPrice")
+print("-------------------------")
+
+for item_id, details in item.items():
+    name, price, qty = details  
+    print(f"{item_id}\t{name}\t{price}\t{qty}")
+
+
+===============================================================
+
+process the above item dict and display it as following
+   name    item cost (stock value) ::: price x qty
+   Laptop  282500
+   Mobile  235000
+   ..      ...
+   ..      ...
+
+
+
+print("name    item cost (stock value)")
+for details in item.values():
+    name, price, qty = details
+    stock_value = price * qty
+    print(f"{name}  {stock_value}")
+
+
+=============================================================
+7) create another dict called item_1
+   move all the item details into item_1 whose qty is less than 6(move meaning delete it in item, add it in item_1)
+   display the item_1 contents
+   display the item contents
+
+
+
+item_1 = {}
+for id,details in list(item.items()):
+    qty = details[2]
+    if qty < 6:
+        item_1[id] = details
+        del item[id]
+
+        
+print(item)
+
+print()
+print('Item_1')
+print(item_1)
+
+
+===============================================================

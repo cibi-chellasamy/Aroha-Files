@@ -1,0 +1,50 @@
+1)Introduction
+2)'12/01/1990' in this date display only year
+3) display the duplicate records?
+4) i want to extract the name from the email_id
+   input: 'Abcd1.xyz2@gmail.com' and 
+   i want otput: 'Abcd1.xyz2'
+5) what is substr and instr 
+6) emp
+   empid  name    doj      gender  proj_cd     location
+    100     A  1/4/2021     M        1        Hyderabad
+    102     B  1/5/2021     F        2        Bengaloru
+    103     C  1/6/2021     F        3        Hyderabad
+    104     D  1/7/2021     M        4        Bengaloru
+    105     E  1/8/2021     M        1        Bengaloru    
+  
+   project
+    proj_cd     project_name
+      1            ABC
+      2            XYZ
+      3            PQR
+      4            INFA
+
+   display the distinct locations
+
+7) display the location wise employee count
+8) display the project wise employee count
+9) difference between view and mat views
+10) explain left outer join
+11) table1       table2
+      1            1
+      2            2
+      3            2
+      4            3
+      5 
+      6
+    how many records will get by using left outer join
+12) In my emp table gender column male and female is there you can update the 
+    gender column male as female and female as male
+    write a update statement 
+13) i have source table in different database and target as different database
+    you can access the source data and load into target table 
+    how will you do
+14) i have date in the form of csv file how to load the date into table
+15) what is sql loader explain
+16) i have a source table and target table you can load the records into the target table 
+    how you validate the records if inserted or not in a target table
+17) you are not creating any procedure you are using ETL tool
+    how you valiadate the date    
+
+            

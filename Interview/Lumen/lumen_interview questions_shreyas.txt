@@ -1,0 +1,17 @@
+------------lumen interview questions--------------
+
+1.what is your daily work routine.
+2.tell me your roles and responsibilities in your project.
+3.can we do ddl operations in procedure.
+4.tell me a procedure how you will truncate the given table.
+5.write a query to dislpay duplicate records.
+6.write a query to count the duplicate records.
+7.how to copy only structure from table A to table B.
+8.difference between primary key and unique key.
+9.difference between where clause and having clause.
+10.write syntax for dense_rank.
+11.difference between dense_rank and row_number.
+12. write a query to display duplicate records using dense rank.
+13.what is db link.
+14.write a syntax for connecting to different database.
+ 

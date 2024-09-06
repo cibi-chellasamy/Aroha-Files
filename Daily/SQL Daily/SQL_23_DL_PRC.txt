@@ -1,0 +1,254 @@
+Data Lemur
+https://datalemur.com/questions?category=SQL&difficulty=Easy
+-------------------------------------------------------------------------------
+With total_tweets as(SELECT
+user_id,COUNT(tweet_id)as tweet_per_user from tweets
+where tweet_date between '2022-01-01' and '2022-12-31'
+group by user_id)
+select tweet_per_user as tweet_bucket,
+count(user_id) as user_num
+from total_tweets
+group by tweet_per_user;
+-------------------------------------------------------------------------------
+select candidate_id from candidates
+where skill in ('Python', 'Tableau',  'PostgreSQL')
+group by candidate_id 
+having count(skill) = 3
+-------------------------------------------------------------------------------
+select page_id 
+from pages
+where page_id not in 
+  (SELECT
+    page_id from page_likes 
+      where page_id is not null)
+-------------------------------------------------------------------------------
+
+SELECT part,assembly_step FROM parts_assembly
+where finish_date is null;
+-------------------------------------------------------------------------------
+SELECT
+sum(case when device_type in ('tablet','phone') then 1 ELSE 0 end) as mobile_views,
+sum(case when device_type = 'laptop' then 1 ELSE 0 end) as laptop_views
+from viewership 
+-------------------------------------------------------------------------------
+
+SELECT user_id, MAX(post_date::DATE) - MIN(post_date::DATE) AS days_between
+FROM posts
+WHERE DATE_PART('year', post_date::DATE) = 2021 
+GROUP BY user_id
+HAVING COUNT(post_id)>1;
+-------------------------------------------------------------------------------
+
+select sender_id,count(message_id) as message_count
+from messages
+where EXTRACT(year from sent_date) = 2022
+and extract(month from sent_date) = 8
+group by sender_id
+order by count(message_id) DESC
+fetch first 2 rows only
+
+-------------------------------------------------------------------------------
+
+with job_list_co as(SELECT
+company_id,title,description ,count(job_id)as job_count
+from job_listings
+group by company_id,title,description)
+select count(DISTINCT company_id) as duplicate_companies
+from job_list_co
+where job_count>1
+-------------------------------------------------------------------------------
+
+SELECT city , count(order_id) as total_count
+from trades t join users u
+on t.user_id = u.user_id
+where t.status = 'Completed'
+group by city
+order by count(order_id) desc
+fetch first 3 rows only
+--------------------------------------------------------------------------------
+SELECT app_id, ROUND(100.0 *
+    SUM(CASE WHEN event_type = 'click' THEN 1 ELSE 0 END) /
+    SUM(CASE WHEN event_type = 'impression' THEN 1 ELSE 0 END), 2)  AS ctr_rate
+FROM events
+WHERE timestamp >= '2022-01-01' 
+  AND timestamp < '2023-01-01'
+GROUP BY app_id;
+--------------------------------------------------------------------------------
+
+SELECT DISTINCT(user_id)
+from emails e join texts t
+on e.email_id = t.email_id
+where t.action_date = e.signup_date+ interval '1 day'
+and t.signup_action  = 'Confirmed'
+--------------------------------------------------------------------------------
+
+SELECT employee_id,COUNT(DISTINCT query_id) AS unique_queries_count
+  FROM queries
+  WHERE query_starttime >= '2023-07-01T00:00:00Z'
+    AND query_starttime < '2023-10-01T00:00:00Z'
+  GROUP BY employee_id;
+
+--------------------------------------------------------------------------------
+SELECT card_name,max(issued_amount) - min(issued_amount) as difference
+from monthly_cards_issued
+group by card_name
+order by difference DESC
+
+--------------------------------------------------------------------------------
+SELECT ROUND(SUM(item_count::DECIMAL*order_occurrences)/SUM(order_occurrences)
+,1) AS mean
+FROM items_per_order;
+
+--------------------------------------------------------------------------------
+SELECT drug,(total_sales-cogs) as total_profit
+from pharmacy_sales 
+order by total_profit desc
+fetch first 3 rows only
+--------------------------------------------------------------------------------
+SELECT manufacturer,count(drug)drug_count,
+sum(cogs - total_sales)as total_loss
+from pharmacy_sales 
+where cogs >total_sales
+group by manufacturer
+order by total_loss desc
+--------------------------------------------------------------------------------
+SELECT manufacturer,count(drug)drug_count,
+sum(cogs - total_sales)as total_loss
+from pharmacy_sales 
+where cogs >total_sales
+group by manufacturer
+order by total_loss desc
+--------------------------------------------------------------------------------
+SELECT manufacturer,
+concat('$',round(sum(total_sales)/1000000),' million')as sales_mil
+from pharmacy_sales 
+group by manufacturer
+order by sum(total_sales) desc ,manufacturer
+--------------------------------------------------------------------------------
+
+with call_records as(select policy_holder_id,
+count(case_id)as call_count from callers
+group by policy_holder_id
+having COUNT(case_id)>=3)
+select count(policy_holder_id) as policy_holder_count
+from call_records
+
+--------------------------------------------------------------------------------
+select 
+  deals.employee_id,
+  case when sum(deals.deal_size) > quotas.quota then 'yes' 
+    else 'no' 
+  end as made_quota
+from deals
+inner join sales_quotas as quotas
+  on deals.employee_id = quotas.employee_id
+group by deals.employee_id, quotas.quota
+order by deals.employee_id;
+--------------------------------------------------------------------------------
+
+MEDIUM
+
+
+
+select user_id,spend,transaction_date from(
+select user_id,spend,transaction_date,
+row_number() over(PARTITION BY user_id order by transaction_date)as rnn 
+from transactions)as trans_nm
+where rnn = 3;
+
+--------------------------------------------------------------------------------
+
+with tot as
+(SELECT category,product,sum(spend)as total_spend,
+rank() OVER(partition by category order by sum(spend) desc)as rnking
+from product_spend
+where extract(year from transaction_date)=2022
+GROUP BY category,product)
+select category,product,total_spend
+from tot 
+where rnking <=2
+ORDER BY category,rnking
+
+--------------------------------------------------------------------------------
+
+SELECT a.artist_name,
+dense_rank() over(order by count(s.song_id)desc )as artist_rank
+FROM
+artists a join songs S 
+on a.artist_id = s.artist_id
+join global_song_rank gls 
+on s.song_id = gls.song_id
+where gls.rank <=10
+group by a.artist_name
+fetch first 7 rows only
+
+--------------------------------------------------------------------------------
+
+with sal as(  
+select name,salary,department_id,
+dense_rank() over(partition by department_id order by salary desc) as rnk  
+from employee)
+select d.department_name,s.name,s.salary
+from sal s join department d  
+on s.department_id = d.department_id 
+where s.rnk <=3
+order by d.department_id ,s.salary DESC,s.name ASC
+--------------------------------------------------------------------------------
+
+select max(salary) from employees
+where salary <(select max(salary) from employees)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

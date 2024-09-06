@@ -1,0 +1,8 @@
+1.Self  introduction 
+2.do you aware of rdbms
+3.have you worked on sql server
+4.Display top5 customers names based on their purchase amt in each age group
+
+  SELECT * FROM (select name,c.id,age,dense_rank()over(partition by age order by sum(price*qty)desc)r,sum(price*qty) from sale_c s inner join cust_c  c on c.id = s.id
+  group by name,c.id,age) WHERE R <= 5) where r <= 5
+5. do you aware of devops.

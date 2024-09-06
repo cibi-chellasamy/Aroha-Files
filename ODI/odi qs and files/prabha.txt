@@ -1,0 +1,13 @@
+1. what is cursor?
+cursor is to store records based on sql queries and fetch records and not found it exists.
+
+2. firstname and lastname into one column?
+firstname and lastname into one column using concate operator
+
+3. how to aggregation in odi?
+In odi we do aggregation with the aggregate components.
+
+4. source table have values and in lookup table have dollar values how to get the dollar values?
+I said by plsql loop we get the dollar values related to the values in source table.
+ He asked how to do in odi?i said we call plqsql block in odi procedure and get the values.
+

@@ -1,0 +1,36 @@
+Manual Testing
+
+1.Difference between sanity and somke testing
+2.Difference between load and stress testing
+3.what is defect life cycle ?
+4.There 100 test cases and you have to do regression testing and need to submit in next day,how to handle this situation ?
+
+Automation Testing 
+
+5.How to identify colour of web elements in automation
+6.Difference between single slash and double slash
+7.Difference between find element and find elements
+8.how can you store the elements from textbox(webelements) from web application ?
+9.what are the four things in selenium which used with the URL ?
+10.Give atleast five Exception
+11.what is selenium ?
+12.How to preform click() on any co-ordinate in web page?
+13.what is Junit ?
+
+Python
+
+14.Different between list to Dictonary
+15.What is Slicing ?
+16.Different between list and Tuple
+17.Different between .py and .pyc
+18.What is oops ?
+19.what is Polymorphism ?
+20.what is Encapsulation ?
+
+SQL
+
+21.Difference Between Drop and Delete
+22.How to display 2nd highest salary holding employee ?
+23.How to create empty table ? 
+24.what is stored procedure ?
+25.what are joins ?

@@ -1,0 +1,16 @@
+lumen 1st round quetions  (sagar)                      			22-12-2022
+------------------------					  			----------
+1).you are working with aroha, what you are  did in this 2 years.
+2).explain your 2nd project.
+3).which ETL tool you are using?
+4).how you get data?
+5).What is inline view? explain.
+6).What is cursor?Types of Cursor?where you used?
+7).what are all constraints you are used in your project. explain?
+8).what is %type, %rowtype explain?
+9).i executed query yesterday, it work less time . today same query takes time to execute. 
+   what is your approch.
+10).what is coalese function explain.
+11).what is subquery.
+12).explain rank and dense_rank.
+

@@ -1,0 +1,17 @@
+1.  introduction
+2.  scd-2, how to track the records
+3.  normalization
+4.  sequence
+5.  how to find current value of a sequence in new session
+6.  write a query to find second greatest employee based on salary
+7.  i want to update salary of employee who are getting least salary and not belongs to 'sales' department
+    write a query to display ename, old_sal, new_sal employee whose salary getting updated from above statement
+ 
+    write a query to display ename, old_sal, new_sal employee whose salary getting updated
+    and employee whose salary not getting updated(old_sal and new sal are equal) from above statement
+8.  if you are in production environment how will you find where error occurs in a procedure
+9.  i have employee table with huge data. i need to use partition on employee based on deptno. which partition you'll prefer
+10. if table is filled with records can i do partitions directly on the table
+11. procedure you developed in your project
+12. where you'll get data and how
+13. in anonymus block i want to display employee name without declaring anything

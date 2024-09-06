@@ -1,0 +1,16 @@
+vimalan
+1) What is cursor ?
+
+Cursor is used to retrieve the set of records and we can use this in for loop for accessing all rows with specific condition.
+
+2) How to handle errors in odi ?
+
+Using Load plans to execute error handling with use of step by step process and use of store procedure with plsql we can handle errors.
+
+3) How to do validation in odi ?
+
+I will check whether the validation is successful after running the process and check the operator navigator to find the sessions whether all the steps executed successfully and make sure that all the records from source inserted into target.
+
+4) How to check all the records from the source table are presented in target table ?
+
+Using of lookup table to check common Id from the source and lookup table and connected those to target table with surrogate id that is primary Id for target table. Then I can check whether all the records from source are presented in target.

@@ -1,0 +1,66 @@
+CREATE TABLE Student (
+    student_id VARCHAR2(10),
+    course VARCHAR2(100)
+);
+
+INSERT INTO Student (student_id, course) VALUES ('a', 'Dwbi');
+INSERT INTO Student (student_id, course) VALUES ('b', 'Data Science');
+INSERT INTO Student (student_id, course) VALUES ('c', 'Dwbi');
+INSERT INTO Student (student_id, course) VALUES ('d', 'Data Science');
+INSERT INTO Student (student_id, course) VALUES ('e', 'Dwbi');
+INSERT INTO Student (student_id, course) VALUES ('f', 'mainframe');
+INSERT INTO Student (student_id, course) VALUES ('g', 'Dwbi');
+INSERT INTO Student (student_id, course) VALUES ('h', 'Dwbi');
+INSERT INTO Student (student_id, course) VALUES ('i', 'Data Science');
+INSERT INTO Student (student_id, course) VALUES ('j', 'Ai-mi');
+INSERT INTO Student (student_id, course) VALUES ('a', 'Dwb');
+
+--Write a SELECT Query list out course which have more than one student enrolled:
+select course,count( student_id) as student_count
+from student
+group by course
+order by count(student_id)desc
+fetch first 2 rows only;
+
+--------------------------------------------------------------------------------
+CREATE TABLE Score (
+    score_id NUMBER PRIMARY KEY
+);
+
+INSERT INTO Score (score_id) VALUES (1);
+INSERT INTO Score (score_id) VALUES (2);
+INSERT INTO Score (score_id) VALUES (3);
+INSERT INTO Score (score_id) VALUES (5);
+INSERT INTO Score (score_id) VALUES (6);
+INSERT INTO Score (score_id) VALUES (8);
+INSERT INTO Score (score_id) VALUES (9);
+INSERT INTO Score (score_id) VALUES (10);
+
+
+select (score_id+1) as frst_missing
+from (select score_id,lead(score_id) over(order by score_id) as nxt
+from score)
+where nxt <> score_id+1
+fetch first 1 rows only;
+
+--------------------------------------------------------------------------------
+
+CREATE TABLE pat (
+    pat_id NUMBER,
+    gender CHAR(1),
+    city VARCHAR2(100)
+);
+
+INSERT INTO pat (pat_id, gender, city) VALUES (1, 'm', 'delhi');
+INSERT INTO pat (pat_id, gender, city) VALUES (2, 'f', 'delhi');
+INSERT INTO pat (pat_id, gender, city) VALUES (3, 'f', 'mumbai');
+INSERT INTO pat (pat_id, gender, city) VALUES (4, 'm', 'bangalore');
+
+
+select city,
+sum(case when gender = 'm' then 1 else 0 end) as male_count,
+sum(case when gender = 'f' then 1 else 0 end) as female_count,
+count(pat_id) as total_count
+from pat
+group by city
+--------------------------------------------------------------------------------

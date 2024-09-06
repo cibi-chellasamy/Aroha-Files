@@ -1,0 +1,31 @@
+
+
+
+4) select  *  from patient where round((sysdate-patdob)/365)>89;
+
+5) delete from doctor where rowid not in (select max(rowid) from doctor group by docid,docname,doczip,speciality,gender);
+
+6 ) update doctor set gender=case  when gender= 'Male' then 'M' else gender  end;
+
+7)
+select docname,to_char(dateofvisit,'yyyy') as  year, round((count(to_char(dateofvisit,'yyyy'))/sum(count(*)) over(partition by to_char(dateofvisit,'yyyy')))*100,2) as average 
+from patient inner join doctor on doctor.docid=patient.docid 
+group by docname,,to_char(dateofvisit,'yyyy')  order by ,to_char(dateofvisit,'yyyy') ;
+
+
+
+8)select * from doctor where docid not in(select distinct (docid) from patient );
+
+
+9)countif(C5:C9,"<60") gives total count as 4 or =sumif(C5:C9,"<60") this gives us 85 as total cost <60
+
+10)Xlookup , it as improved version Vlookup and Xloopup syntax:Xlookup(lookup_value,lookup_array,return_array,[if_not_found],[match_mode],[search_mode])
+
+11)data tab we have option to remove duplicates from that we can find out another option by using advance fillter we can filter only unique values
+
+
+12) IF(COUNTIFS($A$2:$A$8,A2,$B$2:$B$8,B2,$C$2:$C$8,C2)>1,"Duplicate row","")
+
+
+13)1)Create ABCD as a lis2 2)select cell where we want drop down 3)go to Data validation select list and source as ABCD preference location and apply. and we can handle by error alert also 
+

@@ -1,0 +1,36 @@
+
+1.	Financial perspective (CFO)
+	Current Revenue / Claim or Visit (By provider, speciality, center)
+	Current Revenue / center
+	% AR above 120 days (volume & $$, Center, Speciality)
+	Most frequent Procedures done (By Specialty, Center)
+	Self-Pay Vs Insurance (By Specialty, Center)
+	 
+                                
+2.	Operations perspective (COO)
+	What is the throughput of patients seen daily/monthly/annually and delta of reimbursement per claim per provider
+	Are my providers learning or continually making the same mistakes (Are we seeing repeat Queries, if so what frequency)  
+	DOS to rejection receipt days (By provider, speciality, center)
+	DOS to Date of charges posted (By provider, speciality, center)
+	Days to bill
+	DOS to Claim payment days (By provider, speciality, center)
+	DOS to Claim denials (By provider, speciality, center)
+	Average days to address / work on the denials (By provider, speciality, center)
+	Average days of Claim in AR buckets (30, 60, 90) Quantity & $$ (By provider, speciality, center)
+	Current EM Level distribution (By provider, speciality, center)
+	Weightage average of current EM Levels (By provider, speciality, center)
+	New Vs Established patients (By provider, speciality, center)
+ 
+ 
+                                
+3.	Provider management perspective
+	How easy is it to view my work and self-check my productivity
+	Current volume of queries by Provider, Specialty, Center
+	Current Query to response rates by Provider, Specialty, center
+	Current nature of Queries & related responses
+ 
+4.	Quality perspective
+	Benchmark percentage of coding errors before Exdion Partnership and the improvements made to maintain compliance after partnership
+	First pass rate from FP to Clearing house (By provider, speciality, center)
+	First pass rate from FP to Payor (By provider, speciality, center)
+	Type of Rejections & Denials (By provider, speciality, center)

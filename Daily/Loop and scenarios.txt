@@ -1,0 +1,301 @@
+24/6/24
+
+# Implement a program for binary search using a while loop.
+
+def binary_search(arr,targter):
+    left,right = 0,len(arr) -1
+    while left <= right:
+        mid = (left+right)//2
+        mid_value = arr[mid]
+
+        if mid_value == target:
+            return mid
+
+        elif mid_value < target :
+            left = mid + 1
+
+        else:
+            right = mid - 1
+
+    return -1
+
+
+arr = [2, 3, 4, 10, 40]
+target = 10
+
+res = binary_search(arr,target)
+
+
+if res != -1:
+    print(f"element is present at index {res}")
+else:
+    
+    print("Element is not present in array")        
+    
+
+---------------------------------------------------------------
+# Use recursion to calculate the factorial of a number.
+
+def factoriall(n):
+    if n == 0 or n == 1:
+        return 1
+    else:
+        return n * factoriall(n-1)
+
+num = 6
+result = factoriall(num)
+print(f"The factorial of {num} is {result}")
+---------------------------------------------------------------
+# Implement a program to find the GCD (Greatest Common Divisor) using Euclidean algorithm.
+def gcd(a,b):
+    while b != 0:
+        a,b = b,a%b
+    return a
+
+num1 = 15
+num2 = 20
+
+result = gcd(num1, num2)
+print(f"The GCD of {num1} and {num2} is {result}")
+---------------------------------------------------------------
+# Create a program to find the LCM (Least Common Multiple) of two numbers.
+def lcm(a,b):
+    return abs(a * b)// gcd(a,b)
+
+num1 = 15
+num2 = 20
+
+result = lcm(num1, num2)
+print(f"The LCM of {num1} and {num2} is {result}")
+---------------------------------------------------------------
+# Implement a program to check if a number is Armstrong or not.
+def amstorng(number):
+    num_str = str(number)
+    num_digit = len(num_str)
+    sum_powers = sum(int(digit) ** num_digit for digit in num_str)
+
+    return sum_powers == number
+
+num = 153
+
+if amstorng(num):
+    print(f"{num} is an Armstrong number.")
+else:
+    print(f"{num} is not an Armstrong number.")
+---------------------------------------------------------------
+# Calculate the power of a number using recursion.
+def power(base,exponent):
+    if exponent == 0:
+        return 1
+    else:
+        return base * power(base,exponent -1)
+
+base = 2
+exponent = 3
+
+result = power(base, exponent)
+print(f"{base} to the power of {exponent} is {result}")
+---------------------------------------------------------------
+# Implement a program to find the roots of a cubic equation.
+import numpy as np
+
+def find_roots(a,b,c,d):
+    coefficients = [a,b,c,d]
+
+    roots = np.roots(coefficients)
+    return roots
+
+a = 1
+b = 12
+c = 11
+d = 2
+
+roots = find_roots(a, b, c, d)
+print(f"The roots of the cubic equation {a}x^3 + {b}x^2 + {c}x + {d} = 0 are: {roots}")
+---------------------------------------------------------------
+# Create a program to find the factorial of a number without using recursion.
+def fact(n):
+    result = 1
+
+    for i in range (1,n + 1):
+        result = result * i
+
+    return result
+
+number = 10
+result = fact(number)
+print(f"The factorial of {number} is {result}")
+---------------------------------------------------------------
+# Implement a program to check if a number is a palindrome.
+def ispalindrome(number):
+    num_str = str(number)
+    reversed_num = num_str[::-1]
+
+    return num_str == reversed_num
+
+number = 122
+
+if ispalindrome(number):
+    print(f"{number} is a palindrome.")
+else:
+    print(f"{number} is not a palindrome.")
+---------------------------------------------------------------
+# Use a generator function to generate the Fibonacci series.
+
+def generate_fibb():
+    a,b = 0,1
+    while True:
+        yield a
+        a,b = b,a+b
+
+fib_gen = generate_fibb()
+for _ in range(10):
+    print(next(fib_gen))
+---------------------------------------------------------------
+Assignment
+
+
+1. Write a program
+   Given an array, rearrange such that all odd numbers come at the start of array in ascending order followed by all even numbers in descending order.
+   Example:
+   Input : arr[] = {12, 10, 5, 6, 52, 37, 23}
+   Output : arr[] = {5, 23, 37, 52, 12, 10, 6}
+
+
+def rearrange_array(arr):
+    odd_numbers = [num for num in arr if num % 2 != 0]
+    even_numbers = [num for num in arr if num % 2 == 0]
+
+    odd_numbers.sort()
+
+    even_numbers.sort(reverse=True)
+
+    rearranged_array = odd_numbers + even_numbers
+
+    return rearranged_array
+
+arr = {12, 10, 5, 6, 52, 37, 23}
+result = rearrange_array(arr)
+print(result)
+
+---------------------------------------------------------------
+# 2. Write a program which lists out all possible sequence of 5 digit binary numbers. Read from the the list and then check whether they are divisible by 4 or not. The numbers that are divisible by 4 are to be printed in a comma separated sequence.
+# Example:
+# Sequence of 3 digit numbers are 
+# 000, 001, 010, 011, 100, 101, 110, 111
+# Numbers divisible by 4 are
+# 100
+
+def seq_binary_num(n):
+    sequence = [format (i,f"0{n}b") for i in range(2**n)]
+    return sequence
+
+def filter_divisible_by_4 (sequence):
+    divisible_by_4 = [seq for seq in sequence if int(seq,2)% 4 == 0]
+    return divisible_by_4
+
+def main():
+    sequence = seq_binary_num(4)
+    divisible_by_4_sequences = filter_divisible_by_4(sequence)
+
+    print('.'.join (divisible_by_4_sequences))
+
+main()
+---------------------------------------------------------------
+#3. Write a program Given the year, find number of 5th Saturday's in that year.
+
+import calendar
+
+def count_fifth_sat(year):
+    fifth_saturdays_count  = 0
+    for month in range(1,13):
+        month_cal = calendar.monthcalendar(year,month)
+
+        saturdays = [week[calendar.SATURDAY] for week in month_cal if week[calendar.SATURDAY] != 0]
+
+        if len(saturdays) >= 5:
+            fifth_saturdays_count = fifth_saturdays_count  + 1
+    return fifth_saturdays_count 
+
+year = 2023
+
+result = count_fifth_sat(year)
+print(f"The number of 5th Saturdays in {year} is: {result}")
+            
+---------------------------------------------------------------
+# 4. Given a list of numbers, write a  program to create a list of tuples having second element as the number and first element as the cube of the number.
+# Input: list = [1, 2, 3]
+# Output: [(1, 1), (8, 2), (27, 3)]
+
+numbers = [1, 2, 3]
+res = [(num**3,num) for num in numbers]
+print(res)
+---------------------------------------------------------------
+# 5. Write a program to interchange 1st and 3rd row of a 3x3 matrix.
+# Input : 3x3 Matrix
+# Output : 3x3 Matrix with 1st and 3rd row interchanged.
+
+def interchange_rows(matrix):
+    matrix[[0, 2]] = matrix[[2, 0]]
+    return matrix
+
+matrix = np.array([[1, 2, 3],
+                   [4, 5, 6],
+                   [7, 8, 9]])
+
+interchanged_matrix = interchange_rows(matrix)
+print(interchanged_matrix)
+---------------------------------------------------------------
+def process_file(file_path):
+    try:
+        with open(file_path, 'r') as file:
+            content = file.read()
+        
+        words = content.split()
+
+        for i in range(len(words)):
+            word = words[i]
+            if 'i' in word and 'u' in word:
+                words[i] = word.upper()
+
+        modified_content = ' '.join(words)
+        with open(file_path, 'w') as file:
+            file.write(modified_content)
+        
+        print(f"File '{file_path}' processed successfully.")
+    
+    except IOError:
+        print(f"Error: Could not read or write to file '{file_path}'.")
+
+file_path = 'tx.txt'  
+process_file(file_path)
+---------------------------------------------------------------
+Scenario Web api
+
+import pandas as pd
+import requests
+import json
+
+
+city = input('Enter a city : ')
+url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid=37d99f4c8bd8fa96d4509c54c8a262d7"
+
+
+response = requests.get(url)
+
+if response.status_code == 200:
+    data = response.json()
+
+    weather_data = {
+        'City': data['name'],
+        'Temperature (C)': data['main']['temp'],
+        'Humidity (%)': data['main']['humidity'],
+        'Weather': data['weather'][0]['description']}
+    df = pd.DataFrame(weather_data, index=[0])
+    df['Temperature (C)'] = df['Temperature (C)'] - 273
+    df.rename(columns={'Temperature (C)':'Temperature (K)'},inplace=True)
+    print(df)
+    print(df['Temperature (K)'])
+else:
+    print("Error in API request:", response.status_code)
+-------------------------------------------------------------------------------

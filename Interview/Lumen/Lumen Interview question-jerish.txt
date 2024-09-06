@@ -1,0 +1,25 @@
+Lumen Interview:
+
+1.Tell me about yourself
+2.Explain about project.tell me some few tables you have in your project.
+3.Function scenario in project
+4.Exception scenario in project
+5.what is view
+6.What is materialized views
+7.what is Indexes.
+8.partition by clause
+9.scenario for analytical function.
+10.Remove duplicates from table
+11.display last record from table
+12.Left outer join
+13.DML,DDL,TCL commands
+14. if you perform updation after that, one ddl and  delete operation,if u rollback,what will happen.
+15.How you get your requirements.
+16.Project Development Life Cycle and Developers role
+17.what testers will do.
+18.how testers get your code.
+19.how they get to know that these files are developed by you.
+20.after you completed your code ,what will developers do.
+21.sql performace tuning.
+22.Table partitioning.
+

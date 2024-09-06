@@ -1,0 +1,159 @@
+1) name = 'Harish Kumar'
+
+using for loop print the char of name one by one
+
+using for loop print the char of name one by one (using range)
+
+name = 'Harish Kumar'
+
+for i in name:
+    print(i,end = " ")
+
+----------output-----------
+H a r i s h   K u m a r
+---------------------
+
+
+for i in range (len(name)):
+    print(name[i],end =" ")
+----------output-----------
+H a r i s h   K u m a r 
+
+
+
+
+2)do the same 1) using the while loop print all the char of name but in REVERSE
+
+
+n = len(name)
+
+for i in range(n-1,-1,-1):
+    print(name[i],end=" ")
+----------output---------------
+
+r a m u K   h s i r a H
+
+
+
+
+
+
+3)data = 'all is well that begins and ends well'
+process this and count how many vowels (a,e,i,o,u) are there
+
+use for loop to do
+
+
+data = 'all is well that begins and ends well'
+count = 0
+for i in data:
+    if i.lower() in 'aeiou':
+        count = count+1
+print('The number of vowels is',count)
+
+-------------output----------------
+The number of vowels is 9
+
+
+
+
+
+4)data = "100010010001110011"
+use while loop like this...
+while True:
+xxxx xxx
+keep processing the data - as soon as the count of 0's reach 7 then break from the loop
+
+data = "100010010001110011"
+count = 0
+index = 0
+while index < len(data):
+    if data[index] == '0':
+        count += 1
+    else:
+        count = 0  
+    print(data[index], end=' ')  
+    index += 1
+    if count == 7:
+        break
+print("\nbreaking from the loop.")
+--------------ouput-----------------
+1 0 0 0 1 0 0 1 0 0 0 1 1 1 0 0 1 1 
+breaking from the loop.
+
+
+5)s1 = 'vinay' s2 = 'ganesh' s3 = 'kiran' s4 = 'harish' for i in s1,s2,s3,s4: print(i)
+
+s1 = 'vinay'
+s2 = 'ganesh' 
+s3 = 'kiran' 
+s4 = 'harish'
+for i in s1,s2,s3,s4: 
+    print((f"{i} - length: {len(i)}"))
+-------------output---------------
+vinay - length: 5
+ganesh - length: 6
+kiran - length: 5
+harish - length: 6
+
+
+
+
+
+6)keep inputting number , use while loop , the break condition is -1
+   ie. when user enters -1 then stop , till that time keep adding the inputted number
+   find the total of all numbers
+   find the avg
+   find the highest and lowest inputted number...
+   for example::::
+       25
+       10
+        9
+      123
+       99
+      100 
+        3
+      101
+      112
+       76
+       -1  <<<< stop
+
+ highest is 123
+ lowest is 3
+ similarly total and avg...
+
+
+
+total = 0
+count = 0
+max_number = float('-inf')
+min_number = float('inf')
+
+while True:
+    num = int(input("Enter a number (or -1 to stop): "))
+    if num == -1:
+        break
+    total += num
+    count += 1
+    avg = total / count
+
+    max_number = max(max_number, num)
+    min_number = min(min_numnumber, num)
+print(f"Sum: {total}")
+print(f"Average: {avg}")
+print(f"Max: {max_num}")
+print(f"Min: {min_num}")
+
+--------------outpu------------------
+Enter a number (or -1 to stop): 45
+Enter a number (or -1 to stop): 566
+Enter a number (or -1 to stop): 33
+Enter a number (or -1 to stop): 24
+Enter a number (or -1 to stop): 53
+Enter a number (or -1 to stop): -1
+Sum: 721
+Average: 144.2
+Max: 566
+Min: 24
+
+

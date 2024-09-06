@@ -1,0 +1,381 @@
+CREATE TABLE empsp (
+    employee_id NUMBER PRIMARY KEY,
+    emp_name VARCHAR2(100),
+    emp_salary NUMBER,
+    department_id NUMBER
+);
+
+CREATE TABLE depsp (
+    department_id NUMBER PRIMARY KEY,
+    department_name VARCHAR2(100)
+);
+CREATE SEQUENCE employee_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NOCACHE
+    NOCYCLE;
+
+-- Sample Data
+INSERT INTO depsp VALUES (1, 'IT');
+INSERT INTO depsp VALUES (2, 'HR');
+INSERT INTO depsp VALUES (3, 'MARKETING');
+
+
+INSERT INTO empsp VALUES (1, 'John Doe', 5000, 1);
+INSERT INTO empsp VALUES (2, 'Jane Smith', 6000, 1);
+INSERT INTO empsp VALUES (3, 'Alice Johnson', 7000, 2);
+INSERT INTO empsp VALUES (4, 'Bob Brown', 6200, 2);
+INSERT INTO empsp VALUES (5, 'Michael Williams', 4800, 1);
+INSERT INTO empsp VALUES (6, 'Emily Jones', 5800, 2);
+INSERT INTO empsp VALUES (7, 'David Davis', 5100, 1);
+INSERT INTO empsp VALUES (8, 'Sarah Miller', 6300, 2);
+INSERT INTO empsp VALUES (9, 'Daniel Wilson', 5400, 3);
+INSERT INTO empsp VALUES (10, 'Olivia Taylor', 5900, 3);
+INSERT INTO empsp VALUES (11, 'James Anderson', 5200, 1);
+INSERT INTO empsp VALUES (12, 'Emma Brown', 6400, 2);
+INSERT INTO empsp VALUES (13, 'William Martinez', 5300, 3);
+INSERT INTO empsp VALUES (14, 'Ava Thomas', 6000, 3);
+CREATE TABLE empsp (
+    employee_id NUMBER PRIMARY KEY,
+    emp_name VARCHAR2(100),
+    emp_salary NUMBER,
+    department_id NUMBER
+);
+
+CREATE TABLE depsp (
+    department_id NUMBER PRIMARY KEY,
+    department_name VARCHAR2(100)
+);
+CREATE SEQUENCE employee_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NOCACHE
+    NOCYCLE;
+
+-- Sample Data
+INSERT INTO depsp VALUES (1, 'IT');
+INSERT INTO depsp VALUES (2, 'HR');
+INSERT INTO depsp VALUES (3, 'MARKETING');
+
+
+INSERT INTO empsp VALUES (1, 'John Doe', 5000, 1);
+INSERT INTO empsp VALUES (2, 'Jane Smith', 6000, 1);
+INSERT INTO empsp VALUES (3, 'Alice Johnson', 7000, 2);
+INSERT INTO empsp VALUES (4, 'Bob Brown', 6200, 2);
+INSERT INTO empsp VALUES (5, 'Michael Williams', 4800, 1);
+INSERT INTO empsp VALUES (6, 'Emily Jones', 5800, 2);
+INSERT INTO empsp VALUES (7, 'David Davis', 5100, 1);
+INSERT INTO empsp VALUES (8, 'Sarah Miller', 6300, 2);
+INSERT INTO empsp VALUES (9, 'Daniel Wilson', 5400, 3);
+INSERT INTO empsp VALUES (10, 'Olivia Taylor', 5900, 3);
+INSERT INTO empsp VALUES (11, 'James Anderson', 5200, 1);
+INSERT INTO empsp VALUES (12, 'Emma Brown', 6400, 2);
+INSERT INTO empsp VALUES (13, 'William Martinez', 5300, 3);
+INSERT INTO empsp VALUES (14, 'Ava Thomas', 6000, 3);
+
+
+set serveroutput on
+--------------------------------------------------------------------------------
+
+
+--Calculate Total Salary for a Department
+CREATE OR REPLACE PROCEDURE TOT_SALARY (
+    DEPT_ID IN NUMBER) AS
+    TOTAL_SALARY NUMBER := 0;
+BEGIN
+    SELECT SUM(EMP_SALARY) INTO TOTAL_SALARY
+    FROM EMPSP
+    WHERE DEPARTMENT_ID = DEPT_ID;
+    DBMS_OUTPUT.PUT_LINE('Total Salary for Department ' || DEPT_ID || ': ' || TOTAL_SALARY);
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('No employees found for department ' || DEPT_ID);
+END;
+/
+--------------------------------------------------------------------------------
+CREATE OR REPLACE PROCEDURE UP_SAL (
+    EMP_ID IN  NUMBER,
+    NEW_SAL IN NUMBER) AS
+BEGIN
+    UPDATE EMPSP
+    SET emp_salary = NEW_SAL
+    WHERE employee_id = EMP_ID;
+    DBMS_OUTPUT.PUT_LINE('Employee ' || emp_id || ' salary updated to ' || NEW_SAL);
+END;
+
+EXEC UP_SAL(2,10000)
+--------------------------------------------------------------------------------
+--Retrieve Employees by Department
+
+CREATE OR REPLACE PROCEDURE EMP_DET (
+    DEPT_ID IN NUMBER)AS
+    
+BEGIN 
+    FOR EMP IN(SELECT * FROM EMPSP WHERE DEPARTMENT_ID = DEPT_ID)LOOP
+    DBMS_OUTPUT.PUT_LINE('Employee ID: ' || EMP.employee_id || ', Name: ' || EMP.emp_name || ', Salary: ' || emp.emp_salary);
+    END LOOP;
+EXCEPTION
+    WHEN N0_DATA_FOUND THEN
+   DBMS_OUTPUT.PUT_LINE('No employees found for department ' || DEPT_ID);
+    
+END;
+/
+
+EXEC EMP_DET(5)
+
+--------------------------------------------------------------------------------
+CREATE OR REPLACE PROCEDURE GET_HIGH_SAL (dept_id IN EMPSP.DEPARTMENT_ID%TYPE) AS
+    CURSOR EMP_C IS
+    WITH RankedEmployees AS (
+    SELECT EMP_NAME, EMP_SALARY, DEPARTMENT_ID,
+           ROW_NUMBER() OVER (PARTITION BY DEPARTMENT_ID ORDER BY EMP_SALARY DESC) AS rank
+    FROM EMPSP
+)
+SELECT EMP_NAME, EMP_SALARY, DEPARTMENT_ID
+FROM RankedEmployees
+WHERE rank = 1
+ORDER BY DEPARTMENT_ID;
+
+    
+    PREV_DEPT_ID EMPSP.DEPARTMENT_ID%TYPE;
+    HIGHEST_SAL EMPSP.EMP_SALARY%TYPE;
+    
+BEGIN
+    FOR EMP_REC IN EMP_C LOOP
+        IF EMP_REC.DEPARTMENT_ID = DEPT_ID THEN
+            DBMS_OUTPUT.PUT_LINE('Highest salary in department ' || emp_rec.department_id || ': ' || emp_rec.emp_name || ', Salary: ' || emp_rec.emp_salary);
+            EMP_REC.DEPARTMENT_ID := DEPT_ID;
+        END IF;
+    END LOOP;
+END;
+
+
+
+EXEC GET_HIGH_SAL(1)
+--------------------------------------------------------------------------------
+--Handle Exceptions in Salary Calculation
+
+CREATE OR REPLACE PROCEDURE TAX_CAL (EMP_ID IN NUMBER) AS
+    V_SAL EMPSP.EMP_SALARY%TYPE;
+    V_TAX_RATE NUMBER := 0.2;
+    V_NETSAL NUMBER;
+    
+BEGIN
+    SELECT EMP_SALARY INTO V_SAL
+    FROM EMPSP
+    WHERE EMPLOYEE_ID = EMP_ID;
+
+    IF V_SAL <= 0 THEN
+        RAISE_APPLICATION_ERROR (-2000,'INVALID SALARY AMOUNT');
+    END IF;
+    
+    V_NETSAL := V_SAL*(1-V_TAX_RATE);
+    DBMS_OUTPUT.PUT_LINE('Employee ID: ' || emp_id || ', Net Salary: ' || V_NETSAL);
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN 
+        DBMS_OUTPUT.PUT_LINE('Employee with ID ' || emp_id || ' not found.');
+     WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('An error occurred: ' || SQLERRM);
+END;
+    
+
+    
+EXEC TAX_CAL (2)
+
+
+
+set serveroutput on
+--------------------------------------------------------------------------------
+
+
+--Calculate Total Salary for a Department
+CREATE OR REPLACE PROCEDURE TOT_SALARY (
+    DEPT_ID IN NUMBER) AS
+    TOTAL_SALARY NUMBER := 0;
+BEGIN
+    SELECT SUM(EMP_SALARY) INTO TOTAL_SALARY
+    FROM EMPSP
+    WHERE DEPARTMENT_ID = DEPT_ID;
+    DBMS_OUTPUT.PUT_LINE('Total Salary for Department ' || DEPT_ID || ': ' || TOTAL_SALARY);
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('No employees found for department ' || DEPT_ID);
+END;
+/
+--------------------------------------------------------------------------------
+CREATE OR REPLACE PROCEDURE UP_SAL (
+    EMP_ID IN  NUMBER,
+    NEW_SAL IN NUMBER) AS
+BEGIN
+    UPDATE EMPSP
+    SET emp_salary = NEW_SAL
+    WHERE employee_id = EMP_ID;
+    DBMS_OUTPUT.PUT_LINE('Employee ' || emp_id || ' salary updated to ' || NEW_SAL);
+END;
+
+EXEC UP_SAL(2,10000)
+--------------------------------------------------------------------------------
+--Retrieve Employees by Department
+
+CREATE OR REPLACE PROCEDURE EMP_DET (
+    DEPT_ID IN NUMBER)AS
+    
+BEGIN 
+    FOR EMP IN(SELECT * FROM EMPSP WHERE DEPARTMENT_ID = DEPT_ID)LOOP
+    DBMS_OUTPUT.PUT_LINE('Employee ID: ' || EMP.employee_id || ', Name: ' || EMP.emp_name || ', Salary: ' || emp.emp_salary);
+    END LOOP;
+EXCEPTION
+    WHEN N0_DATA_FOUND THEN
+   DBMS_OUTPUT.PUT_LINE('No employees found for department ' || DEPT_ID);
+    
+END;
+/
+
+EXEC EMP_DET(5)
+
+--------------------------------------------------------------------------------
+CREATE OR REPLACE PROCEDURE GET_HIGH_SAL (dept_id IN EMPSP.DEPARTMENT_ID%TYPE) AS
+    CURSOR EMP_C IS
+    WITH RankedEmployees AS (
+    SELECT EMP_NAME, EMP_SALARY, DEPARTMENT_ID,
+           ROW_NUMBER() OVER (PARTITION BY DEPARTMENT_ID ORDER BY EMP_SALARY DESC) AS rank
+    FROM EMPSP
+)
+SELECT EMP_NAME, EMP_SALARY, DEPARTMENT_ID
+FROM RankedEmployees
+WHERE rank = 1
+ORDER BY DEPARTMENT_ID;
+
+    
+    PREV_DEPT_ID EMPSP.DEPARTMENT_ID%TYPE;
+    HIGHEST_SAL EMPSP.EMP_SALARY%TYPE;
+    
+BEGIN
+    FOR EMP_REC IN EMP_C LOOP
+        IF EMP_REC.DEPARTMENT_ID = DEPT_ID THEN
+            DBMS_OUTPUT.PUT_LINE('Highest salary in department ' || emp_rec.department_id || ': ' || emp_rec.emp_name || ', Salary: ' || emp_rec.emp_salary);
+            EMP_REC.DEPARTMENT_ID := DEPT_ID;
+        END IF;
+    END LOOP;
+END;
+
+
+
+EXEC GET_HIGH_SAL(1)
+--------------------------------------------------------------------------------
+--Handle Exceptions in Salary Calculation
+
+CREATE OR REPLACE PROCEDURE TAX_CAL (EMP_ID IN NUMBER) AS
+    V_SAL EMPSP.EMP_SALARY%TYPE;
+    V_TAX_RATE NUMBER := 0.2;
+    V_NETSAL NUMBER;
+    
+BEGIN
+    SELECT EMP_SALARY INTO V_SAL
+    FROM EMPSP
+    WHERE EMPLOYEE_ID = EMP_ID;
+
+    IF V_SAL <= 0 THEN
+        RAISE_APPLICATION_ERROR (-2000,'INVALID SALARY AMOUNT');
+    END IF;
+    
+    V_NETSAL := V_SAL*(1-V_TAX_RATE);
+    DBMS_OUTPUT.PUT_LINE('Employee ID: ' || emp_id || ', Net Salary: ' || V_NETSAL);
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN 
+        DBMS_OUTPUT.PUT_LINE('Employee with ID ' || emp_id || ' not found.');
+     WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('An error occurred: ' || SQLERRM);
+END;
+    
+
+    
+EXEC TAX_CAL (2)
+
+--------------------------------------------------------------------------------
+--Retrieve Employees by Salary Range
+CREATE OR REPLACE PROCEDURE MIN_MAX_SAL (MIN_SAL IN NUMBER,MAX_SAL IN NUMBER) AS
+    CURSOR C2 IS
+    SELECT EMP_NAME,EMP_SALARY
+    FROM EMPSP
+    WHERE EMP_SALARY BETWEEN MIN_SAL AND MAX_SAL;
+    
+    EMP_R C2%ROWTYPE;
+BEGIN
+    OPEN C2;
+    LOOP
+        FETCH C2 INTO EMP_R;
+        EXIT WHEN C2%NOTFOUND;
+            DBMS_OUTPUT.PUT_LINE('Employee: ' || EMP_R.emp_name || ', Salary: ' || EMP_R.emp_salary);
+            END LOOP;
+    CLOSE C2;
+END;
+        
+EXEC MIN_MAX_SAL(8000 ,10000)
+---------------------------------------------------------------------------------------
+
+CREATE OR REPLACE PROCEDURE MIN_MAX_SAL (MIN_SAL IN NUMBER,MAX_SAL IN NUMBER) AS
+    CURSOR C2 IS
+    SELECT EMP_NAME,EMP_SALARY
+    FROM EMPSP
+    WHERE EMP_SALARY BETWEEN MIN_SAL AND MAX_SAL;
+    
+     EMP_R C2%ROWTYPE;
+    v_count NUMBER := 0;
+BEGIN
+    OPEN C2;
+        FETCH C2 INTO EMP_R;
+            IF C2%NOTFOUND THEN 
+                CLOSE C2;
+                RAISE NO_DATA_FOUND;
+             END IF;
+        LOOP
+            v_count := v_count + 1;
+            DBMS_OUTPUT.PUT_LINE('Employee: ' || EMP_R.emp_name || ', Salary: ' || EMP_R.emp_salary);
+            FETCH C2 INTO EMP_R;
+             EXIT WHEN C2%NOTFOUND;
+         END LOOP;
+         
+      CLOSE C2;
+        IF v_count = 0 THEN
+            DBMS_OUTPUT.PUT_LINE('No employees found in the given salary range');
+        END IF;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+     DBMS_OUTPUT.PUT_LINE('ENTER A VALID SALARY RANGE');
+END;
+        
+EXEC MIN_MAX_SAL(1000 ,1500)
+----------------------------------------------------------------------------------
+Handle Exceptions in Salary Calculation
+
+--Handle Divide by Zero Exception
+
+CREATE OR REPLACE PROCEDURE ZERO_ER (DEPT_ID IN NUMBER) AS
+    V_TOT_SAL NUMBER := 0;
+    V_TOT_EMP NUMBER := 0;
+    AVG_SALARY NUMBER ;
+    
+BEGIN
+    SELECT SUM(EMP_SALARY),COUNT(*) INTO V_TOT_SAL,V_TOT_EMP
+    FROM EMPSP
+    WHERE DEPARTMENT_ID = DEPT_ID;
+    
+    IF V_TOT_EMP = 0 THEN
+        RAISE_APPLICATION_ERROR(-20002, 'No employees found in the department');
+    END IF;
+    avg_salary := V_TOT_SAL /V_TOT_EMP;
+    DBMS_OUTPUT.PUT_LINE('Average Salary in Department ' || dept_id || ': ' || avg_salary);
+EXCEPTION
+    WHEN ZERO_DIVIDE THEN
+        DBMS_OUTPUT.PUT_LINE('Division by zero error. No employees found in the department.');
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('An error occurred: ' || SQLERRM);
+END;
+
+EXEC ZERO_ER(4)
+

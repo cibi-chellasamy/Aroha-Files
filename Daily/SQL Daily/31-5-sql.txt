@@ -1,0 +1,197 @@
+from src create unique value records to tgt
+
+create tgt_tbl as
+select distinct col1,col2,col3
+from scr_tbl;
+--------------------------------------------------------------------
+
+create table as tgt  (select col1,col2,col3 from src)
+
+
+CREATE TABLE tgt_tbl AS 
+SELECT col1, col2, col3 
+FROM src_tbl 
+WHERE 1=2;
+--------------------------------------------------------------------
+What does lpad('aroha',10,'$') return?
+%%%%%aroha
+--------------------------------------------------------------------
+What is the query to print last 3 characters in a 'ibridge'
+select substr('ibridge,-3) from dual
+--------------------------------------------------------------------
+row wise max values
+
+select id,Greatest(c1,c2,c3,c4) as output
+from table
+--------------------------------------------------------------------
+Print the rows that have 'yellow' in one of the columns c1,c2,c3,but without using 'OR'
+
+select id, color
+from(
+select id,(case when lower(c1)='yellow' then c1
+                when lower(c2)='yellow' then c2
+                end)as color
+            from test4)
+        where color is not null;
+--------------------------------------------------------------------
+Purge
+Flashback
+decode
+--------------------------------------------------------------------
+
+
+
+
+SQL - 7.5
+Python - 7 
+DW Concepts 7.5
+AWS Cloud - 6
+
+
+How do you populate the primary key column value in RDBMS?
+create sequence seq_name
+insert into values add that in id wirh seqname.next_val
+
+Can we insert records using a View in RDBMS?
+If the view is single table we can insert and it should not have any complex joins and aggregateion
+
+I have 10 records in master (customer). I have 40 records in sales table (sales can be tracked for customer or guest). Guest purchase wont have cust_id. How you create a table for this
+
+sale id will be the primary key
+cust_id will be foriegn key of master table and this will save customer who made purchae
+and it can be null in for guest 
+
+---------------------------------------------------------------------------
+customer -- 20 Rows
+Sales -- 40 Rows
+4 records in sales table don't have any cust_id
+4 customers did not purchase any thing right now
+
+inner join between cust and sale how many records will i get
+
+right join between customer and sales (how many records I get)
+
+
+full join between customer and sales (how many records I get)
+
+
+
+select cust_id from customer
+minus
+select cust_id from sales
+
+
+---------------------------------------------------------------------------
+
+
+select cust_id from customer
+minus
+select cust_id from sales
+
+rewrite the query in a different way
+
+
+select cust_id from customer
+where cust_id not in(select cust_id from sales)
+---------------------------------------------------------------------------
+
+If we store structred data, semi structured data and unstructured data in analytical platfrom, what we can call that as?
+---------------------------------------------------------------------------
+
+Example of Operational activity and analytical activity in a BANK
+---------------------------------------------------------------------------
+operational activity
+Customer transaction
+
+analytical activity
+Cusomer marketing
+---------------------------------------------------------------------------
+List four services you know in AWS Cloud
+
+S3
+Ec2
+IAM
+
+---------------------------------------------------------------------------
+What does touch command do in Linux?
+creating file
+---------------------------------------------------------------------------
+Who are the end users of DW?
+
+Executives
+managers
+Analysts
+---------------------------------------------------------------------------
+
+
+What is MPP stands for? (in infrastructure)
+---------------------------------------------------------------------------
+List 5 transformations you performed as ETL Developer
+
+Aggregation
+Filter
+Join
+Deduplication
+---------------------------------------------------------------------------
+What do you mean by cloud DW?
+
+
+---------------------------------------------------------------------------
+What is the use of PowerBI tool in DW environment
+---------------------------------------------------------------------------
+
+what is the mechanism you use to do incremental extract as ETL developer
+
+---------------------------------------------------------------------------
+
+customer -- 20 records. sales -- 40 records
+umatching records -- 4 (customer)
+unmatching records -- 4 (customers)
+
+
+4 cust no sale
+4 sales rec no in cust
+
+inner join 36
+
+20 customers -- 40 sales records
+4 customers don't have any association to sales records
+4 sales records which are not associated to customer table 
+inner join = 36 records
+left join = matching + unmactching
+customer == 36 + 4
+
+
+right 40 records
+
+
+
+full outer join == matching records + unmatching frm left table + unmatching from right table
+
+
+36 + 4 + 4 = 44
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

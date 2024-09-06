@@ -1,0 +1,26 @@
+Lumen_Interview (2 round Surendar) Questions						19/12/2022
+----------------------------------
+
+1)Introduce your self?
+2)Explain your project and What you have done in your project?
+3)What is cursor?
+4)Why cursor is used ?
+5)What are the types of cursor?
+6)Difference between explicit and implicit cursor and What is the need of explicit cursor why cant we go  for implicit cursor?
+7)What is refcursor and where you used in project?
+8)What are Fact tables in your Project?
+9)What are Dimension tables in your project?
+10)What are the columns in your fact table? 
+11)Why payment is fact table why can`t it be dimension table?
+12)What are the measures in your fact table?
+13)What is Matview?where you used mat view?
+14)Can we do dml operation on mat view?
+15)What happen if any records inserted into base table?
+16)What are referesh methods?
+18)What is analysis?What analysis you done in your project?
+17)What are analytical function?
+18)What is lead and lag?
+19)Display the nth record in your table?
+20)Validte email by sql query 
+'abdul.muqsit7829@gmail.com' @ should be contain atleast 1
+

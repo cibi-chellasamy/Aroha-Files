@@ -1,0 +1,117 @@
+31. Difference between Power BI Pro and premium?
+Ans:-
+Power BI Pro Power BI Premium
+Maximum storage 10GB Per Users Maximum storage 100GB Per Users
+Maximum size of individual data set 1GB Maximum size of individual data set 10 GB
+Maximum no.of Automatic refresh per day 8 Maximum no.of Automatic refresh per day 
+Able to publish reports to be shared Unable to publish reports to be shared
+Unable do incremental data refresh Able do incremental data refresh
+Licensed by deducted cloud computed and
+storage server not available
+
+Licensed by deducted cloud computed and
+storage server available
+
+32. What is RLS?
+Ans:- Row level security is the ability to filter content based on a user's role.
+Both Direct Query and data imported to the model support RLS
+Note: If the members of the group associated to the Workspace have edit
+permissions, row level security in Power BI will be ignored.
+SSAS: SQL Server Analysis Services implements RLS on its own. SSAS requires
+the enterprise gateway to implement LiveConnection and RLS. RLS is
+supported by using EffectiveUserName on the connection from Power BI to the
+on-premises SSAS instance.
+
+
+33. Using the username() or userprincipalname() DAX function?
+Ans:- username() will return a user in the format of DOMAIN\User
+userprincipalname() will return a user in the format of user@boyinasoft.com.
+Within the Power BI service, username() and userprincipalname() will both
+return the user's User Principal Name (UPN). This looks similar to an email
+address.
+
+34. Can I use RLS to limit the columns or measures accessible by my users?
+Answer: No. If a user has access to a particular row of data, they can see all
+the columns of data for that row.
+
+35. Does RLS let me hide detailed data but give access to data summarized in
+visuals?
+Answer: No, you secure individual rows of data but users can always see either
+the details or the summarized data.
+
+36. Creating Static RLS?
+Ans:- Security model doesn't change dynamically for each logged in user
+Create Roles in Power BI Desktop--> Test Roles in Desktop
+Publish to Power BI Service ---------> Add Users to Power BI Service
+
+37. Creating Dynamic RLS?
+Ans:- Static RLS is about creating roles manually, If we have too many Roles to
+create Static RLS is not an option. Thus comes the Dynamic RLS.
+Example: if you want to restrict the user based on the state then we need to
+create Role for each state.
+
+38. What if I had previously created roles and rules for a dataset in the
+Power BI service? Will they still work if I do nothing?
+Answer: No. Visuals will not render properly. You will have to re-create the
+roles and rules within Power BI Desktop and then publish to the Power BI
+service.
+
+39. What is visual?
+Ans:- A visual is a graphic representation of the data in your model.
+
+
+40. Can I create these roles for Analysis Services data sources?
+Answer: You can if you imported the data into Power BI Desktop. If you are
+using a live connection, you will not be able to configure RLS within the Power
+BI service. This is defined within the Analysis Services model on-premises.
+
+41. Can I use RLS to limit the columns or measures accessible by my users?
+Answer: No. If a user has access to a particular row of data, they can see all the
+columns of data for that row.
+
+42. Does RLS let me hide detailed data but give access to data summarized in
+visuals?
+Answer: No, you secure individual rows of data but users can always see either
+the details or the summarized data.
+
+43. Can I use a custom URL as a hyperlink in a table or matrix?
+Ans:- No. You can use a link icon. If you need custom text for your hyperlinks
+and your list of URLs is short, consider using a text box instead.
+
+44. What is Reports?
+Ans:- A collection of visuals in one Power BI Desktop file is called a report. A
+report can have one or more pages just like an Excel file can have one or more
+worksheets.
+
+45. Can we delete datasets in pro from works space?
+Ans:- Yes
+
+46. Can we create a dashboard from visuals from multiple pages within the
+report?
+Ans:- Yes, we can create a dashboard from multiple pages .
+
+47. Can we create a dashboard from visuals from multiple reports?
+Ans:- Yes we can create a dashboard from visuals from multiple reports.
+
+48. Can we create reports in service?
+Ans:- Yes we can create reports in service.
+
+49. Can we create Calculated columns and measures in Service?
+Ans:- No, we cannot create calculated columns and measures in service
+
+
+50. What are the difference between filters?
+Ans:-
+Filter is used to filter the data statically at developer level, and share limited
+data to the users by using filters we can restrict the data.
+There are three types filters are here
+1. Visual Level Filter
+2. Report Level Filter
+3. Page Level Filter
+Visual Level Filter:- This Visual level filter applies to a single visual on a report
+page.
+Report Level Filter:- Report level filter applies to all pages in the report or this
+filter works on the entire report. It will works on all pages and all visualizations.
+Page Level Filter:- Page level filter applies all the visual on the report page.
+This filters works at reports page level. Difference pages in the same report can
+have different page level filter

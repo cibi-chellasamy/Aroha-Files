@@ -1,0 +1,88 @@
+Ashish
+10:18 AM
+Ant Colony Optimization
+https://pypi.org/project/acopy/
+https://github.com/rhgrant10/acopy
+
+Particle Swarm Optimization
+https://github.com/ljvmiranda921/pyswarms
+
+Genetic Algorithm Optimization
+https://github.com/rmsolgi/geneticalgorithm
+https://github.com/PasaOpasen/geneticalgorithm2
+https://faun.pub/genetic-algorithms-to-solve-the-zero-one-knapsack-problem-implementation-26c1982f44b3
+
+Hill Climbing
+https://towardsdatascience.com/how-to-implement-the-hill-climbing-algorithm-in-python-1c65c29469de
+https://machinelearningmastery.com/stochastic-hill-climbing-in-python-from-scratch/
+
+Simulated Annealing
+https://machinelearningmastery.com/simulated-annealing-from-scratch-in-python/
+https://pypi.org/project/simanneal/
+https://github.com/perrygeo/simanneal
+
+Google OR Tools
+https://developers.google.com/optimization
+https://developers.google.com/optimization/routing/tsp
+
+Pyomo (Framework)
+http://www.pyomo.org/
+
+https://github.com/gkhayes/mlrose
+
+GAMS
+
+MultiObjective Optimization
+https://github.com/anyoptimization/pymoo
+
+Solvers
+https://www.scipopt.org/ SCIP solver
+https://www.gurobi.com/ Gurobi Solver
+https://www.ibm.com/in-en/analytics/cplex-optimizer CPLEX solver
+https://www.gnu.org/software/glpk/ GLPK solver
+
+https://www.scipopt.org/ SCIP solver
+https://www.gurobi.com/ Gurobi Solver
+https://www.ibm.com/in-en/analytics/cplex-optimizer CPLEX solver
+https://www.gnu.org/software/glpk/ GLPK solver
+
+Ashish
+10:19 AM
+https://nathanrooy.github.io/posts/2016-08-17/simple-particle-swarm-optimization-with-python/
+
+
+
+https://5ly.co/blog/etl-pipeline-with-aws-glue/
+
+
+https://www.udemy.com/course/optimisation/
+
+https://www.udemy.com/course/optimization-with-python-linear-nonlinear-and-cplex-gurobi/
+
+
+
+
+
+
+
+For Optimization following things are required:
+
+    Variable - It is unknown and we have to find optimal value for this
+    Parameter - It is known and given values
+    Constraint - It is known and given conditions
+    Objective function - We have to maximize or minimize this function
+
+Linear models always gets the global minimum solution and Non linear models may get stuck in the local minimum solution
+
+Linearization techique such as BigM can be used to convert Non linear models into linear models
+
+
+
+
+
+
+
+
+
+
+https://www.alphaa.ai/cds-resources/top-12-data-engineering-projects-beginner-to-advanced

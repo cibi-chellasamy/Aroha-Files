@@ -1,0 +1,119 @@
+import pandas as pd
+import numpy as np
+
+customers_data = {
+    'customer_id': [1, 2, 3, 4],
+    'name': ['John Doe', 'Jane Smith', 'Alice Brown', 'Bob Johnson'],
+    'email': ['john@example.com', 'jane@example.com', 'alice@example.com', 'bob@example.com'],
+    'join_date': ['2021-01-15', '2020-07-22', '2019-03-10', '2022-11-01']
+}
+
+products_data = {
+    'product_id': [1, 2, 3, 4],
+    'name': ['Smartphone XYZ', 'Laptop ABC', 'Headphones QWE', 'Smartwatch DEF'],
+    'category': ['Electronics', 'Electronics', 'Accessories', 'Wearables'],
+    'price': [699, 999, 199, 299]
+}
+
+reviews_data = {
+    'review_id': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    'customer_id': [1, 2, 3, 1, 4, 2, 3, 4, 1, 2],
+    'product_id': [1, 2, 3, 4, 1, 3, 4, 2, 3, 1],
+    'review_date': ['2023-01-10', '2023-01-15', '2023-01-20', '2023-01-25', '2023-01-30', '2023-02-05', '2023-02-10', '2023-02-15', '2023-02-20', '2023-02-25'],
+    'rating': [5, 4, 3, 2, 5, 2, 4, 4, 1, 5],
+    'review_text': [
+        'Excellent smartphone! Great performance and battery life.',
+        'Very good laptop but a bit overpriced.',
+        'Average headphones, sound quality is not as expected.',
+        'The smartwatch is okay but has connectivity issues.',
+        'Love this smartphone! Worth every penny.',
+        'Not satisfied with the headphones, too expensive.',
+        'Good smartwatch, useful features but a bit bulky.',
+        'Solid performance from this laptop, very satisfied.',
+        'Terrible headphones, broke after a week.',
+        'Best smartphone on the market right now!'
+    ]
+}
+
+df_customers = pd.DataFrame(customers_data)
+df_product = pd.DataFrame(products_data)
+df_reviews = pd.DataFrame(reviews_data)
+
+reviews_cust_df = pd.merge(df_reviews,df_customers,on='customer_id',how = 'left')
+reviews_cust_df
+
+
+reviews_cust_df['review_text']
+
+for i in reviews_cust_df['review_text']:
+    if '!' in i:
+        print(i)
+
+
+reviews_full_df = pd.merge(reviews_cust_df, df_product, on='product_id', how='left')
+
+
+def subjectivity (text):
+    analysis_s = TextBlob(text)
+    return analysis_s.sentiment.subjectivity
+
+reviews_full_df['Subjectivity'] = reviews_full_df['review_text'].apply(subjectivity)
+
+
+
+from textblob import TextBlob
+
+def get_sentiment(text):
+    analysis = TextBlob(text)
+    return analysis.sentiment.polarity
+
+reviews_full_df['sentiment'] = reviews_full_df['review_text'].apply(get_sentiment)
+
+
+summary = reviews_full_df.groupby('product_id').agg({'rating': ['mean', 'count'],'sentiment': 'mean','Subjectivity':'mean'}).reset_index()
+
+summary.columns = ['product_id', 'avg_rating', 'review_count', 'avg_sentiment','avg_subjectivity']
+
+
+summary = pd.merge(summary, df_product, on='product_id', how='left')
+
+def determine_mood(sentiment):
+    if sentiment > 0.90:
+        return 'Happy'
+    elif sentiment <= 0.90 and sentiment > 0.50:
+        return 'Satisfied'
+    elif sentiment <= 0.50 and sentiment > 0.10:
+        return 'Neutral'
+    else:
+        return 'Not happy'
+
+reviews_full_df['mood'] = reviews_full_df['sentiment'].apply(determine_mood)
+
+
+reviews_full_df.rename({'name_x':'Customer_name'},inplace=True,axis=1)
+reviews_full_df.rename({'name_y':'Product_name'},inplace=True,axis=1)
+
+
+colors = ['Blue', 'Green', 'Red', 'Orange']
+
+sns.countplot(x='mood', data=reviews_full_df,palette=colors)
+
+
+avg_customer_rating = reviews_full_df.groupby('Customer_name')['rating'].mean().sort_values(ascending = False)
+avg_customer_rating
+
+
+#Simple recomendation
+customer_product_matrix = reviews_full_df.pivot_table(index='Customer_name',columns='Product_name',values = 'rating')
+customer_product_matrix = customer_product_matrix.fillna(0)
+customer_product_matrix
+
+reviews_full_df['review_date'] = pd.to_datetime(reviews_full_df['review_date'])
+
+plt.figure(figsize=(10, 6))
+sns.lineplot(data=reviews_full_df, x='review_date', y='sentiment')
+plt.title('Trend of Sentiment Over Time')
+plt.xlabel('Date')
+plt.ylabel('Sentiment')
+plt.xticks(rotation=90) 
+plt.show()

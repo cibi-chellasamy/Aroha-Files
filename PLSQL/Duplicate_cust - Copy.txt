@@ -1,0 +1,383 @@
+CREATE OR REPLACE PROCEDURE DIST_DUP(
+    ENTER_NAME VARCHAR2,
+    ENTER_PHONE VARCHAR2,
+    ENTER_CITY VARCHAR2,
+    ENTER_DATE DATE
+) AS
+    V_INSTANCE_NO NUMBER;
+BEGIN
+    SELECT COUNT(*) INTO V_INSTANCE_NO
+    FROM CUST
+    WHERE CUST_NAME = ENTER_NAME
+    AND CUST_PHONE = ENTER_PHONE
+    AND CUST_CITY = ENTER_CITY
+    AND CUST_SINCE = ENTER_DATE;
+
+    FOR CUST_REC IN (SELECT CUST_NAME, CUST_PHONE, CUST_CITY, CUST_SINCE FROM CUST) LOOP
+        IF CUST_REC.CUST_NAME = ENTER_NAME
+        AND CUST_REC.CUST_PHONE = ENTER_PHONE
+        AND CUST_REC.CUST_CITY = ENTER_CITY
+        AND CUST_REC.CUST_SINCE = ENTER_DATE THEN
+            INSERT INTO CUST_DUPLICATE 
+            VALUES (CUST_REC.CUST_NAME, CUST_REC.CUST_PHONE, CUST_REC.CUST_CITY, CUST_REC.CUST_SINCE, V_INSTANCE_NO);
+            DBMS_OUTPUT.PUT_LINE('RECORD INSERTED INTO CUST_DUPLICATE');
+        ELSE 
+            INSERT INTO CUST_TARGET 
+            VALUES (CUST_REC.CUST_NAME, CUST_REC.CUST_PHONE, CUST_REC.CUST_CITY, CUST_REC.CUST_SINCE);
+            DBMS_OUTPUT.PUT_LINE('RECORD INSERTED INTO CUST_TARGET');
+            COMMIT;
+        END IF;
+    END LOOP;
+END;
+/
+BEGIN
+    DIST_DUP('raj',12345,'blr', TO_DATE('21-jan-19', 'YYYY-MM-DD'));
+END;
+/
+
+--------------------------------------------------------------------------------
+--EXEC DIST_DUP ('SANJU',87899,'CHN','12-FEB-24')
+--EXEC DIST_DUP ('SANJU', 87899, 'CHN', '12-FEB-24');
+--
+--BEGIN
+--    DIST_DUP;
+--END;
+
+
+/*
+CREATE OR REPLACE PROCEDURE DIST_DUP AS
+    V_INSTANCE_NO NUMBER;
+BEGIN
+    FOR CUST_REC IN (SELECT CUST_NAME, CUST_PHONE, CUST_CITY, CUST_SINCE, COUNT(*) AS INSTANCE_COUNT FROM CUST
+        GROUP BY CUST_NAME, CUST_PHONE, CUST_CITY, CUST_SINCE) LOOP
+        IF CUST_REC.INSTANCE_COUNT > 1 THEN
+            INSERT INTO CUST_DUPLICATE (cust_name, cust_phone, cust_city, cust_since, no_of_instances)
+            VALUES (CUST_REC.CUST_NAME, CUST_REC.CUST_PHONE, CUST_REC.CUST_CITY, CUST_REC.CUST_SINCE, CUST_REC.INSTANCE_COUNT);
+            DBMS_OUTPUT.PUT_LINE('RECORD INSERTED INTO CUST_DUPLICATE');
+        ELSE
+            INSERT INTO CUST_TARGET (cust_name, cust_phone, cust_city, cust_since)
+            VALUES (CUST_REC.CUST_NAME, CUST_REC.CUST_PHONE, CUST_REC.CUST_CITY, CUST_REC.CUST_SINCE);
+            DBMS_OUTPUT.PUT_LINE('RECORD INSERTED INTO CUST_TARGET');
+        END IF;
+    END LOOP;
+
+    COMMIT;
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('ERROR: ' || SQLERRM);
+        ROLLBACK;
+END;
+
+BEGIN
+    DIST_DUP('John Doe', '123456789', 'New York', '2024-05-14');
+END;
+*/
+
+/*
+DECLARE
+    V_INSTANCE_NO NUMBER;
+    V_CUST_NAME VARCHAR2(50) := '&ENTER_NAME';
+    N_CUST_PHONE VARCHAR2(20) := '&ENTER_PHONE';
+    V_CUST_CITY VARCHAR2(50) := '&ENTER_CITY';
+    D_CUST_SINCE VARCHAR2(20) := '&ENTER_DATE';
+BEGIN
+    SELECT COUNT(*) INTO V_INSTANCE_NO
+    FROM CUST
+    WHERE CUST_NAME = V_CUST_NAME
+    AND CUST_PHONE = N_CUST_PHONE
+    AND CUST_CITY = V_CUST_CITY
+    AND CUST_SINCE = TO_DATE(D_CUST_SINCE, 'YYYY-MM-DD');
+
+    -- Insert into appropriate table based on the existence of duplicates
+    IF V_INSTANCE_NO > 0 THEN
+        -- Insert into CUST_DUPLICATE table
+        INSERT INTO CUST_DUPLICATE (cust_name, cust_phone, cust_city, cust_since, no_of_instances)
+        VALUES (V_CUST_NAME, N_CUST_PHONE, V_CUST_CITY, TO_DATE(D_CUST_SINCE, 'YYYY-MM-DD'), V_INSTANCE_NO);
+        DBMS_OUTPUT.PUT_LINE('RECORD INSERTED INTO CUST_DUPLICATE');
+    ELSE
+        -- Insert into CUST_TARGET table
+        INSERT INTO CUST_TARGET (cust_name, cust_phone, cust_city, cust_since)
+        VALUES (V_CUST_NAME, N_CUST_PHONE, V_CUST_CITY, TO_DATE(D_CUST_SINCE, 'YYYY-MM-DD'));
+        DBMS_OUTPUT.PUT_LINE('RECORD INSERTED INTO CUST_TARGET');
+    END IF;
+
+    -- Check for duplicates among new values
+    SELECT COUNT(*) INTO V_INSTANCE_NO
+    FROM (SELECT :V_CUST_NAME AS cust_name, :N_CUST_PHONE AS cust_phone, :V_CUST_CITY AS cust_city, TO_DATE(:D_CUST_SINCE, 'YYYY-MM-DD') AS cust_since FROM DUAL)
+    WHERE EXISTS (
+        SELECT 1
+        FROM CUST
+        WHERE CUST_NAME = :V_CUST_NAME
+        AND CUST_PHONE = :N_CUST_PHONE
+        AND CUST_CITY = :V_CUST_CITY
+        AND CUST_SINCE = TO_DATE(:D_CUST_SINCE, 'YYYY-MM-DD')
+    );
+
+    -- Insert new values into appropriate table based on the existence of duplicates
+    IF V_INSTANCE_NO > 0 THEN
+        -- Insert into CUST_DUPLICATE table
+        INSERT INTO CUST_DUPLICATE (cust_name, cust_phone, cust_city, cust_since, no_of_instances)
+        VALUES (:V_CUST_NAME, :N_CUST_PHONE, :V_CUST_CITY, TO_DATE(:D_CUST_SINCE, 'YYYY-MM-DD'), V_INSTANCE_NO);
+        DBMS_OUTPUT.PUT_LINE('NEW RECORD INSERTED INTO CUST_DUPLICATE');
+    ELSE
+        -- Insert into CUST_TARGET table
+        INSERT INTO CUST_TARGET (cust_name, cust_phone, cust_city, cust_since)
+        VALUES (:V_CUST_NAME, :N_CUST_PHONE, :V_CUST_CITY, TO_DATE(:D_CUST_SINCE, 'YYYY-MM-DD'));
+        DBMS_OUTPUT.PUT_LINE('NEW RECORD INSERTED INTO CUST_TARGET');
+    END IF;
+
+    COMMIT;
+
+END;
+*/
+--------------------------------------------------------------------------------
+CREATE OR REPLACE PROCEDURE DIST_DUP(
+    ENTER_NAME VARCHAR2,
+    ENTER_PHONE NUMBER,
+    ENTER_CITY VARCHAR2,
+    ENTER_DATE DATE
+) AS
+    SRC_CNT NUMBER;
+BEGIN
+    SELECT COUNT(*) INTO SRC_CNT FROM CUST;
+    INSERT INTO CUST VALUES(ENTER_NAME,ENTER_PHONE,ENTER_CITY,ENTER_DATE);
+    
+    DECLARE
+    CURSOR CUST_SRC IS
+    SELECT  CUST_NAME, CUST_PHONE, CUST_CITY, CUST_SINCE FROM CUST
+    WHERE ROWNUM > SRC_CNT;
+    REC CUST_SRC%ROWTYPE;
+    
+    BEGIN
+        OPEN CUST_SRC;
+        LOOP 
+            FETCH CUST_SRC INTO REC;
+            EXIT WHEN CUST_SRC%NOTFOUND;
+        
+            SELECT CUST_NAME, CUST_PHONE, CUST_CITY, CUST_SINCE FROM cust_target
+            WHERE CUST_NAME = REC.CUST_NAME
+            AND CUST_PHONE = REC.CUST_PHONE
+            AND CUST_CITY = REC.CUST_CITY
+            AND CUST_SINCE = REC.CUST_SINCE;
+        
+            IF SQL%FOUND THEN 
+            DECLARE 
+                CNT NUMBER;
+                BEGIN
+                    SELECT COUNT(*) INTO CNT FROM CUST_DUPLICATE
+                    WHERE CUST_NAME = REC.CUST_NAME
+                    AND CUST_PHONE = REC.CUST_PHONE
+                    AND CUST_CITY = REC.CUST_CITY
+                    AND CUST_SINCE = REC.CUST_SINCE;
+                
+                IF CNT >= 1 THEN
+                    UPDATE CUST_DUPLICATE SET NO_OF_INSTANCE  = NO_OF_INSTANCE+1
+                    WHERE CUST_NAME = REC.CUST_NAME
+                    AND CUST_PHONE = REC.CUST_PHONE
+                    AND CUST_CITY = REC.CUST_CITY
+                    AND CUST_SINCE = REC.CUST_SINCE;
+                ELSIF CNT = 0 THEN
+                    INSERT INTO CUST_DUPLICATE  VALUES (REC.CUST_NAME,REC.CUST_PHONE,REC.CUST_CITY,REC.CUST_SINCE,2);
+                END IF;
+                END;
+            END IF;
+            END LOOP;
+        CLOSE CUST_SRC;
+EXCEPTION 
+    WHEN NO_DATA_FOUND THEN
+    INSERT INTO CUST_TARGET VALUES(REC.CUST_NAME,REC.CUST_PHONE,REC.CUST_CITY,REC.CUST_SINCE);
+END;
+    
+                    
+        
+        
+      
+        
+        
+--------------------------------------------------------------------------------
+    
+    
+    
+CREATE OR REPLACE PROCEDURE DIST_DUP(
+    ENTER_NAME VARCHAR2,
+    ENTER_PHONE NUMBER,
+    ENTER_CITY VARCHAR2,
+    ENTER_DATE DATE
+) AS
+    SRC_CNT NUMBER;
+BEGIN
+    -- Get the count of existing records in CUST
+    SELECT COUNT(*) INTO SRC_CNT FROM CUST;
+
+    -- Insert the new values into CUST table
+    INSERT INTO CUST (CUST_NAME, CUST_PHONE, CUST_CITY, CUST_SINCE) 
+    VALUES (ENTER_NAME, ENTER_PHONE, ENTER_CITY, ENTER_DATE);
+    
+    -- Cursor to fetch records from CUST
+    FOR REC IN (SELECT CUST_NAME, CUST_PHONE, CUST_CITY, CUST_SINCE 
+                FROM CUST WHERE ROWNUM > SRC_CNT) LOOP
+        -- Check if the record exists in CUST_TARGET
+        SELECT COUNT(*) INTO SRC_CNT
+        FROM CUST_TARGET
+        WHERE CUST_NAME = REC.CUST_NAME
+        AND CUST_PHONE = REC.CUST_PHONE
+        AND CUST_CITY = REC.CUST_CITY
+        AND CUST_SINCE = REC.CUST_SINCE;
+
+        -- If the record exists in CUST_TARGET, update or insert into CUST_DUPLICATE
+        IF SRC_CNT > 0 THEN 
+            SELECT COUNT(*) INTO SRC_CNT
+            FROM CUST_DUPLICATE
+            WHERE CUST_NAME = REC.CUST_NAME
+            AND CUST_PHONE = REC.CUST_PHONE
+            AND CUST_CITY = REC.CUST_CITY
+            AND CUST_SINCE = REC.CUST_SINCE;
+            
+            IF SRC_CNT >= 1 THEN
+                UPDATE CUST_DUPLICATE 
+                SET no_of_instances = no_of_instances + 1
+                WHERE CUST_NAME = REC.CUST_NAME
+                AND CUST_PHONE = REC.CUST_PHONE
+                AND CUST_CITY = REC.CUST_CITY
+                AND CUST_SINCE = REC.CUST_SINCE;
+            ELSIF SRC_CNT = 0 THEN
+                INSERT INTO CUST_DUPLICATE  
+                VALUES (REC.CUST_NAME, REC.CUST_PHONE, REC.CUST_CITY, REC.CUST_SINCE, 2);
+            END IF;
+        ELSE
+            -- If the record doesn't exist in CUST_TARGET, insert into it
+            INSERT INTO CUST_TARGET 
+            VALUES (REC.CUST_NAME, REC.CUST_PHONE, REC.CUST_CITY, REC.CUST_SINCE);
+        END IF;
+    END LOOP;
+END;
+
+
+EXEC DIST_DUP ('PC',98999,'LS','22-JAN-19')
+
+    
+    
+ select * from cust;
+
+select * from cust_duplicate;
+
+select * from cust_target;
+--------------------------------------------------------------------------------
+TRUNCATE TABLE cust;
+truncate table cust_duplicate;
+truncate table cust_target;
+   
+    
+    
+  CREATE OR REPLACE PROCEDURE DIST_DUP(
+    ENTER_NAME VARCHAR2,
+    ENTER_PHONE NUMBER,
+    ENTER_CITY VARCHAR2,
+    ENTER_DATE DATE
+) AS
+    SRC_CNT NUMBER;
+BEGIN
+    INSERT INTO CUST (CUST_NAME, CUST_PHONE, CUST_CITY, CUST_SINCE) 
+    VALUES (ENTER_NAME, ENTER_PHONE, ENTER_CITY, ENTER_DATE);
+    
+    SELECT COUNT(*) INTO SRC_CNT
+    FROM CUST_TARGET
+    WHERE CUST_NAME = ENTER_NAME
+    AND CUST_PHONE = ENTER_PHONE
+    AND CUST_CITY = ENTER_CITY
+    AND CUST_SINCE = ENTER_DATE;
+
+    IF SRC_CNT = 0 THEN
+        INSERT INTO CUST_TARGET (CUST_NAME, CUST_PHONE, CUST_CITY, CUST_SINCE)
+        VALUES (ENTER_NAME, ENTER_PHONE, ENTER_CITY, ENTER_DATE);
+        DBMS_OUTPUT.PUT_LINE('RECORD INSERTED INTO CUST_TARGET');
+    END IF;
+
+    SELECT COUNT(*) INTO SRC_CNT
+    FROM CUST_DUPLICATE
+    WHERE CUST_NAME = ENTER_NAME
+    AND CUST_PHONE = ENTER_PHONE
+    AND CUST_CITY = ENTER_CITY
+    AND CUST_SINCE = ENTER_DATE;
+
+    IF SRC_CNT >= 1 THEN
+        UPDATE CUST_DUPLICATE
+        SET NO_OF_INSTANCES = NO_OF_INSTANCES + 1
+        WHERE CUST_NAME = ENTER_NAME
+        AND CUST_PHONE = ENTER_PHONE
+        AND CUST_CITY = ENTER_CITY
+        AND CUST_SINCE = ENTER_DATE;
+        DBMS_OUTPUT.PUT_LINE('RECORD UPDATED IN CUST_DUPLICATE');
+    ELSIF SRC_CNT = 0 THEN
+        INSERT INTO CUST_DUPLICATE (CUST_NAME, CUST_PHONE, CUST_CITY, CUST_SINCE, NO_OF_INSTANCES)
+        VALUES (ENTER_NAME, ENTER_PHONE, ENTER_CITY, ENTER_DATE, 2);
+        DBMS_OUTPUT.PUT_LINE('RECORD INSERTED INTO CUST_DUPLICATE');
+    END IF;
+
+    COMMIT;
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('ERROR: ' || SQLERRM);
+        ROLLBACK;
+END;
+/
+  
+--------------------------------------------------------------------------------
+CREATE OR REPLACE PROCEDURE DIST_DUP(
+    ENTER_NAME VARCHAR2,
+    ENTER_PHONE NUMBER,
+    ENTER_CITY VARCHAR2,
+    ENTER_DATE DATE
+) AS
+    SRC_CNT NUMBER;
+BEGIN
+    -- Check if the record already exists in CUST_TARGET
+    SELECT COUNT(*) INTO SRC_CNT
+    FROM CUST_TARGET
+    WHERE CUST_NAME = ENTER_NAME
+    AND CUST_PHONE = ENTER_PHONE
+    AND CUST_CITY = ENTER_CITY
+    AND CUST_SINCE = ENTER_DATE;
+
+    IF SRC_CNT = 0 THEN
+        -- Insert the new record into CUST_TARGET
+        INSERT INTO CUST_TARGET (CUST_NAME, CUST_PHONE, CUST_CITY, CUST_SINCE)
+        VALUES (ENTER_NAME, ENTER_PHONE, ENTER_CITY, ENTER_DATE);
+        DBMS_OUTPUT.PUT_LINE('RECORD INSERTED INTO CUST_TARGET');
+    ELSE
+        -- If the record already exists in CUST_TARGET, check if it's a duplicate
+        SELECT COUNT(*) INTO SRC_CNT
+        FROM CUST_DUPLICATE
+        WHERE CUST_NAME = ENTER_NAME
+        AND CUST_PHONE = ENTER_PHONE
+        AND CUST_CITY = ENTER_CITY
+        AND CUST_SINCE = ENTER_DATE;
+
+        IF SRC_CNT >= 1 THEN
+            -- If it's a duplicate, update the count in CUST_DUPLICATE
+            UPDATE CUST_DUPLICATE
+            SET NO_OF_INSTANCES = NO_OF_INSTANCES + 1
+            WHERE CUST_NAME = ENTER_NAME
+            AND CUST_PHONE = ENTER_PHONE
+            AND CUST_CITY = ENTER_CITY
+            AND CUST_SINCE = ENTER_DATE;
+            DBMS_OUTPUT.PUT_LINE('RECORD UPDATED IN CUST_DUPLICATE');
+        ELSE
+            -- If it's not a duplicate, insert it into CUST_DUPLICATE
+            INSERT INTO CUST_DUPLICATE (CUST_NAME, CUST_PHONE, CUST_CITY, CUST_SINCE, NO_OF_INSTANCES)
+            VALUES (ENTER_NAME, ENTER_PHONE, ENTER_CITY, ENTER_DATE, 2);
+            DBMS_OUTPUT.PUT_LINE('RECORD INSERTED INTO CUST_DUPLICATE');
+        END IF;
+    END IF;
+
+    COMMIT;
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('ERROR: ' || SQLERRM);
+        ROLLBACK;
+END;
+/
+
+    
+
+EXEC DIST_DUP ('KS',98979,'LS','22-JAN-19')

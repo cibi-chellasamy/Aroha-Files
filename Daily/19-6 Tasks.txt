@@ -1,0 +1,482 @@
+19-6-24
+
+Domain: Human Resource
+Function:Department Employee Jobs
+Scenario:dept emp jobs analysis
+------------------------------------------------------------------------------------------
+
+Assignment questions
+
+
+# List Comprehension:
+
+import math
+
+#1 )Generate a list of even numbers from 1 to 20 using list comprehension.
+
+l = [i for i in range(1,21) if i%2==0]
+print(l)
+
+#2) Create a list of cubes for the numbers 1 to 10 using list comprehension.
+
+l = [i**3 for i in range(1,11)]
+print(l)
+
+#3) Write a list comprehension to get the square roots of numbers from 1 to 10.
+
+l = [math.sqrt(i) for i in range(1,11)]
+print(l)
+
+#4 )Generate a list of strings by concatenating each number from 1 to 5 with the letter 'A'.
+
+l = [str(i) + "A" for i in range(1,6)]
+print(l)
+
+#5 )Create a list of tuples where each tuple contains a number and its square.
+
+l = [(i,i**2) for i in range(1,11)]
+print(l)
+------------------------------------------------------------------------------------------
+
+# Dictionary Comprehension:
+
+
+#6. Build a dictionary where keys are numbers from 1 to 5, and values are their cubes.
+d = {x:x**3 for x in range(1,6)}
+print(d)
+
+#7)Create a dictionary with keys as vowels and values as their ASCII values.
+
+d = {vowel : ord(vowel) for vowel in 'AEIOUaeiou'}
+print(d)
+
+#8)Write a dictionary comprehension to count the frequency of each character in a given string.
+
+s = 'Hi Hello'
+d = {i:s.count(i) for i in s }
+print(d)
+
+#9)Generate a dictionary where keys are even numbers from 1 to 10, and values are their squares.
+
+d = {i:i**2 for i in range(1,11) if i%2==0}
+print(d)
+
+#10 )Build a dictionary mapping words to their lengths in a given sentence.
+
+s = 'Hello how are you'
+
+d = {word: len(word) for word in s.split()}
+print(d)
+------------------------------------------------------------------------------------------
+
+#Set Comprehension:
+
+# 11. Generate a set of odd numbers from 1 to 15 using set comprehension.
+s = {x for x in range(1,16) if x % 2 != 0}
+print(s)
+
+# 12) Create a set of the first letter of each word in a sentence.
+
+st = 'Hi Good Morning'
+s = {word[0].lower() for word in st.split()}
+print(s)
+
+# 13) Write a set comprehension to get unique vowels from a sentence.
+st = 'Hi Good Morning what are you doing'
+
+s = {i for i in st if i in 'AEIOUaeiou'}
+print(s)
+
+# 14) Build a set of square numbers from 1 to 10 using set comprehension.
+
+s = {x**2 for x in range (1,11)}
+print(s)
+
+# 15) Generate a set of prime numbers less than 20 using set comprehension.
+
+def is_prime(n):
+    if n <=1:
+        return False
+    if n == 2:
+        return True
+    if n % 2 == 0:
+        return False
+    for i in range(3,int(n**0.5) +1,2):
+        if n % i == 0:
+            return False
+    return True
+
+
+s = {x for x in range (2,20) if is_prime(x)}
+print(s)
+
+------------------------------------------------------------------------------------------
+
+# Nested Comprehension:
+
+# 16. Create a list of lists where each inner list contains the first three multiples of the corresponding number in the outer list.
+
+l = [[j*i for i in range (1,4)]for j in range (1,6)]
+print(l)
+
+#17) Generate a nested dictionary where keys are numbers from 1 to 3, 
+#and values are dictionaries with keys as numbers from 1 to 5 and values as their squares.
+
+l = {x:{y:y**2 for y in range(1,6) } for x in range(1,4)}
+print(l)
+
+# 18)Build a list of tuples where each tuple contains a letter and its corresponding ASCII value for all letters in the word "PYTHON".
+
+s = 'PYTHON'
+
+l = [(i,ord(i)) for i in s]
+print(l)
+
+# 19) Create a list of lists where each inner list contains numbers from 1 to the outer list's index.
+l = [[i for i in range (1,num+1)] for num in range (1,6)]
+print(l)
+
+# 20) Generate a nested set where each inner set contains vowels from a word and its reverse.
+
+def vowels_(word):
+    vowels = {'a', 'e', 'i', 'o', 'u'}
+    return {char for char in word.lower() if char in vowels}
+
+word = 'PythonProgramming'
+
+l = {frozenset(vowels_(word)),frozenset(vowels_(word[::-1]))}
+print(l)
+------------------------------------------------------------------------------------------
+# Advanced Comprehension:
+
+# 26) Use the zip function with list comprehension to create a list of pairs from two lists.
+
+l1 = [1,2,3,4,5]
+l2 = ['a', 'b', 'c', 'd']
+l = [(x,y) for x,y in zip(l1,l2)]
+print(l)
+
+# 27) Create a generator expression to yield Fibonacci numbers up to 100.
+
+def fibbonacci(max_val):
+    a,b = 0,1
+    while a <= max_val:
+        yield a
+        a,b = b,a+b
+
+
+fib_num = fibbonacci(100)
+
+for num in fib_num:
+    print(num)
+
+# 28) Implement a nested list comprehension to flatten a 2D list.
+
+tdl = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+l = [i for sublist in tdl for i in sublist ]
+print(l)
+
+# 29)Write a dictionary comprehension using enumerate to map a list of words to their length and index.
+
+words = ["apple", "banana", "cherry", "date"]
+
+d = {word: (index, len(word)) for index, word in enumerate(words)}
+print(d)
+
+# 30) Generate a list of tuples where each tuple contains two numbers from the range 1 to 5, but only if they are different.
+
+tl = [(x,y) for x in range (1,6) for y in range(1,6) if x!=y]
+print(tl)
+------------------------------------------------------------------------------------------
+Python Basics
+
+# Write a Python program to print "Hello, Python!" to the console. User Input and Output:
+
+st = input('Enter: ')
+
+print(f"Hello {st} welcome ")
+------------------------------------------------------------------------------------------
+#Create a program that takes the user's name as input and prints a personalized greeting. Arithmetic Operations:
+
+st = input('Enter: ')
+
+print(f"Start {st} coding ")
+------------------------------------------------------------------------------------------
+#Write a Python script to perform addition, subtraction, multiplication, and division of two numbers entered by the user. Conditional Statements:
+
+def add(a, b):
+    return a + b
+
+def subtract(a, b):
+    return a - b
+
+def multiply(a, b):
+    return a * b
+
+def divide(a, b):
+    if b != 0:
+        return a / b
+    else:
+        return "Error: Division by zero"
+
+num1 = float(input("Enter the first number: "))
+num2 = float(input("Enter the second number: "))
+
+print('addition',add(num1,num2))
+print('subraction',subtract(num1,num2))
+print('multiplication',multiply(num1,num2))
+print('division',divide(num1,num2))
+------------------------------------------------------------------------------------------
+# Implement a program that checks if a given number is even or odd. Loops:
+num1 = float(input("Enter the first number: "))
+if num1 % 2 == 0:
+    print('Even')
+else:
+    print('Odd')
+-----------------------------------------------------------------------------------------
+# Write a Python program to print the multiplication table (up to 10) for a given number. Lists and Iteration:
+
+num = int(input("Enter the first number: "))
+
+for i in range (1,11):
+    print(i,'x',num,'=',i*num)
+
+------------------------------------------------------------------------------------------
+# Create a list of fruits and use a loop to print each fruit on a new line. Functions:
+
+def print_fruits():
+    fruits = ["apple", "banana", "cherry", "date", "elderberry"]
+    
+    for fruit in fruits:
+        print(fruit)
+print_fruits()
+------------------------------------------------------------------------------------------
+# Define a function that calculates the square of a number and then use it to calculate the square of 5. String Manipulation:
+def calculate(num):
+    c = num ** 2
+    return c
+
+num = 5
+calculate(num)
+------------------------------------------------------------------------------------------
+# Write a program that takes a user's input and prints the input in uppercase. Lists and Sorting:
+
+st = input('Enter a string')
+
+print(f'{st.upper()}')
+------------------------------------------------------------------------------------------
+# Create a list of numbers and sort them in ascending order. File Handling:
+
+l = [5,3,2,57,85,4,9,5,1,10]
+l.sort()
+l
+------------------------------------------------------------------------------------------
+# Write a program to read a text file and print its content to the console.
+
+def read_and_print_file(filename):
+    try:
+        with open(filename, 'r') as file:
+            file_content = file.read()
+            print(file_content)
+    except FileNotFoundError:
+        print(f"Error: The file '{filename}' was not found.")
+    except IOError as e:
+        print(f"Error: An IOError occurred. Details: {e}")
+
+filename = 'num.txt'  
+read_and_print_file(filename)
+------------------------------------------------------------------------------------------
+Conditional Statements:
+
+
+
+# Check if a number is positive, negative, or zero.
+
+def check_num(num):
+    if num > 0:
+        print(f"{num} is positive.")
+    elif num < 0:
+        print(f"{num} is Negative.")
+    else:
+        print(f"{num} is zero.")
+
+check_num(5)
+check_num(0)
+check_num(-2)
+------------------------------------------------------------------------------------------
+# Determine the largest of three numbers.
+def find_largest(num1, num2, num3):
+    if num1 >= num2 and num1 >= num3:
+        largest = num1
+    elif num2 >= num1 and num2 >= num3:
+        largest = num2
+    else:
+        largest = num3
+    return largest
+
+# Example usage:
+num1 = 10
+num2 = 5
+num3 = 7
+
+largest_number = find_largest(num1, num2, num3)
+print(f"the largest number is: {largest_number}")
+------------------------------------------------------------------------------------------
+# Check if a given year is a leap year.
+
+def is_leap_year(year):
+    if (year % 4 == 0 and year % 100 != 0 ) or(year % 400 == 0 ):
+        return True
+    else:
+        return False
+year = 2004
+
+if is_leap_year(year):
+    print(f"{year} is a leap year.")
+else:
+    print(f"{year} is not a leap year.")
+------------------------------------------------------------------------------------------
+# Implement a basic calculator with addition, subtraction, multiplication, and division.
+
+def add(a, b):
+    return a + b
+
+def subtract(a, b):
+    return a - b
+
+def multiply(a, b):
+    return a * b
+
+def divide(a, b):
+    if b != 0:
+        return a / b
+    else:
+        return "Error: Division by zero"
+
+num1 = float(input("Enter the first number: "))
+num2 = float(input("Enter the second number: "))
+
+print('addition',add(num1,num2))
+print('subraction',subtract(num1,num2))
+print('multiplication',multiply(num1,num2))
+print('division',divide(num1,num2))
+------------------------------------------------------------------------------------------
+# Check if a number is even or odd.
+def odd_even(num):
+    if num % 2 == 0:
+        return True
+    else :
+        return False
+
+num = int(input('Enter a number'))
+if odd_even(num):
+    print(f"{num} is even.")
+else:
+    print(f"{num} is odd.")
+
+------------------------------------------------------------------------------------------
+# Determine if a person is eligible to vote based on their age.
+def eligible(age):
+    if age >= 18 :
+        return True
+    else :
+        return False
+
+age = int(input('Enter the age : '))
+
+if eligible(age):
+    print(f"{age} person is eligible to vote.")
+else:
+    print(f"{age} person is not eligible to vote.")
+------------------------------------------------------------------------------------------
+# Check if a given character is a vowel or consonant.
+letter = input('Enter a letter : ')
+if letter in 'AEIOUaeiou':
+    print(f"{letter} is a vowel.")
+else :
+    print(f"{letter} is a consonant.")
+
+------------------------------------------------------------------------------------------
+# Determine the quadrant of a point on the Cartesian plane.
+def determine_quadrant(x, y):
+    if x > 0 and y > 0:
+        quadrant = 1
+    elif x < 0 and y > 0:
+        quadrant = 2
+    elif x < 0 and y < 0:
+        quadrant = 3
+    elif x > 0 and y < 0:
+        quadrant = 4
+    else:
+        quadrant = 0  
+
+    return quadrant
+
+x = float(input("Enter the x-coordinate: "))
+y = float(input("Enter the y-coordinate: "))
+quadrant = determine_quadrant(x, y)
+print(f"{quadrant} quadrant ")
+------------------------------------------------------------------------------------------
+# Implement a grading system based on a student's percentage.
+def grading_system(percentage):
+    if percentage >= 90:
+        grade = 'A'
+    elif percentage >= 80:
+        grade = 'B'
+    elif percentage >= 70:
+        grade = 'C'
+    elif percentage >= 60:
+        grade = 'D'
+    else:
+        grade = 'F'
+    
+    return grade
+
+
+percentage = float(input("Enter the student's percentage: "))
+grade = grading_system(percentage)
+print(f"The student's grade based on {percentage}% is: {grade}")
+------------------------------------------------------------------------------------------
+# Check if a number is prime or composite.
+def is_prime(number):
+    if number <= 1:
+        return False
+    for i in range (2,int(number**0.5)+1):
+        if number % i == 0:
+            return False
+    return True
+
+try:
+    num = int(input("Enter a number:  "))
+    if is_prime(num):
+              print(f"{num} is a prime number.")
+    else:
+        print(f"{num} is a composite number.")
+
+except ValueError:
+    print("Error: Please enter a valid integer.")
+------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

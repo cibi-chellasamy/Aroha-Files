@@ -1,0 +1,216 @@
+Date,Meeting ID,Meeting Name,Time,From,To,MsgType,Message
+17/05/2024,000,bench_resources_hands_on_v1,17:24:51,Ibridge,Everyone,Open Message,Write a select statement to get the current value of sequence called customer_sequence
+17/05/2024,000,bench_resources_hands_on_v1,17:25:30,SRIREVATHI,Everyone,Open Message,select customer_sequence.current_val
+17/05/2024,000,bench_resources_hands_on_v1,17:25:47,Karthik,Everyone,Open Message,select customer_sequence.currval from dual;
+17/05/2024,000,bench_resources_hands_on_v1,17:25:55,Prabhahar,Everyone,Open Message,select sustomer_sequence.currval fromdual
+17/05/2024,000,bench_resources_hands_on_v1,17:26:04,Vimalan,Everyone,Open Message,Select customer_sequence.CURRVAL from dual;
+17/05/2024,000,bench_resources_hands_on_v1,17:26:14,Ibridge,Everyone,Open Message,write a query to find second greatest employee based on salary
+17/05/2024,000,bench_resources_hands_on_v1,17:26:14,Chethan,Everyone,Open Message,select seq_no.curvel from dual;
+17/05/2024,000,bench_resources_hands_on_v1,17:26:14,Anugraha,Everyone,Open Message,I don't know sequence
+17/05/2024,000,bench_resources_hands_on_v1,17:26:27,akshay,Everyone,Open Message,select customer_sequnce.currval from dual;
+17/05/2024,000,bench_resources_hands_on_v1,17:26:29,Nidhi,Everyone,Open Message,select customer_sequence.curval from dual;
+17/05/2024,000,bench_resources_hands_on_v1,17:26:32,SRIREVATHI,Everyone,Open Message,select emp_name
+17/05/2024,000,bench_resources_hands_on_v1,17:26:35,Thimmappa,Everyone,Open Message,customer_sequence.currval
+17/05/2024,000,bench_resources_hands_on_v1,17:26:36,Anusha,Everyone,Open Message,SELECT CUSTOMER_SEQUENCE.CURRVAL FROM DUAL;
+17/05/2024,000,bench_resources_hands_on_v1,17:26:45,Cibi,Everyone,Open Message,select customer_sequence.currval from table_name
+17/05/2024,000,bench_resources_hands_on_v1,17:26:58,Thimmappa,Everyone,Open Message,select customer_sequence.currval from dual;
+17/05/2024,000,bench_resources_hands_on_v1,17:27:14,Vinutha,Everyone,Open Message,select customer_sequence.currval from dual
+17/05/2024,000,bench_resources_hands_on_v1,17:27:20,SRIREVATHI,Everyone,Open Message,select emp_name
+17/05/2024,000,bench_resources_hands_on_v1,17:27:27,AMAR,Everyone,Open Message,SELECT MAX(salary) AS second_highest_salary
+17/05/2024,000,bench_resources_hands_on_v1,17:27:39,Prabhahar,Everyone,Open Message,"select (select emp_name, dense_rank () over( order by sal desc) rn from emp ) where rn =2"
+17/05/2024,000,bench_resources_hands_on_v1,17:27:39,Nidhi,Everyone,Open Message,select emp_name                          from emp                    where sal in (select max(sal)    from emp          where sal < (select max(sal)    from emp));
+17/05/2024,000,bench_resources_hands_on_v1,17:27:43,HP,Everyone,Open Message,select customer_sequence.currval from dual;
+17/05/2024,000,bench_resources_hands_on_v1,17:28:21,Prabhahar,Everyone,Open Message,"select emp_name from (select emp_name, dense_rank () over( order by sal desc) rn from emp ) where rn =2"
+17/05/2024,000,bench_resources_hands_on_v1,17:28:41,Thimmappa,Everyone,Open Message,select ename
+17/05/2024,000,bench_resources_hands_on_v1,17:28:49,Anusha,Everyone,Open Message,"SELECT EMP_NM FROM(SELECT EMP_NM ,DENSE_RANK() OVER(ORDER BY SALARY DESC)R FROM EMP)WHERE R = 2;"
+17/05/2024,000,bench_resources_hands_on_v1,17:28:50,Ibridge,Everyone,Open Message,I have table named employee. I want to create a table called employee_Copy with all the data in employee table. What do you do? Write the Statement to accomplish this task
+17/05/2024,000,bench_resources_hands_on_v1,17:28:54,Chethan,Everyone,Open Message,"seelct * from(select emp_name,emp_sal,dense_rank() over(order by emp_sal desc) dr from employee) ranking_sal where dr=2;"
+17/05/2024,000,bench_resources_hands_on_v1,17:29:02,akshay,Everyone,Open Message,"select emp_name from (select emp_name, dense_rank() over(order by nvl(emp_sal,0) desc) as rnk from emp_table) where rnk = 2;"
+17/05/2024,000,bench_resources_hands_on_v1,17:29:02,Karthik,Everyone,Open Message,"select emp_name from (select emp_name,dense_rank() over (partition by salary order by emp_id)  as drank from employee) as result"
+17/05/2024,000,bench_resources_hands_on_v1,17:29:10,Karthik,Everyone,Open Message,where drank=2;
+17/05/2024,000,bench_resources_hands_on_v1,17:29:22,SRIREVATHI,Everyone,Open Message,create table employee_copy as select * from employee
+17/05/2024,000,bench_resources_hands_on_v1,17:29:44,ashok,Everyone,Open Message,select * into employee_copy from employee
+17/05/2024,000,bench_resources_hands_on_v1,17:29:51,Thimmappa,Everyone,Open Message,create table employee_Copy as
+17/05/2024,000,bench_resources_hands_on_v1,17:29:54,Anugraha,Everyone,Open Message,create table employee_copy(select * from employee)
+17/05/2024,000,bench_resources_hands_on_v1,17:30:08,AMAR,Everyone,Open Message,create table employee_copy as
+17/05/2024,000,bench_resources_hands_on_v1,17:30:10,Nitish,Everyone,Open Message,2.select max(salary) from employee 
+17/05/2024,000,bench_resources_hands_on_v1,17:30:14,akshay,Everyone,Open Message,create table employee_copy as select * from employee;
+17/05/2024,000,bench_resources_hands_on_v1,17:30:17,Chethan,Everyone,Open Message,create table employee_copy as (select * from employee);
+17/05/2024,000,bench_resources_hands_on_v1,17:30:20,Karthik,Everyone,Open Message,create table employee_copy as select * from employee;
+17/05/2024,000,bench_resources_hands_on_v1,17:30:21,Prabhahar,Everyone,Open Message,insert into employee_copy values ( select * from employee);
+17/05/2024,000,bench_resources_hands_on_v1,17:30:27,Cibi,Everyone,Open Message,select emp_name  
+17/05/2024,000,bench_resources_hands_on_v1,17:30:34,AMAR,Everyone,Open Message,create table employee_copy as select * from employee;
+17/05/2024,000,bench_resources_hands_on_v1,17:31:00,Vimalan,Everyone,Open Message,"Select emp_name, salary"
+17/05/2024,000,bench_resources_hands_on_v1,17:31:12,Ibridge,Everyone,Open Message,delete the duplicate records from the guest
+17/05/2024,000,bench_resources_hands_on_v1,17:31:18,Vinutha,Everyone,Open Message,"select emp_name from(select emp_name,sal dense_rank() order by sal desc)r from employee where r=2;"
+17/05/2024,000,bench_resources_hands_on_v1,17:31:24,Cibi,Everyone,Open Message,create table employee_copy as select * from employee
+17/05/2024,000,bench_resources_hands_on_v1,17:31:28,Anugraha,Everyone,Open Message,write a query to find second greatest employee based on salary
+17/05/2024,000,bench_resources_hands_on_v1,17:32:11,SRIREVATHI,Everyone,Open Message,delete from guest
+17/05/2024,000,bench_resources_hands_on_v1,17:32:22,akshay,Everyone,Open Message,"delete from guest where rowid not in(select min(rowid) from guest group by guest_id,guest_nm,guest_city)"
+17/05/2024,000,bench_resources_hands_on_v1,17:32:34,Chethan,Everyone,Open Message,"delete from guest where rowid not in (select max(rowid) from guest group by guest_id,guest_nm,guest_city);"
+17/05/2024,000,bench_resources_hands_on_v1,17:32:39,Thimmappa,Everyone,Open Message,delete from guest
+17/05/2024,000,bench_resources_hands_on_v1,17:32:53,Ibridge,Everyone,Open Message,How many duplicate records we have? Write a query to give this count.
+17/05/2024,000,bench_resources_hands_on_v1,17:32:53,Prabhahar,Everyone,Open Message,"delete from guest where rowid not in (select max(rowid) from guest group by guest_id, guest_nm-guest_city)"
+17/05/2024,000,bench_resources_hands_on_v1,17:33:00,Karthik,Everyone,Open Message,delete from guest where row_id not in (select max(row_id) from gueat group by guest_id)
+17/05/2024,000,bench_resources_hands_on_v1,17:33:31,Vimalan,Everyone,Open Message,create table employee_copy as select * from employee;
+17/05/2024,000,bench_resources_hands_on_v1,17:33:38,Anugraha,Everyone,Open Message,delete guest (select guest_id 
+17/05/2024,000,bench_resources_hands_on_v1,17:33:40,Nitish,Everyone,Open Message,"3. delete from guest where rowid not in (select min(rowid) from guest group by guest_id,guest_nm,guest_city);"
+17/05/2024,000,bench_resources_hands_on_v1,17:33:56,Cibi,Everyone,Open Message,with del_dup as
+17/05/2024,000,bench_resources_hands_on_v1,17:34:02,Prabhahar,Everyone,Open Message,"select guest_id, guest_nm,guest_city from guest"
+17/05/2024,000,bench_resources_hands_on_v1,17:34:05,SRIREVATHI,Everyone,Open Message,select count(*)
+17/05/2024,000,bench_resources_hands_on_v1,17:34:21,Ibridge,Everyone,Open Message,wrong answer
+17/05/2024,000,bench_resources_hands_on_v1,17:34:28,Ibridge,Everyone,Open Message,think a bit more
+17/05/2024,000,bench_resources_hands_on_v1,17:34:31,Anugraha,Everyone,Open Message,select * from guest
+17/05/2024,000,bench_resources_hands_on_v1,17:34:34,SRIREVATHI,Everyone,Open Message,ok sir
+17/05/2024,000,bench_resources_hands_on_v1,17:34:38,HP,Everyone,Open Message,"delete from guest where rowed not in (select max(rowed) from guest group by guest_nm,guest_city);"
+17/05/2024,000,bench_resources_hands_on_v1,17:34:45,Chethan,Everyone,Open Message,"select count(*) from guest group by guest_id,guest_nm,guest_city having count(*)>1;"
+17/05/2024,000,bench_resources_hands_on_v1,17:34:50,Prabhahar,Everyone,Open Message,"select guest_id, guest_nm,guest_city,count(*) from guest group by guest_id, guest_nm,guest_city;"
+17/05/2024,000,bench_resources_hands_on_v1,17:35:45,Karthik,Everyone,Open Message,"select count(*) from (select guest_id,guest_nm,guest_city,count(*) from guest group by guest_id,guest_nm,guest_city);"
+17/05/2024,000,bench_resources_hands_on_v1,17:35:52,Ibridge,Everyone,Open Message,write the query to display from today (100 days)
+17/05/2024,000,bench_resources_hands_on_v1,17:35:55,AMAR,Everyone,Open Message,"SELECT COUNT(*) AS duplicate_count FROM (SELECT guest_id,guset_name COUNT(*) AS cnt"
+17/05/2024,000,bench_resources_hands_on_v1,17:36:01,Thimmappa,Everyone,Open Message,select count(*)
+17/05/2024,000,bench_resources_hands_on_v1,17:36:41,Anugraha,Everyone,Open Message,I don't know sir
+17/05/2024,000,bench_resources_hands_on_v1,17:37:18,Anugraha,Everyone,Open Message,I donk know how to list the data
+17/05/2024,000,bench_resources_hands_on_v1,17:37:42,Karthik,Everyone,Open Message,"Sorry sir, i don't know how to display 100 days of dates"
+17/05/2024,000,bench_resources_hands_on_v1,17:37:45,Vimalan,Everyone,Open Message,delete from guest
+17/05/2024,000,bench_resources_hands_on_v1,17:37:56,HP,Everyone,Open Message,write the query to display from today (100 days)-I don't know
+17/05/2024,000,bench_resources_hands_on_v1,17:37:58,akshay,Everyone,Open Message,"select trunc(to_date(sysdate,'dd-mm-yyyy'))+level from dual connect by level< 101;"
+17/05/2024,000,bench_resources_hands_on_v1,17:37:59,ashok,Everyone,Open Message,"select trunc(TO_DATE(SYSDATE, 'DD-MM-YYYY'))+ LEVEL"
+17/05/2024,000,bench_resources_hands_on_v1,17:38:07,Nitish,Everyone,Open Message,"select trunc(to_date(sysdate,'dd-mm-yyyy'))+level-1"
+17/05/2024,000,bench_resources_hands_on_v1,17:38:17,Thimmappa,Everyone,Open Message,"select to_date('17-05-2024','dd-mm-yyyy') as my_date+level-1"
+17/05/2024,000,bench_resources_hands_on_v1,17:38:18,Anugraha,Everyone,Open Message,yes sir
+17/05/2024,000,bench_resources_hands_on_v1,17:38:39,Ibridge,Everyone,Open Message,Find a owner who owns more than one team? Write a query
+17/05/2024,000,bench_resources_hands_on_v1,17:38:50,Cibi,Everyone,Open Message,select count(*) from guests
+17/05/2024,000,bench_resources_hands_on_v1,17:40:06,Anugraha,Everyone,Open Message,"select  own_name, count(team_id)"
+17/05/2024,000,bench_resources_hands_on_v1,17:40:14,SRIREVATHI,Everyone,Open Message,"select own_name,count(team_id)"
+17/05/2024,000,bench_resources_hands_on_v1,17:40:14,AMAR,Everyone,Open Message,"select owner_name,count(team_id)"
+17/05/2024,000,bench_resources_hands_on_v1,17:40:39,ashok,Everyone,Open Message,"SELECT O.OWNER_NAME , COUNT(T.TEAM_ID) "
+17/05/2024,000,bench_resources_hands_on_v1,17:40:44,Anugraha,Everyone,Open Message,"select own_id, own_name, count(team_id)"
+17/05/2024,000,bench_resources_hands_on_v1,17:41:17,Nidhi,Everyone,Open Message,"select to.own_name from team_owners to, teams t                                        where to.team_id = t.team_id                               group by to.own_name                                  having count(*)>1;"
+17/05/2024,000,bench_resources_hands_on_v1,17:41:22,Prabhahar,Everyone,Open Message,"select own_name ,count(team_id)from team_owners groupby own_name"
+17/05/2024,000,bench_resources_hands_on_v1,17:41:24,Ibridge,Everyone,Open Message,"Team name, owner name (who owns highest percentage only)"
+17/05/2024,000,bench_resources_hands_on_v1,17:41:47,akshay,Everyone,Open Message,select own_name from team_owners t_o join team team t on t_o.team_id = t.team_id group by own_name having count(t.team_id) >1;
+17/05/2024,000,bench_resources_hands_on_v1,17:42:27,AMAR,Everyone,Open Message,"select to.owner_name,count(t.team_id) from team t join team_owners  to on t.team_id=to.team_id group by to.owner_name having count(t.team_id)>1;"
+17/05/2024,000,bench_resources_hands_on_v1,17:42:27,Anusha,Everyone,Open Message,"SELECT O.OWN_NAME,COUNT(T.TEAM_ID)  FROM TEAM_OWNER O,TEAM T "
+17/05/2024,000,bench_resources_hands_on_v1,17:42:29,Thimmappa,Everyone,Open Message,select own_team
+17/05/2024,000,bench_resources_hands_on_v1,17:42:58,Vimalan,Everyone,Open Message,"select to.own_id, to.own_name"
+17/05/2024,000,bench_resources_hands_on_v1,17:43:06,Cibi,Everyone,Open Message,"select tos.owner_name,t.team_name"
+17/05/2024,000,bench_resources_hands_on_v1,17:43:12,Anugraha,Everyone,Open Message,"select own_name,team_name,max(percentage)"
+17/05/2024,000,bench_resources_hands_on_v1,17:43:23,Ibridge,Everyone,Open Message,What is the relation ship between team and matches table
+17/05/2024,000,bench_resources_hands_on_v1,17:43:27,Karthik,Everyone,Open Message,"select own_name from (select own_name,dense_rank() over (partition by team_id order by own_id) drank from team_owners) where drank>1;"
+17/05/2024,000,bench_resources_hands_on_v1,17:43:38,Nidhi,Everyone,Open Message,"select t.team_nm, to.own_name                   from team t, team_owners to                              where t.team_id = to.team_id and                        to.percentage in (select max(percentage) from team_owners);"
+17/05/2024,000,bench_resources_hands_on_v1,17:44:02,akshay,Everyone,Open Message,one to many
+17/05/2024,000,bench_resources_hands_on_v1,17:44:05,Vinutha,Everyone,Open Message,"select own_name,count(team_id) from team_owners o,Team t where o.team_id=t.team_id group by own_name having count(team_id)>1;"
+17/05/2024,000,bench_resources_hands_on_v1,17:44:23,Prabhahar,Everyone,Open Message,team__id and visting team_id and home teamid
+17/05/2024,000,bench_resources_hands_on_v1,17:44:31,Anusha,Everyone,Open Message,"SELECT T.TEAM_NAME,O.OWN_NAME FROM TEAM T,TEAM_OWNERS O "
+17/05/2024,000,bench_resources_hands_on_v1,17:44:32,Anugraha,Everyone,Open Message,sta_id
+17/05/2024,000,bench_resources_hands_on_v1,17:44:49,SRIREVATHI,Everyone,Open Message,"select own_name,team_name,max(percentage)"
+17/05/2024,000,bench_resources_hands_on_v1,17:45:12,AMAR,Everyone,Open Message,"select t.team,to,owner_nm,max(percentage) from team t join team_owner to on t.team_id=to.team_id group by team_nm,owner_nm;"
+17/05/2024,000,bench_resources_hands_on_v1,17:45:14,Ibridge,Everyone,Open Message,"Match_date, Game, Stadium Name, home team name and visiting name for all the matches"
+17/05/2024,000,bench_resources_hands_on_v1,17:45:15,Thimmappa,Everyone,Open Message,many to many
+17/05/2024,000,bench_resources_hands_on_v1,17:45:21,Karthik,Everyone,Open Message,"select team_nm,own_nm,max(percentage) from team t join team_members tm on t.team_id=tm.team_id group by team_n,own_nm;"
+17/05/2024,000,bench_resources_hands_on_v1,17:45:34,Ibridge,Everyone,Open Message,"Match_date, Game, Stadium Name, home team name and visiting name for all the matches"
+17/05/2024,000,bench_resources_hands_on_v1,17:45:43,SRIREVATHI,Everyone,Open Message,relation:1:m
+17/05/2024,000,bench_resources_hands_on_v1,17:46:11,Anusha,Everyone,Open Message,MANY TO MANY ==> ONE TEAM HAS MANY MATCHES AND ONE MATCH HAS MORE THAN ONE TEAMS
+17/05/2024,000,bench_resources_hands_on_v1,17:46:39,Karthik,Everyone,Open Message,relation ship between team and matches table is many to many
+17/05/2024,000,bench_resources_hands_on_v1,17:46:40,AMAR,Everyone,Open Message,one to many
+17/05/2024,000,bench_resources_hands_on_v1,17:47:35,HP,Everyone,Open Message,How many duplicate records we have? Write a query to give this count.-> many to many
+17/05/2024,000,bench_resources_hands_on_v1,17:47:40,Chethan,Everyone,Open Message,"select to.owner_name,count(t.team_id) from team t join team_owners to on t.team_id=to.team_id  group by to.owner_name having count(t.team_id)>   (from select max(count(team_id)) from team t join team_owners to on t.team_id=to.team_id group by to.owner_name);"
+17/05/2024,000,bench_resources_hands_on_v1,17:48:43,Prabhahar,Everyone,Open Message,"select match_date,Game, Stadium Name, home team name "
+17/05/2024,000,bench_resources_hands_on_v1,17:49:23,Ibridge,Everyone,Open Message,What is ROWID is used for in Oracle RDMBS?
+17/05/2024,000,bench_resources_hands_on_v1,17:49:24,Nidhi,Everyone,Open Message,"select m.match_date , m.game, st.sta_name, t.team_nm, m.visiting_team_id                                   from stadium st, team t, match m                               where st.sta_id = m.sta_id and     m.game = t.game;"
+17/05/2024,000,bench_resources_hands_on_v1,17:50:25,Vinutha,Everyone,Open Message,"select m.game,s.sta_name,m.home_team_id,m.visiting_id from match m,stadium s where s.sta_id=m.sta_id"
+17/05/2024,000,bench_resources_hands_on_v1,17:50:35,akshay,Everyone,Open Message,"select sta_name, m.game, match_date, (select team_nm from team t join match m on t.team_id =m.home_team_id ),(select team_nm from team t join match m on t.team_id =m.visiting_team_id )from stadium s join match m on s.sta_id = m.sta_id;"
+17/05/2024,000,bench_resources_hands_on_v1,17:50:44,Prabhahar,Everyone,Open Message,rowid is unique value for all recors in database we can used to delete duplicate records
+17/05/2024,000,bench_resources_hands_on_v1,17:51:10,Ibridge,Everyone,Open Message,What are the three types of indexes we can create in Oracle RDBMS
+17/05/2024,000,bench_resources_hands_on_v1,17:51:23,AMAR,Everyone,Open Message,The rowid pseudocolumn is a table and its used for unique identifier for a row in a table.
+17/05/2024,000,bench_resources_hands_on_v1,17:51:30,Prabhahar,Everyone,Open Message,"unique,cluster and non cluster index"
+17/05/2024,000,bench_resources_hands_on_v1,17:51:38,Vimalan,Everyone,Open Message,"select m.match_date, m.game, s.sta_name, t.team_nm "
+17/05/2024,000,bench_resources_hands_on_v1,17:51:50,SRIREVATHI,Everyone,Open Message,"select match_date,game,sta_name,(case when home_team_id=50 then 'titans'"
+17/05/2024,000,bench_resources_hands_on_v1,17:52:03,Karthik,Everyone,Open Message,rowed is a 18 characters unique address assigned for each row of the table.
+17/05/2024,000,bench_resources_hands_on_v1,17:52:20,Thimmappa,Everyone,Open Message,"select m.Match_date, m.Game, s.Stadium Name,(select team_nm from team where team_id=t.home_team_id) home team,(select team_nm from team where team_id=t.visiting_team_id)as visiting_team"
+17/05/2024,000,bench_resources_hands_on_v1,17:52:22,Ibridge,Everyone,Open Message,"When I create a column as the PK, what happens behind the scenes. How oracle make sures there is no duplicate value in that column?"
+17/05/2024,000,bench_resources_hands_on_v1,17:52:29,Anusha,Everyone,Open Message,"SELECT  M.MATCH_DATE,M.GAME,S.STA_NAME,M.HOME_TEAM_ID,M.VISITING_TEAM_ID FROM MATCH M , STADIUM S"
+17/05/2024,000,bench_resources_hands_on_v1,17:52:54,HP,Everyone,Open Message,What are the three types of indexes we can create in Oracle RDBMS-> 1.clustered 2.non-clustered 3.bit map
+17/05/2024,000,bench_resources_hands_on_v1,17:52:58,AMAR,Everyone,Open Message,"cluster index, non-cluster index and bitmap"
+17/05/2024,000,bench_resources_hands_on_v1,17:53:08,akshay,Everyone,Open Message,rowid is an unique identifier which is given to the rows of table across the database
+17/05/2024,000,bench_resources_hands_on_v1,17:53:12,Nitish,Everyone,Open Message,rowid is a unique identifier used to access the physical location of a row in the database.
+17/05/2024,000,bench_resources_hands_on_v1,17:53:12,Anugraha,Everyone,Open Message,During ddl itself we give the constraints as primary key not null
+17/05/2024,000,bench_resources_hands_on_v1,17:53:19,SRIREVATHI,Everyone,Open Message,"from (select match_date,visiting_team_id,home_team_id,team_nm"
+17/05/2024,000,bench_resources_hands_on_v1,17:53:24,Chethan,Everyone,Open Message,"select t.team_nm,to.owner_name from team t join team_owner to on t.team_id=to.team_id where to.percentage= (select max(to.percentage) from team_owners);"
+17/05/2024,000,bench_resources_hands_on_v1,17:53:45,Thimmappa,Everyone,Open Message,to know physical location of the row and identify row as unique
+17/05/2024,000,bench_resources_hands_on_v1,17:53:54,Prabhahar,Everyone,Open Message,it will check the pk_id is present or not if it is present it will throws error and not present it insert the new record
+17/05/2024,000,bench_resources_hands_on_v1,17:53:56,Cibi,Everyone,Open Message,RowID is a pseudo column which is used to locate rows and the operations takes place faster while using ROWID and it is also represents the physical location of the data stored in memory
+17/05/2024,000,bench_resources_hands_on_v1,17:54:09,Vimalan,Everyone,Open Message,ROWID is the row identifier and it is a pseudo column that uniquely identifies the row across the all database.ROWID have hexadecimal string.
+17/05/2024,000,bench_resources_hands_on_v1,17:54:17,akshay,Everyone,Open Message,"clustered, non-clustered,bitmap index"
+17/05/2024,000,bench_resources_hands_on_v1,17:54:20,Nidhi,Everyone,Open Message,"clustered, non clustered and bitmap"
+17/05/2024,000,bench_resources_hands_on_v1,17:54:27,Thimmappa,Everyone,Open Message,"clustered,non_clustered,unique"
+17/05/2024,000,bench_resources_hands_on_v1,17:54:29,Chethan,Everyone,Open Message,m:m
+17/05/2024,000,bench_resources_hands_on_v1,17:54:32,Nitish,Everyone,Open Message,"clustered, non clustered, bitmap"
+17/05/2024,000,bench_resources_hands_on_v1,17:54:47,Thimmappa,Everyone,Open Message,"also function based indesx ,reverse key index"
+17/05/2024,000,bench_resources_hands_on_v1,17:54:59,akshay,Everyone,Open Message,when we create pk on a table itll create b-tree index on that column
+17/05/2024,000,bench_resources_hands_on_v1,17:55:10,Anugraha,Everyone,Open Message,if duplicate values getting inserted it will not insert but shows error
+17/05/2024,000,bench_resources_hands_on_v1,17:55:11,Karthik,Everyone,Open Message,"clustered index, non clustered index, bitmap index"
+17/05/2024,000,bench_resources_hands_on_v1,17:55:13,Anusha,Everyone,Open Message,ROWID : It is a type of pseudo column.rowid is a column which assings unic address for each row of a table and it is  fixed .
+17/05/2024,000,bench_resources_hands_on_v1,17:55:18,Ibridge,Everyone,Open Message,Give me 3 meta data tables which you know in Oracle RDBMS
+17/05/2024,000,bench_resources_hands_on_v1,17:55:30,Vinutha,Everyone,Open Message,Rowid is a psuedocolumn it is created internally during the creation of table it has unique address for each row.
+17/05/2024,000,bench_resources_hands_on_v1,17:55:53,AMAR,Everyone,Open Message,when we create a column as primary key that time automatically created unique index on that particular column  and not null constraints
+17/05/2024,000,bench_resources_hands_on_v1,17:56:20,SRIREVATHI,Everyone,Open Message,What is ROWID is used for in Oracle RDMBS?
+17/05/2024,000,bench_resources_hands_on_v1,17:56:29,Thimmappa,Everyone,Open Message,it will create by default unique index on that column it will ensure to not allow duplicates
+17/05/2024,000,bench_resources_hands_on_v1,17:56:37,Cibi,Everyone,Open Message,"Clustered index ,non clustered index and bitmap index"
+17/05/2024,000,bench_resources_hands_on_v1,17:56:49,HP,Everyone,Open Message,primary key accepts only unique values and not null vales . it provides unique identify records in the table
+17/05/2024,000,bench_resources_hands_on_v1,17:56:54,Anusha,Everyone,Open Message,3 types of indexes :
+17/05/2024,000,bench_resources_hands_on_v1,17:57:00,SRIREVATHI,Everyone,Open Message,What are the three types of indexes we can create in Oracle RDBMS
+17/05/2024,000,bench_resources_hands_on_v1,17:57:04,Ibridge,Everyone,Open Message,What is the relation between user and a schema? Explain it in your own way.
+17/05/2024,000,bench_resources_hands_on_v1,17:57:06,Prabhahar,Everyone,Open Message,"user_tables , user_sequences, user_name"
+17/05/2024,000,bench_resources_hands_on_v1,17:57:08,Karthik,Everyone,Open Message,primary key has only unique constraint and not null values.so there is no duplicate values
+17/05/2024,000,bench_resources_hands_on_v1,17:57:30,Vinutha,Everyone,Open Message,"3 types of indexes are cluster index,non cluster index and bitmap index"
+17/05/2024,000,bench_resources_hands_on_v1,17:57:35,akshay,Everyone,Open Message,"all_tables, user_tab_columns, user_tables, owner"
+17/05/2024,000,bench_resources_hands_on_v1,17:57:42,Thimmappa,Everyone,Open Message,"user_tables,user_constraints,user_procedures"
+17/05/2024,000,bench_resources_hands_on_v1,17:57:51,Prabhahar,Everyone,Open Message,"schema have table , views, procedures  and all objects"
+17/05/2024,000,bench_resources_hands_on_v1,17:57:53,AMAR,Everyone,Open Message,"user_table , user_constraint , date_dimension table"
+17/05/2024,000,bench_resources_hands_on_v1,17:57:57,Vimalan,Everyone,Open Message,1) USER_TABLES
+17/05/2024,000,bench_resources_hands_on_v1,17:58:14,Prabhahar,Everyone,Open Message,but user is accessing these
+17/05/2024,000,bench_resources_hands_on_v1,17:58:28,Cibi,Everyone,Open Message,It automatically create a unique index when primary key is created so the the unique property of the primary key cannot be violated
+17/05/2024,000,bench_resources_hands_on_v1,17:58:36,Nitish,Everyone,Open Message,"all_tables, all_views, all_tab_columns,all_indexes"
+17/05/2024,000,bench_resources_hands_on_v1,17:58:48,Nidhi,Everyone,Open Message,"3 meta-data in oracle RDBMS : user_table, user_view, user_tabs_column"
+17/05/2024,000,bench_resources_hands_on_v1,17:58:52,SRIREVATHI,Everyone,Open Message,"When I create a column as the PK, what happens behind the scenes. How oracle make sures there is no duplicate value in that column?"
+17/05/2024,000,bench_resources_hands_on_v1,17:58:55,Ibridge,Everyone,Open Message,Rate yourself on what I asked today and share your thoughts. What help you need from us.
+17/05/2024,000,bench_resources_hands_on_v1,17:59:10,Anugraha,Everyone,Open Message,"user is the person(who is holding that data base/a creating schemas for a/multiple entities), schema is nothing but the rule for a entity"
+17/05/2024,000,bench_resources_hands_on_v1,17:59:26,Cibi,Everyone,Open Message,"user table,user views and tab column"
+17/05/2024,000,bench_resources_hands_on_v1,17:59:57,Thimmappa,Everyone,Open Message,"in my pov,user and schema are similar.because whenever we create an user it will create logical space with that user name which we call it as schema.but user name we used to login but schema is different which is used to differentiate our database objects which are with the same name"
+17/05/2024,000,bench_resources_hands_on_v1,18:00:29,SRIREVATHI,Everyone,Open Message,Give me 3 meta data tables which you know in Oracle RDBMS
+17/05/2024,000,bench_resources_hands_on_v1,18:00:59,Nidhi,Everyone,Open Message,relation between user and a schema is 1:1 (one to one)
+17/05/2024,000,bench_resources_hands_on_v1,18:01:01,Thimmappa,Everyone,Open Message,8/10
+17/05/2024,000,bench_resources_hands_on_v1,18:01:13,AMAR,Everyone,Open Message,one to one . one user can use one schema
+17/05/2024,000,bench_resources_hands_on_v1,18:01:54,ashok,Everyone,Open Message,7.0 /10
+17/05/2024,000,bench_resources_hands_on_v1,18:02:37,ashok,Everyone,Open Message,Give me 3 meta data tables which you know in Oracle RDBMS
+17/05/2024,000,bench_resources_hands_on_v1,18:03:03,Cibi,Everyone,Open Message,User can create schemas and can have more than one schemas.
+17/05/2024,000,bench_resources_hands_on_v1,18:03:17,akshay,Everyone,Open Message,8/10
+17/05/2024,000,bench_resources_hands_on_v1,18:03:19,Nitish,Everyone,Open Message,7.5/10
+17/05/2024,000,bench_resources_hands_on_v1,18:03:58,Anugraha,Everyone,Open Message,6/10
+17/05/2024,000,bench_resources_hands_on_v1,18:04:45,Anugraha,Everyone,Open Message,"match date, sta_name, home_team_name.,visitng team_name--> this question I got  the logic but I could not do it in query"
+17/05/2024,000,bench_resources_hands_on_v1,18:05:02,Anugraha,Everyone,Open Message,I need these type of queries to practice
+17/05/2024,000,bench_resources_hands_on_v1,18:05:46,SRIREVATHI,Everyone,Open Message,out of 5 I rate my self at 4 sir
+17/05/2024,000,bench_resources_hands_on_v1,18:05:55,Prabhahar,Everyone,Open Message,7.5/10  and  i struggle in thinking the query on present
+17/05/2024,000,bench_resources_hands_on_v1,18:06:24,Thimmappa,Everyone,Open Message,"8)Team name, owner name (who owns highest percentage only)"
+17/05/2024,000,bench_resources_hands_on_v1,18:06:35,Thimmappa,Everyone,Open Message,I missed it before
+17/05/2024,000,bench_resources_hands_on_v1,18:06:40,Cibi,Everyone,Open Message,I rate my self 7.5. I can understand concepts. But while writing query I am confused what query exactly i have to use .I can solve the questions but I take more .I need more hands practice  on in SQL.
+17/05/2024,000,bench_resources_hands_on_v1,18:07:07,Anugraha,Everyone,Open Message,I really felt bad for not writing query for displaying the list of dates. Until today I haven't thought of listing things in SQL. I have done it in Python.
+17/05/2024,000,bench_resources_hands_on_v1,18:07:51,AMAR,Everyone,Open Message,7.5/10 by today activities I get some thoughts
+17/05/2024,000,bench_resources_hands_on_v1,18:08:03,Chethan,Everyone,Open Message,"select m.match_date,t.game,s.sta_name,m.home_team_id,visiting_team_id from match m join team t on m.home_team_id=t.team_id join stadium s on s.sta_id=m.sta_id join match mt on t.team_id=mt.visiting_team_id;"
+17/05/2024,000,bench_resources_hands_on_v1,18:08:04,Anugraha,Everyone,Open Message,Thank You for this Session sir. Please guide me to develop myself better in SQL.I will definitely do it in next session.
+17/05/2024,000,bench_resources_hands_on_v1,18:08:07,Nidhi,Everyone,Open Message,I will rate myself 7/10 . Today I felt little bit difficulty in Data dictionary part . I will go through on it more.
+17/05/2024,000,bench_resources_hands_on_v1,18:09:21,HP,Everyone,Open Message,6/10. i need to  explore more on concepts.
+17/05/2024,000,bench_resources_hands_on_v1,18:09:22,Vimalan,Everyone,Open Message,"I have rated myself at 7.5/10 .i am able to think the logic of the query but when wrote takes little bit time. In theoretical questions when create PK what happens behind the scenes I thought oracle create automatically on unique constraints and also use index to enforce the uniqueness of the primary key.. this is my thought but iam not sure about the answer.when comes to question about relationship between schema and user I thought like schema is a database which has tables,views etc and user in the sense the user who handle the particular database but iam not sure."
+17/05/2024,000,bench_resources_hands_on_v1,18:09:24,Anugraha,Everyone,Open Message,Thank you Sir.
+17/05/2024,000,bench_resources_hands_on_v1,18:09:28,Chethan,Everyone,Open Message,rowid which is used to give unique number to record
+17/05/2024,000,bench_resources_hands_on_v1,18:09:48,Karthik,Everyone,Open Message,6 out of 10
+17/05/2024,000,bench_resources_hands_on_v1,18:09:55,Anusha,Everyone,Open Message,many to many ==> one user can create many schema and one schema can have a more than one user.
+17/05/2024,000,bench_resources_hands_on_v1,18:11:04,Chethan,Everyone,Open Message,"1)cluster,2)non-cluster,3)bit map"
+17/05/2024,000,bench_resources_hands_on_v1,18:12:20,Anusha,Everyone,Open Message,i rate myself 5/10. i need this type of qns more to practise and learn.
+17/05/2024,000,bench_resources_hands_on_v1,18:12:39,Chethan,Everyone,Open Message,"When I create a column as the PK, what happens behind the scenes. How oracle make sures there is no duplicate value in that column?   it is a combination of uniqe and not null contraints"
+17/05/2024,000,bench_resources_hands_on_v1,18:13:21,Vinutha,Everyone,Open Message,Schema means group of tables and user can has a schema with same name containing all the objects created by user.
+17/05/2024,000,bench_resources_hands_on_v1,18:13:30,Ibridge,Everyone,Open Message,"theory, how it gets implemented"
+17/05/2024,000,bench_resources_hands_on_v1,18:13:58,Chethan,Everyone,Open Message,"Give me 3 meta data tables which you know in Oracle RDBMS========>user_name,user_table,"
+17/05/2024,000,bench_resources_hands_on_v1,18:14:41,Vinutha,Everyone,Open Message,I rate myself with 5/10 I need these types of queries or scenarios to practice more

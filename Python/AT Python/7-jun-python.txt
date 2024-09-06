@@ -1,0 +1,180 @@
+6-jun
+PYTHON capability test and questions solved
+-----------------------------------------
+1) Domain - Data structures completed all scenarios in DS
+-----------------------------------------
+2) One line coder
+
+Domain: One Line Coder
+
+Function: Comprehension
+
+Scenario: Set Comprehension
+-----------------------------------------
+3) Domain: One Line Coder
+
+Function: Comprehension
+
+Scenario: List Comprehension
+-----------------------------------------
+4) Domain: One Line Coder
+
+Function: Comprehension
+
+Scenario: Dictionary Comprehension
+-----------------------------------------
+5) Domain: Conditional Statement
+Function: If else Condition
+Scenario: If else condition
+-----------------------------------------
+6)Domain: Basic Programs
+Function: Operators
+Scenario: Programs on Operator
+-----------------------------------------------------------------------------------
+#1. Write a Python function that takes a list of integers as input and returns a new list containing only the prime numbers.
+
+nums= [2,3,4,5,6,7,8,9,10,11,12]
+def return_prime(nums):
+    prime_nums=[]
+    for i in nums:
+        if i>=2:
+            for j in range(2,i):
+                if i%j==0:
+                    break
+            else:
+                prime_nums.append(i)
+    return prime_nums
+return_prime(nums)
+
+-----------------------------------------------------------------------------------
+#2. Implement a function that accepts two lists of integers and returns a new list containing elements that are common to both lists.
+
+def find_common(l1,l2):
+    set1 = set(l1)
+    set2 = set(l2)
+    common_ele = set1.intersection(set2)
+    return list(common_ele)
+
+l1 = [1, 2, 3, 4, 5]
+l2 = [4, 5, 6, 7, 8]
+
+common_elements = find_common(l1, l2)
+print( common_elements)
+
+-----------------------------------------------------------------------------------
+
+#3. Write a Python code to reverse a tuple without using the [: : -1] slicing.
+
+#3. Write a Python code to reverse a tuple without using the [: : -1] slicing.
+
+
+def rev_tup(a):
+    rev_it = reversed(a)
+    rev_tup = tuple(rev_it)
+    return rev_tup
+    
+a = (1,2,3,4,5,1,2)
+
+reversed_tuple = rev_tup(a)
+print(reversed_tuple)
+-----------------------------------------------------------------------------------
+#4. Create a dictionary representing a student database with information such as name, age, subjects, and grades. 
+#Implement a function that calculates and returns the average grade of the student.
+
+
+student = {
+    "name": "John Doe",
+    "age": 20,
+    "subjects": ["Math", "Science", "History", "English"],
+    "grades": [85, 90, 78, 92]  }
+
+def avg_marks_cal(student):
+    grades = student['grades']
+    avg_grade = sum(grades)/len(grades)
+    return avg_grade
+
+avg_grade = avg_marks_cal(student)
+avg_grade
+-----------------------------------------------------------------------------------
+
+#5. Write a Python code to merge two dictionaries. If there are common keys, sum the values.
+d1 = {'a': 100, 'b': 200, 'c': 300}
+d2 = {'b': 300, 'c': 400, 'd': 500}
+
+merged_dict = d1.copy()
+
+for key, value in d2.items():
+    if key in merged_dict:
+        merged_dict[key] += value  
+    else:
+        merged_dict[key] = value  
+
+print(merged_dict)
+-----------------------------------------------------------------------------------
+#6. Consider a list of integers named data. Write a Python program that accomplishes the following tasks:
+
+data = [22,32,1,3,5,322,5,65,54,344,655]
+
+# a) Initialize the data list with a minimum of 10 integer values.
+data = [22,32,1,3,5,322,5,65,54,344,655,43,11]
+print(data)
+-----------------------------------------------------------------------------------
+
+#b) Implement a loop to calculate the square of each element in the data list.
+new = []
+for i in data:
+    i**2
+    new.append(i)
+print(new)
+
+-----------------------------------------------------------------------------------
+#c) Use list comprehension to create a new list named squared_data containing the squared values of the original list.
+
+data = [22,32,1,3,5,322,5,65,54,344,655,43,11]
+
+lc = [i**2 for i in data]
+lc
+-----------------------------------------------------------------------------------
+
+#d) Write a function named filter_data that takes a list as input and returns a new list containing only the elements greater than 50.
+
+
+def filter_data(input_list):
+    filtered_list = [x for x in input_list if x > 50]
+    return filtered_list
+
+data = [22, 32, 1, 3, 5, 322, 5, 65, 54, 344, 655, 43, 11]
+
+filtered_data = filter_data(data)
+
+print(filtered_data)
+-----------------------------------------------------------------------------------
+
+#e) Use the filter_data function to create a new list named filtered_data from the squared_data list.
+def fil_data(l):
+    filtered_list = [x for x in l if x > 50]
+    return filtered_list
+new
+
+filtered_data = fil_data(new)
+
+print(filtered_data)
+-----------------------------------------------------------------------------------
+
+#f) Implement a loop to iterate through the filtered_data list and print each element along with its index in the list.
+filtered_data
+
+for index, element in enumerate(filtered_data):
+    print(f"index {index}: {element}")
+-----------------------------------------------------------------------------------
+#g) Finally, sort the filtered_data list in descending order and print the sorted list.
+
+sorted_l = sorted(filtered_data)
+sorted_l
+
+-----------------------------------------------------------------------------------
+
+
+
+
+

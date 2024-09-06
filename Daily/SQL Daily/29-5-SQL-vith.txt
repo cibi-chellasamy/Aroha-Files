@@ -1,0 +1,277 @@
+LeetCode
+https://leetcode.com/studyplan/top-sql-50/
+--------------------------------------------------------------------------
+
+Write a solution to find the employees who are high earners in each of the departments.
+
+select department,employee,salary from(
+    select d.name as department,
+    e.name as employee,
+    e.salary as salary,
+    dense_rank() over (partition by d.name order by e.salary desc) as rank
+    from employee e join department d 
+    on e.departmentId = d.id
+)
+where rank in(1,2,3);
+--------------------------------------------------------------------------
+Write a solution to swap the seat id of every two consecutive students. If the number of students is odd, the id of the last student is not swapped.
+
+Return the result table ordered by id in ascending order.
+
+select id,NVL(
+    case when mod(id,2) = 1 then lead(student,1) over(order by id)
+    else lag(student,1) over(order by id)end,
+    student
+)student
+from seat
+--------------------------------------------------------------------------
+Write a solution to:
+
+Find the name of the user who has rated the greatest number of movies. In case of a tie, return the lexicographically smaller user name.
+Find the movie name with the highest average rating in February 2020. In case of a tie, return the lexicographically smaller movie name.
+
+
+/* Write your PL/SQL query statement below */
+select name as results from (
+select name from Users where user_id in (
+select distinct USER_ID from(
+select user_id,dense_rank() over (order by cnt_user_id desc) user_rnk from(
+select user_id,count(user_id) over (partition by user_id) cnt_user_id from MovieRating))
+where USER_RNK = '1')
+order by name) where rownum = 1
+union all
+select title as results from (
+select title from Movies where movie_id in (
+select distinct movie_id from(
+select movie_id,dense_rank() over (order by avg_rate desc) movie_rnk from(
+select movie_id,avg(rating) over (partition by movie_id) avg_rate from MovieRating
+where to_char(created_at,'YYYY-MM') = '2020-02' ))
+where movie_rnk = '1')
+order by title) where rownum = 1;
+
+--------------------------------------------------------------------------
+
+Compute the moving average of how much the customer paid in a seven days window (i.e., current day + 6 days before). average_amount should be rounded to two decimal places.
+
+Return the result table ordered by visited_on in ascending order.
+
+The result format is in the following example.
+
+
+with cust_avg as
+(
+select distinct a.visited_on as from_date, b.visited_on as to_date
+from customer a,customer b
+where b.visited_on - a.visited_on = 6
+)
+select to_char(b.to_date,'YYYY-MM-DD') as "visited_on", sum(c.amount) as "amount", round(sum(c.amount)/7, 2) as "average_amount"
+from customer c, cust_avg b
+where c.visited_on between b.from_date and b.to_date
+group by b.to_date
+order by b.to_date;
+--------------------------------------------------------------------------
+Write a solution to find the people who have the most friends and the most friends number.
+
+The test cases are generated so that only one person has the most friends.
+
+select * from (
+    select id,count(*) as num from (
+        select requester_id  as id from RequestAccepted
+        union all
+        select accepter_id   as id from RequestAccepted
+    )group by id
+    order by num desc
+)
+where rownum=1
+
+--------------------------------------------------------------------------
+Write a solution to report the sum of all total investment values in 2016 tiv_2016, for all policyholders who:
+
+have the same tiv_2015 value as one or more other policyholders, and
+are not located in the same city as any other policyholder (i.e., the (lat, lon) attribute pairs must be unique).
+Round tiv_2016 to two decimal places.
+
+
+select round(sum(tiv_2016),2) tiv_2016 from insurance i1
+where 1 = (select count(lat||'#'||lon) from insurance i2 where i2.lat=i1.lat and i1.lon=i2.lon)
+and 1 < (select count(tiv_2015) from insurance i3 where i3.tiv_2015=i1.tiv_2015)
+
+--------------------------------------------------------------------------
+Write a solution to:
+
+Find the name of the user who has rated the greatest number of movies. In case of a tie, return the lexicographically smaller user name.
+Find the movie name with the highest average rating in February 2020. In case of a tie, return the lexicographically smaller movie name.
+
+
+select name as results from (
+select name from Users where user_id in (
+select distinct USER_ID from(
+select user_id,dense_rank() over (order by cnt_user_id desc) user_rnk from(
+select user_id,count(user_id) over (partition by user_id) cnt_user_id from MovieRating))
+where USER_RNK = '1')
+order by name) where rownum = 1
+union all
+select title as results from (
+select title from Movies where movie_id in (
+select distinct movie_id from(
+select movie_id,dense_rank() over (order by avg_rate desc) movie_rnk from(
+select movie_id,avg(rating) over (partition by movie_id) avg_rate from MovieRating
+where to_char(created_at,'YYYY-MM') = '2020-02' ))
+where movie_rnk = '1')
+order by title) where rownum = 1;
+
+--------------------------------------------------------------------------
+Write a solution to report all the employees with their primary department. For employees who belong to one department, report their only department.
+
+WITH employee2 AS
+(SELECT employee_id, count(department_id)
+FROM employee
+GROUP BY employee_id
+HAVING count(Department_id)=1)
+
+SELECT employee_id, department_id
+FROM employee
+WHERE primary_flag='Y'
+OR
+employee_id IN 
+(SELECT employee_id
+FROM employee2)
+
+--------------------------------------------------------------------------
+
+Hacker Rank
+https://www.hackerrank.com/domains/sql?filters%5Bstatus%5D%5B%5D=unsolved
+--------------------------------------------------------------------------
+
+
+Query an alphabetically ordered list of all names in OCCUPATIONS, 
+immediately followed by the first letter of each profession as a parenthetical (i.e.: enclosed in parentheses). 
+
+select Name || '(' || SUBSTR(Occupation, 1, 1) || ')'
+from OCCUPATIONS
+order by Name;
+
+--------------------------------------------------------------------------
+
+Query the number of ocurrences of each occupation in OCCUPATIONS. Sort the occurrences in ascending order, 
+and output them in the following format:
+There are a total of [occupation_count] [occupation]s.
+
+select 'There are a total of ' || count(Name) || ' ' || LOWER(Occupation) || 's.'
+from Occupations
+group by Occupation
+order by Count(Name), Occupation;
+--------------------------------------------------------------------------
+Pivot the Occupation column in OCCUPATIONS so that each Name is sorted alphabetically and displayed underneath its corresponding Occupation. The output column headers should be Doctor, Professor, Singer, and Actor, respectively.
+
+select max(case when occupation = 'Doctor' then name else null end) as Docor,
+max(case when occupation = 'Professor' then name else null end) as Professor,
+max(case when occupation = 'Singer' then name else null end)as Singer,
+max(case when occupation = 'Actor' then name else null end)as Actor
+from (select name,occupation,row_number() over(partition by occupation order by name)as row_num 
+from occupations) 
+group by row_num
+order by row_num;
+--------------------------------------------------------------------------
+Consider  and  to be two points on a 2D plane.
+
+ happens to equal the minimum value in Northern Latitude (LAT_N in STATION).
+ happens to equal the minimum value in Western Longitude (LONG_W in STATION).
+ happens to equal the maximum value in Northern Latitude (LAT_N in STATION).
+ happens to equal the maximum value in Western Longitude (LONG_W in STATION).
+
+select round(max(lat_n) - min(lat_n),4) + round(max(long_w) - min(long_w),4)
+from station
+--------------------------------------------------------------------------
+Consider  and  to be two points on a 2D plane where  are the respective minimum and maximum values of Northern Latitude (LAT_N) and  are the respective minimum and maximum values of Western Longitude (LONG_W) in STATION.
+
+Query the Euclidean Distance between points  and  and format your answer to display  decimal digits.
+
+select round( SQRT( power((max(LAT_N) - min(LAT_N)), 2) + 
+power((max(LONG_W) - min(LONG_W)), 2) ), 4 ) as distance from STATION;
+
+--------------------------------------------------------------------------
+A median is defined as a number separating the higher half of a data set from the lower half. Query the median of the Northern Latitudes (LAT_N) from STATION and round your answer to  decimal places.
+
+select round(median(lat_n),4)
+from station
+--------------------------------------------------------------------------
+Write a query to print the respective hacker_id and name of hackers who achieved full scores for more than one challenge. Order your output in descending order by the total number of challenges in which the hacker earned a full score. If more than one hacker received full scores in same number of challenges, then sort them by ascending hacker_id.
+
+with tmp as(
+select s.hacker_id,count(submission_id) as num 
+from Submissions  s join Challenges  c on s.challenge_id = c.challenge_id
+join difficulty d on c.difficulty_level = d.difficulty_level and s.score = d.score
+group by s.hacker_id)
+select tmp.hacker_id, h.name
+from tmp join Hackers h on tmp.hacker_id = h.hacker_id 
+where tmp.num >1 
+order by tmp.num desc, tmp.hacker_id;
+--------------------------------------------------------------------------
+
+
+
+Python
+
+
+Given an integer, , perform the following conditional actions:
+
+If  is odd, print Weird
+If  is even and in the inclusive range of  to , print Not Weird
+If  is even and in the inclusive range of  to , print Weird
+If  is even and greater than , print Not Weird
+
+
+
+n = int(input())
+if n % 2 == 0:
+    if n in range(2,6):
+        print("Not Weird")
+
+    elif n in range(6,21):
+        print("Weird")
+
+    elif n > 20:
+        print("Not Weird")
+else:
+    print("Weird")
+
+--------------------------------------------------------------------------
+The first line contains the sum of the two numbers.
+The second line contains the difference of the two numbers (first - second).
+The third line contains the product of the two numbers.
+
+a, b = int(input()), int(input())
+print(a+b)
+print(a-b)
+print(a*b)
+--------------------------------------------------------------------------
+The provided code stub reads and integer, , from STDIN. For all non-negative integers , print .
+
+a = int(input())
+
+for i in range (0,a):
+    print(i**2)
+--------------------------------------------------------------------------
+Given a year, determine whether it is a leap year. If it is a leap year, return the Boolean True, otherwise return False.
+
+Note that the code stub provided reads from STDIN and passes arguments to the is_leap function. It is only necessary to complete the is_leap function.
+
+def is_leap(year):
+    if year % 4 == 0:
+        if year % 100 == 0:
+            if year % 400 == 0:
+                return True
+            else:
+                return False
+        else:
+            return True
+    else:
+        return False
+
+year = int(input())
+print(is_leap(year))
+--------------------------------------------------------------------------
+
+
+

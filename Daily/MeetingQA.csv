@@ -1,0 +1,16 @@
+ques_id,Questions,Answers
+1,find 5th highest salary in different way? (2 ways),"select salary from(select salary, row_number() over (order by salary desc) AS rn from  employees) ranked_salary where rn = 5  select distinct salary from(select salary, dense_rank() over (order by salary desc) as rnk from  employee) where rnk = 5"
+2,Why View performance is slow? What we should do to increase the performance of the view.,Views are slow because of complex logics and joins .We can make faster by using indexing and partitioning
+3,List the Query execution order.,1)from 2)where 3)group by 4)having 5)select 6)order by
+4,What 4 steps every query goes through before it shows the results to us?,Not Answered
+5,how to find if a column has an index or not ?,select sal_index from user_ind_columns where table_name = 'employees' and column_name = 'salary'
+6,Write a query where you use case statement,"select emp_name, case when gender = 'F' then 'Femalle' when gender = 'M' then 'Male' when gender = 'U' then 'Unknown' end as gender from employees"
+7,webvisit visit_id site 100      www.google.com 101      www.facebook.com 100      www.google.com  Delete the duplicate records in webvisit table,delete from webvisit where rowed not in(select max(rowid) from webvitis group by visit_id)
+8,Why union query runs slower (usually) compared to union all queries,because of duplicate elimination union is slower
+9,What does implicit cursor mean in the database world?,a view is a logical table where synonym is is a alternative name
+10,What is the difference between synonyms and views?,Cursor which are created by oracle itself while executing certain statement inside function or procedure is called implicit cursor
+11,"Select substr(‘dhivakar’,-1,-1) from dual -- What is the output",Emplty string
+12,I have 2 emp tables with 5 records each. Name like emp1 and emp2. Now i delete the emp1 records and truncate the emp2 records after that I rollback this transaction. How many rows you will have in emp1 and emp2,Not Answered
+13,1.       I have an emp table with 5 records. I write a following query what will be the output. Select ename from emp where rownum = 3?,Not Answered
+14,"I have an dept table .In that dept table I have columns like deptno with primary key and dname with unique key. After that I insert vaue like this (insert into dept values(10,’’); insert into dept values(20,’’);), Does it allows null values second time ?",Not Answered
+15,what are the types of statements in TCL you know,what are the types of statements in TCL you know  Commit rollback save poin

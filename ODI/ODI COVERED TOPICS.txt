@@ -1,0 +1,24 @@
+Architecture,
+Topology concepts,
+connecting to your data, 
+logical architecture, 
+Setting up the new project, 
+Creating reverse engineering models, 
+Organizing data models, 
+exploring and auditing the data, 
+one to one interface(mapping, transformations), 
+executing and debugging inetrface, 
+Procedures, 
+Variables and Sequences, 
+User functions, 
+Package(simple proc).
+
+
+PENDING
+
+relational model in ODI,
+Data quality in ODI, 
+Control Types, 
+Advanced Packages, 
+Scheduling, 
+Deployment to the server.

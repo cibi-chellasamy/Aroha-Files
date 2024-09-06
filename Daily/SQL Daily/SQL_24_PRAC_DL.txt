@@ -1,0 +1,122 @@
+Data Lemur
+https://datalemur.com/questions?category=SQL&difficulty=Medium
+----------------------------------------------------------------
+with sup_cloud as (
+  SELECT c.customer_id,
+  count(distinct p.product_category)AS unique_count
+  from customer_contracts  c LEFT JOIN products p 
+  on c.product_id = p.product_id
+  group by c.customer_id)
+
+select customer_id
+from sup_cloud
+where unique_count = (select count(distinct product_category)
+from products)
+order by customer_id;
+-------------------------------------------------------------------------------
+
+with highest_pr as (
+  select ticker,to_char(date,'Mon-YYYY')as highest_mnth,
+  max(open) as highest_open,
+  row_number() over (partition by ticker order by open desc)as 
+  row_num 
+  from stock_prices
+  group by ticker,to_char(date,'Mon-YYYY'),open),
+  
+  lowest_pr as( 
+    select ticker,to_char(date,'Mon-YYYY') as lowest_mnth,
+    min(open)as lowest_open,
+    row_number()over(partition by ticker order by open)as row_num
+    from stock_prices
+    group by ticker,to_char(date,'Mon-YYYY'),open)
+    
+    select hp.ticker,hp.highest_mnth,hp.highest_open
+    ,lp.lowest_mnth,lp.lowest_open
+    from highest_pr hp join lowest_pr lp
+    on hp.ticker = lp.ticker
+    and hp.row_num = 1
+    and lp.row_num = 1
+    order by hp.ticker 
+-------------------------------------------------------------------------------
+
+with uncategorised_callers as (
+  select count(case_id) as uncategorised_calls
+  from callers
+  where call_category is null
+    or call_category = 'n/a'
+)
+select 
+  round(100.0 * uncategorised_calls / (select count(*) from callers), 1) as uncategorised_call_pct
+from uncategorised_callers;
+-------------------------------------------------------------------------------
+
+with intr_mnth as( 
+  select ticker,date,close,
+  lag(close) over (partition by ticker order by date)as pre_cl
+  from stock_prices)
+  
+  SELECT ticker,date,close,
+round((close-pre_cl)/pre_cl*100,2)as intermth_change_pct
+from intr_mnth
+order by ticker,date
+
+-------------------------------------------------------------------------------
+
+SELECT item_count
+from items_per_order
+where order_occurrences  = (select max(order_occurrences)
+from items_per_order)
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+https://leetcode.com/studyplan/top-sql-50/
+LEETCODE
+------------------------------------------
+select *
+from cinema
+where mod(id,2)<> 0 
+and description <> 'boring'
+order by rating desc
+-------------------------------------------------------------------------------
+select p.product_id,round(sum(p.price*u.units)/sum(u.units),2) as avg_price
+from  prices p inner join unitssold u
+on p.product_id = u.product_id
+where u.purchase_date >= p.start_date AND u.purchase_date <= p.end_date
+group by p.product_id
+
+-------------------------------------------------------------------------------
+select p.project_id,round(avg(e.experience_years),2) as average_years 
+from project p inner join employee e
+on e.employee_id = p.employee_id
+group by p.project_id
+-------------------------------------------------------------------------------
+
+select contest_id,round(count(r.contest_id )*100/(select count(*) from users),2) as percentage
+from users u join register r
+on u.user_id = r.user_id
+group by contest_id 
+order by percentage desc ,contest_id
+
+-------------------------------------------------------------------------------
+select query_name,
+round(avg((rating)/position),2) as quality,
+round(avg(case when rating <3 then 1 else 0 end)*100,2)as poor_query_percentage
+from Queries 
+where query_name is not null
+group by query_name
+
+-------------------------------------------------------------------------------
+
+select
+  substr(trans_date, 1, 7) as month,
+  country,
+  count(id) as trans_count,
+  sum(case when state = 'approved' then 1 else 0 end) as approved_count,
+  sum(amount) as trans_total_amount,
+  sum(case when state = 'approved' then amount else 0 end) as approved_total_amount
+from transactions
+group by substr(trans_date, 1, 7), country;
+
+
+-------------------------------------------------------------------------------

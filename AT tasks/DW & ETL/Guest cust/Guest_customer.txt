@@ -1,0 +1,27 @@
+df_cust = pd.read_excel('Customer.xlsx')
+df_guest = pd.read_excel('Guest.xlsx')
+df_call_plan = pd.DataFrame({
+    'Call_plan_id': [], 
+    'Guest_name': [], 
+    'Guest_city': [], 
+    'Guest_phone': []
+})
+df_existing_guests = df_guest.merge(df_cust, how='inner', 
+                                    left_on=['name', 'phone', 'city'], 
+                                    right_on=['c_name', 'c_phone', 'c_city'])
+
+
+
+df_guest = df_guest[~df_guest.index.isin(df_existing_guests.index)]
+
+df_call_plan = df_guest[['name', 'phone', 'city']].copy()
+df_call_plan.rename(columns=
+                    {'name': 'Guest_name', 'phone': 'Guest_phone', 'city': 'Guest_city'}, 
+                    inplace=True)
+
+df_guest['pro_flag'] = 'y'
+
+df_existing_guests
+df_cust
+df_guest
+df_call_plan

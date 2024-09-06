@@ -1,0 +1,17 @@
+1. introduce yourself2. tell me your technical experience3. explain your current project & project flow
+4. write a query for print next 10 dates from current date
+   write a uery to display employee nama who got maximum salary increment between jan and feb
+5. write a procedure to display following pattern
+   1
+   2 2
+   3 3 3
+   4 4 4 4
+   write a procedure to find whether the string is palindrome or not
+6. i have three sealed non-transparent boxes filled with apples, 
+          mangoes and mixture of apples & mangoes. 
+          these all are labeled incorrectly.
+          you can find what is there inside the box by looking into it.
+          in how many attempts you want to label it properly.how?
+7. tell me your strengths
+
+

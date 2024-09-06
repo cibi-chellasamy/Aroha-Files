@@ -1,0 +1,90 @@
+
+Write a select statement to get the current value of sequence called customer_sequence
+
+select customer_sequence.currval from table_name
+
+--------------------------------------------------------------------------------
+
+write a query to find second greatest employee based on salary
+
+select emp_name  
+from (select emp_name salary,dense_rank() over(order by salary desc) as sec_max_sal from employee)
+where sec_max_sal = 2;
+
+--------------------------------------------------------------------------------
+I have table named employee. I want to create a table called employee_Copy with all the data in employee table. What do you do? Write the Statement to accomplish this task
+
+
+create table employee_copy as select * from employee
+--------------------------------------------------------------------------------
+
+with del_dup as
+(select guest_id ,guest_name,guest_city
+row_numer() over(partition by guest_id guest_name,guest_city order by guest_id ) as rn 
+from guest)
+delete from del_dup where rn >1;
+
+--------------------------------------------------------------------------------
+
+How many duplicate records we have? Write a query to give this count.
+
+with count_dup as
+(select guest_id ,guest_name,guest_city
+row_num() over(partition by guest_id guest_name,guest_city order by guest_id ) as rn 
+from guest)
+Select count(*) from count_dup where rn >1
+
+--------------------------------------------------------------------------------
+
+
+select tos.owner_name,t.team_name
+from team_owners tos join team t
+on tos.team_id = t.team_id
+group by tos.owner_name
+having count(t.team_id)>1
+
+
+--------------------------------------------------------------------------------
+
+Team name, owner name (who owns highest percentage only)
+
+select t.team_name,t.owener_name,max(tos.percentage)
+from team_owners tos join team t
+on tos.team_id = t.team_id
+group by  t.team_name, t.owner_name;
+(corrected)
+
+--------------------------------------------------------------------------------
+
+select t.team_name, tos.owner_name
+from( select team_id,max(percentage) as max_percentage
+from team_owners
+group by team_id) ad mx_own
+join team_owners tos on mx_own.team_id = tos.team_id
+and mx_own.max_percentage = tos.ownership_percentage
+join team t on tos.team_id = t.team_id
+--------------------------------------------------------------------------------
+RowID is a pseudo column which is used to locate rows and 
+the operations takes place faster while using ROWID and 
+it is also represents the physical location of the data stored in memory
+--------------------------------------------------------------------------------
+What are the three types of indexes we can create in Oracle RDBMS
+
+Clustered index ,non clustered index and bitmap index
+--------------------------------------------------------------------------------
+
+
+When I create a column as the PK, what happens behind the scenes. How oracle make sures there is no duplicate value in that column?
+
+It automatically create a unique index when primary key is created so the the unique property of the primary key cannot be violated
+--------------------------------------------------------------------------------
+
+
+user table,user views and tab column
+--------------------------------------------------------------------------------
+What is the relation between user and a schema? Explain it in your own way.
+User can create schemas and can have more than one schemas.
+When we create tables or objects it will be stored in schemas
+We can specify the schemas where we want to save those tables and objects.User have access on their schemas
+
+--------------------------------------------------------------------------------

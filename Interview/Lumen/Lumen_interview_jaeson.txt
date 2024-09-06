@@ -1,0 +1,23 @@
+#SQl
+
+1. Introduction
+2. DML DDL TCL Differntiation
+3. views and materialize view
+4. Db objects
+5. Sub query
+6. Joins
+7. create table
+8. getting last record of the table
+9. merge and update differentiation
+10. function and procedure differentiation
+11. There are 50000 records in a table ,yesterday you write a query to display and it give correct result
+    and today you run the same query and it show error or it takes time to give the result then what might be the 
+    error according to you.
+-------------------------------------------------------------------------------------------------------------------------
+#PYTHON
+
+1. why in python no need to mention datatype at the time of variable declearation.
+2. what is compiler and interpreter
+3. when you try to run a short/simple code , why people recomend c language instead of python.
+4. In c include<stdio.h> is needed why in python not needed
+-------------------------------------------------------------------------------------------------------------------------

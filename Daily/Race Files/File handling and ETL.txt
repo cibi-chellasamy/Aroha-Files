@@ -1,0 +1,152 @@
+import pandas as pd
+import glob
+import os
+import json
+from datetime import datetime
+import warnings
+import numpy as np
+warnings.filterwarnings('ignore')
+import pyarrow as pa
+import pyarrow.parquet as pq
+
+folder_path = "C:/Users/DELL/OneDrive/Desktop/AT files/Daily/raw/Files"  
+
+file=[]
+for root, dirs, files in os.walk(folder_path):
+    root_path=root.split('\\')
+    root_path='/'.join(root_path)
+    for i in files:
+        if not i.endswith('.ipynb') and not i.endswith('.DS_Store'):
+            path=f'{root_path}/{i}'
+            file.append(path)
+
+df_dict={}
+
+for i in file :
+    if i.endswith('.csv'):
+        name=i.split('/')[-1].split('.')[0]
+        df_dict[f'{name}_df']=pd.read_csv(i)
+        
+    elif i.endswith('.json'):
+        try:
+            name=i.split('/')[-1].split('.')[0]
+            df_dict[f'{name}_df']=pd.read_json(i, lines=True)
+        except ValueError:
+            name=i.split('/')[-1].split('.')[0]
+            df_dict[f'{name}_df']=pd.read_json(i)
+    else:
+        print('no')
+
+for i in df_dict:
+    print(i)
+
+for key in df_dict:
+    globals()[key] = df_dict[key]
+
+for key in df_dict:
+    print(f"\n{key}:")
+    print(globals()[key])
+
+dataframes = [circuits_df,constructors_df,drivers_df,lap_times_split_1_df,lap_times_split_2_df,
+              lap_times_split_3_df,lap_times_split_4_df,lap_times_split_5_df,
+              pit_stops_df,qualifying_split_1_df,qualifying_split_2_df,races_df,results_df]
+
+for df in dataframes:
+    if 'url' in df.columns:
+        df.drop(columns='url', inplace=True)
+
+dataframes = [circuits_df,constructors_df,drivers_df,lap_times_split_1_df,lap_times_split_2_df,
+              lap_times_split_3_df,lap_times_split_4_df,lap_times_split_5_df,
+              pit_stops_df,qualifying_split_1_df,qualifying_split_2_df,races_df,results_df]
+
+def rename_id_columns(df):
+    df.rename(columns=lambda x: x[:-2] + '_id' if x.endswith('Id') or x.endswith('ID') else x, inplace=True)
+
+for df in dataframes:
+    rename_id_columns(df)
+
+def rename_ref_columns(df):
+    df.rename(columns=lambda x: x[:-3] + '_ref' if x.endswith('Ref') else x, inplace=True)
+
+for df in dataframes:
+    rename_ref_columns(df)
+
+column_mappings = {'lat':'latitude','lng':'longitude','alt':'altitude'}
+dataframes = [circuits_df]
+
+for df in dataframes:
+    for current_col, new_col in column_mappings.items():
+        if current_col in df.columns:
+            df.rename(columns={current_col: new_col}, inplace=True)
+
+lap_times_dfs = [lap_times_split_1_df, lap_times_split_2_df, lap_times_split_3_df, lap_times_split_4_df, lap_times_split_5_df]
+new_columns = ['raceId', 'driverId', 'lap', 'position', 'time', 'milliseconds']
+for df in lap_times_dfs:
+    df.columns = new_columns
+
+races_df.rename({'year':'race_year'},inplace=True,axis=1)
+
+races_df.drop(['date','time'],inplace=True,axis=1)
+
+drivers_df['full_name'] = drivers_df['name'].apply(lambda x:x['forename'] + ' ' + x['surname'])
+
+drivers_df.drop(['name'],inplace=True,axis=1)
+
+drivers_df = drivers_df[['driver_id','driver_ref','number','code','full_name','dob','nationality']]
+
+results_df.rename(columns={'positionText': 'position_text','positionOrder': 'position_order','fastestLap': 'fastest_lap',
+                           'fastestLapTime': 'fastest_lap_time','fastestLapSpeed': 'fastest_lap_speed'}, inplace=True)
+
+today_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+dataframes = [circuits_df,constructors_df,drivers_df,lap_times_split_1_df,lap_times_split_2_df,
+              lap_times_split_3_df,lap_times_split_4_df,lap_times_split_5_df,
+              pit_stops_df,qualifying_split_1_df,qualifying_split_2_df,races_df,results_df]
+
+for df in dataframes:
+    df['ingestion_date'] = today_date
+
+data_source = input("Enter the data source (Testing or Development): ")
+for df in dataframes:
+    df['data_source'] = data_source
+
+def preprocess_dataframe(df, string_columns=None):
+    if string_columns is None:
+        string_columns = []
+
+    for col in df.columns:
+        df[col] = df[col].replace('\\N', np.nan)
+        if col in string_columns:
+            df[col] = df[col].astype(str)
+        else:
+            df[col] = pd.to_numeric(df[col], errors='ignore')
+    return df
+
+string_columns_dict = {'circuits_df': [],'constructors_df': [],'drivers_df': [],'lap_times_split_1_df': ['duration'],'lap_times_split_2_df': ['duration'],
+                       'lap_times_split_3_df': ['duration'],'lap_times_split_4_df': ['duration'],'lap_times_split_5_df': ['duration'],'pit_stops_df': [],
+                       'qualifying_split_1_df': ['position_text'],
+                       'qualifying_split_2_df': ['position_text'],'races_df': [],'results_df': ['position_text']}
+
+dataframes = [('circuits_df', circuits_df), ('constructors_df', constructors_df), ('drivers_df', drivers_df), 
+              ('lap_times_split_1_df', lap_times_split_1_df), ('lap_times_split_2_df', lap_times_split_2_df),
+              ('lap_times_split_3_df', lap_times_split_3_df), ('lap_times_split_4_df', lap_times_split_4_df), 
+              ('lap_times_split_5_df', lap_times_split_5_df),('pit_stops_df', pit_stops_df),
+              ('qualifying_split_1_df', qualifying_split_1_df), 
+              ('qualifying_split_2_df', qualifying_split_2_df), ('races_df', races_df), ('results_df', results_df)]
+
+file_paths = ['circuits.parquet', 'constructors.parquet', 'drivers.parquet', 'lap_times_split_1.parquet', 'lap_times_split_2.parquet',
+              'lap_times_split_3.parquet', 'lap_times_split_4.parquet', 'lap_times_split_5.parquet','pit_stops.parquet', 'qualifying_split_1.parquet',
+              'qualifying_split_2.parquet', 'races.parquet', 'results.parquet']
+
+preprocessed_dataframes = [
+    preprocess_dataframe(df, string_columns_dict.get(name, [])) 
+    for name, df in dataframes
+]
+
+for (name, df), file_path in zip(dataframes, file_paths):
+    table = pa.Table.from_pandas(df, safe=True)
+    pq.write_table(table, file_path)
+
+df = pd.read_parquet('file_path.parquet')
+
+
+

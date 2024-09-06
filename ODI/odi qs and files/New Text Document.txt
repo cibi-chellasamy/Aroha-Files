@@ -1,0 +1,151 @@
+2 db
+manu 
+ship
+
+
+---
+connections
+
+oracle to odi 
+
+
+--------------
+ycd 
+mtd
+qtd
+yoygrowth
+
+
+tell me abou your self
+roles and responsisblities 
+explain about curren project
+
+
+
+
+sql loader
+
+dataware house
+
+intergrating from multiple source
+and loading staging area
+etl techniques
+load into dim and fact tables
+
+
+procedure
+how many record in table
+
+dynamic procudure
+same procedure 
+--------------------
+user defined error
+based on a condition manually raising error
+pass customer id
+exists update happens
+or it will raise error
+
+if update dont happens it will not give no data found error
+-----------------------------
+
+error handling
+
+list of error we have faced
+
+
+
+
+-------------
+test cases
+checking number of rec in src tt
+
+aggregation matching
+
+merging
+update if macthces if not instert
+
+
+no of duplicate rec
+matching with error rec
+is it matching with src
+
+
+firs check mail
+req from  jira
+service now ,out look, teams
+-------------------
+client
+no we dont interac we will join in call
+
+
+daily stand up call
+eve status update call
+road block
+help we need
+
+we create mappind document
+
+code developed accord to req
+
+unit tesing
+push to testig
+
+sample data
+
+pused to production live data
+
+--------------------
+how to push data from dev to test to prod
+git hub
+
+------------------
+teams
+call will be in teams
+interacting in teams
+
+
+
+how do you connect to clinet server
+vpn otg will be recevied
+
+user id pw
+microsoft authenticaor
+
+------------------
+oracle sql dev we use
+
+where you schedule procedure
+plsql in .sqlfile puty to call the file
+
+
+cron jobs to pick the file from particular loc
+putty will run the file for scheluding
+-------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

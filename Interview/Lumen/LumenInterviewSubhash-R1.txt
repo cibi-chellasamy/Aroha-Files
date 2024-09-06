@@ -1,0 +1,20 @@
+Introduce yourself.
+what is xpath ? 
+how to perform action on hyper link ?
+what is selenium?
+what is webdriver ?
+WAQ to display 2nd highest salary holder employee.
+WAP for inhertit the properties of parent class.
+WAP how to handle the user defined exception .
+what is encuplation ?
+what is defference between function and method ?
+what is defference b/w class level variable and function level variable ?
+What are charactestics of __init__ ?
+What is local variable and global variable?
+What are test case techniques?
+which methodlogy you have used in your project ?
+how frequent new version release happend ?
+What will you do when develeper reject the bug to fix where as both having the same requirments ? 
+what is story point ?
+how many sprint is need to complete the project?
+what is the strategy of writing the test cases?

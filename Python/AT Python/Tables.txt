@@ -1,0 +1,33 @@
+Health care Industry
+
+
+Manufacturer Table
+
+Manufacturer:
+ManufacturerID: 
+Manufacturer Name: 
+Contact Information: (Contact details)
+Address: (Manufacturer's address)
+Product: 
+
+===========================
+Product Table
+
+ProductID: 1
+Product Name: 
+Manufacturer: ABC Pharmaceuticals
+Strength: 
+Dosage Form: 
+Package Size: 
+Unit Price: 
+Supplier:
+
+=================================
+Supplier table
+
+SupplierID: 1
+Supplier Name: XYZ Distributors
+Contact Information: (Contact details)
+Address: (Supplier's address)
+Purchase Order:
+

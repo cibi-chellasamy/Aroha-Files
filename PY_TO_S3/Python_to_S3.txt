@@ -1,0 +1,51 @@
+!pip install boto3
+-- Helps to connect aws with python
+------------------------------------------------------------------
+import pandas as pd
+import boto3
+
+------------------------------------------------------------------
+s3 = boto3.resource(
+    service_name = 's3',
+    region_name = 'ap-south-1',
+    aws_access_key_id = 'AKIAZQ3DUKK4OOM5VUWM',
+    aws_secret_access_key = '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'
+)
+------------------------------------------------------------------
+--For printing the bucket names
+
+for bucket in s3.buckets.all():
+    print(bucket.name)
+------------------------------------------------------------------
+!pip install s3fs
+It is a Pythonic file interface to Amazon S3, allowing you to interact with S3 objects as if they were local files.
+------------------------------------------------------------------
+
+--Converting the df to csv_file 
+
+df.to_csv('pys3test')
+------------------------------------------------------------------
+--Uploading the file form local machine
+
+s3.Bucket('pythonprojectat').upload_file(Filename='pys3test',Key = 'pys3test')
+
+------------------------------------------------------------------
+--Printing the objects inside the buckets for verifying 
+
+for obj in s3.Bucket('pythonprojectat').objects.all():
+    print(obj)
+------------------------------------------------------------------
+For accessing datas from S3
+
+obj = s3.Bucket('pythonprojectat').Object('pys3test').get()
+
+df2 = pd.read_csv(obj['Body'],index_col=0)
+
+type(df2)
+
+
+------------------------------------------------------------------
+
+
+
+

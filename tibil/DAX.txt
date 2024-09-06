@@ -1,0 +1,184 @@
+DAX:
+
+Data Expressions
+Data Analytical Expressions
+
+Derived fields/calculated fields
+
+Tables
+Columns
+Measures
+
+CUST -> custid, custfname, custlname, dob
+
+Non Agg:
+Cust Name: custfname concat with custlname
+Year of Birth: extract year from dob
+
+Agg:
+No of Customers: count of custid
+
+Columns:
+Non Aggregated calculations
+Is calculated at the data level of power bi
+
+Measures:
+Aggregated calculations
+Is calculated at the visual level of power bi
+
+Test Column = 1
+
+Test Measure = 1
+
+Demograpy Code = LEFT(Orders[Order ID],2)
+
+What if analysis:
+what if sales is 10% more 
+Proj Up Sales = SUM(Orders[Sales]) * 1.1
+
+what if sales is 10% less
+Proj Down Sales = SUM(Orders[Sales]) * 0.9
+
+Profit %Age:
+(profit/cp) * 100
+
+Profit %Age = SUM(Orders[Profit]) / (SUM(Orders[Sales]) - SUM(Orders[Profit]))
+
+
+Order Year = YEAR(Orders[Order Date])
+Order Qtr = QUARTER(Orders[Order Date])
+Order Month = MONTH(Orders[Order Date])
+Order Day = DAY(Orders[Order Date])
+
+Date Extract = FORMAT(Orders[Order Date],"yyyy")
+Date Extract = FORMAT(Orders[Order Date],"q")
+Date Extract = FORMAT(Orders[Order Date],"m")
+Date Extract = FORMAT(Orders[Order Date],"mm")
+Date Extract = FORMAT(Orders[Order Date],"mmm")
+Date Extract = FORMAT(Orders[Order Date],"mmmm")
+Date Extract = FORMAT(Orders[Order Date],"d")
+Date Extract = FORMAT(Orders[Order Date],"dd")
+Date Extract = FORMAT(Orders[Order Date],"ddd")
+Date Extract = FORMAT(Orders[Order Date],"dddd")
+
+Date Extract = "Q-" & FORMAT(Orders[Order Date],"q")
+
+Order Day No = WEEKDAY(Orders[Order Date],2)
+
+Conditional Statements:
+IF
+SWITCH
+
+IF(Condition,op when true, op when false)
+
+Metro Flag = IF(Orders[Region] = "Central","Metro","Non Metro")
+
+Weekend Flag = if(FORMAT(Orders[Order Date],"ddd") = "Sun" || FORMAT(Orders[Order Date],"ddd") = "Sat", "Weekend", "Weekday")
+
+Weekend Flag = if(FORMAT(Orders[Order Date],"ddd") in {"Sun","Sat"} , "Weekend", "Weekday")
+
+Profit Status = if(SUM(Orders[Profit]) >= 0 , "Profit", "Loss")
+
+
+Profit Clr = if(SUM(Orders[Profit]) >= 0 , "green","yellow")
+
+Profit %Age Clr:
+Profit %Age Clr = if([Profit %Age] >= 0 , "green","red")
+
+Profit %Age Clr = if([Profit %Age] >= 0.15 , "green", if([Profit %Age] <0, "red", "yellow"))
+
+Year Tag:
+Year Tag = if(year(Orders[Order Date]) = year(TODAY()),"Current Year",if(year(Orders[Order Date]) = YEAR(TODAY()) - 1, "Previous Year","Other Years"))
+
+Since data is not available for 2022, the formula is tweaked to make 2021 as the current. The tweaked formula is as mentioned below.
+
+Year Tag = if(year(Orders[Order Date]) = year(TODAY())-1,"Current Year",if(year(Orders[Order Date]) = YEAR(TODAY()) - 2, "Previous Year","Other Years"))
+
+
+Aggregations:
+simple aggs
+conditional aggs
+
+CUST -> custid, custname, gender
+
+Simple agg:
+No of custs: count(custid)
+
+Cond agg:
+No of Males: count(custid where gender = 'male')
+No of Females: count(custid where gender = 'female')
+
+CALCULATE(agg_function,filters,....)
+
+Central Sales = CALCULATE(SUM(Orders[Sales]),Orders[Region]="Central")
+
+Weekend Sales = CALCULATE(SUM(Orders[Sales]),Orders[Weekend Flag] = "Weekend")
+Weekday Sales = CALCULATE(SUM(Orders[Sales]),Orders[Weekend Flag] = "Weekday")
+
+CY Sales = CALCULATE(SUM(Orders[Sales]),Orders[Year Tag] = "Current Year")
+PY Sales = CALCULATE(SUM(Orders[Sales]),Orders[Year Tag] = "Previous Year")
+
+YoY Growth = ([CY Sales]-[PY Sales])/[PY Sales]
+
+Super aggregates:
+
+Overall Sales = CALCULATE(SUM(Orders[Sales]),ALL(Orders))
+
+Cat Sales = CALCULATE(SUM(Orders[Sales]),ALL(Orders[Sub-Category]))
+
+Cat Cap = SUM(Orders[Sales])/[Cat Sales]
+Overall Cap = SUM(Orders[Sales])/Orders[Overall Sales]
+
+Rank:
+Sales Amount = sum([Sales])
+Sub Cat Rnk = RANKX(ALL(Orders[Sub-Category]),Orders[Sales Amount],,DESC,Dense)
+
+Overall Rank = RANKX(ALL(Orders[Category],Orders[Sub-Category]),Orders[Sales Amount],,DESC,Dense)
+
+All Selected Rank:
+Sub Cat Rnk v1 = RANKX(ALLSELECTED(Orders[Sub-Category]),Orders[Sales Amount],,DESC,Dense)
+
+Ref Line Tag = IF(SUM(Orders[Sales]) >= 150000,"green","brown")
+
+Ref Line Tag Dyn = IF(SUM(Orders[Sales]) >= 'Ref Line'[Ref Line Value],"green","brown")
+
+Selected Sub Cat Rnk = IF(Orders[Sub Cat Rnk] <= 'Top N'[Top N Value],Orders[Sub Cat Rnk],BLANK())
+
+Selected Sales = IF(Orders[Sub Cat Rnk]<= 'Top N'[Top N Value],SUM(Orders[Sales]),BLANK())
+
+Title Top N = "Top " & 'Top N'[Top N Value] & " Sub Cat on Sales"
+
+Dynamic Title:
+Region Sel Title = "Analysis for " & if(ISFILTERED(Orders[Region]),VALUES(Orders[Region]),"All Regions")
+
+Measures: one row of value is expected
+
+South
+West
+
+Concat
+
+ip:
+South
+West
+
+op:
+South, west
+
+Region Sel Title = "Analysis for " & if(ISFILTERED(Orders[Region]),CONCATENATEX(VALUES(Orders[Region]),Orders[Region],", "),"All Regions")
+
+Region Sel Title = "Analysis for " & if( DISTINCTCOUNT(Orders[Region]) <> CALCULATE(DISTINCTCOUNT(Orders[Region]),all(Orders))  ,CONCATENATEX(VALUES(Orders[Region]),Orders[Region],", "),"All Regions")
+
+
+
+
+
+
+
+
+
+
+
+
+
+

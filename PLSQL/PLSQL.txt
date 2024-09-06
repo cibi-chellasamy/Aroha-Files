@@ -1,0 +1,15 @@
+PL/SQL 
+------
+Introduction to PL/SQL		      
+What is PL/SQL? 		
+Advantages of PL/SQL 		
+Variables and data types	
+Control Structures		
+Exceptions Handling		
+Cursor 				
+Stored procedures
+Functions
+Packages
+Trigger
+Best Practices and Coding Standards
+Debugging tool

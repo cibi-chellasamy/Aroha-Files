@@ -1,0 +1,256 @@
+1) Shift Assignment Fact Table:
+	Employee Dimension Table:
+		employee_id (Primary Key)
+		employee_name
+		job_role
+		department
+		hire_date
+		contact_information
+
+	Time Dimension Table:
+		time_id (Primary Key)
+		date
+		day_of_week
+		month
+		quarter
+		year
+		holiday_indicator
+		fiscal_period
+	
+	Shift Dimension Table:
+		shift_id (Primary Key)
+		shift_name
+		start_time
+		end_time
+		other_shift_attributes
+
+Shift Assignment Fact Table:
+
+	shift_assignment_id (Primary Key)
+	employee_id (Foreign Key to Employee Dimension)
+	time_id (Foreign Key to Time Dimension)
+	shift_id (Foreign Key to Shift Dimension)
+	assignment_status
+-----------------------------------------------------------------
+2)Equipment Downtime Fact Table:
+
+	Equipment Dimension Table:
+		equipment_id (Primary Key)
+		equipment_name
+		equipment_type
+		manufacturer
+		installation_date
+		maintenance_history
+		operational_status
+
+	Downtime Reason Dimension Table:
+		
+		downtime_reason_id (Primary Key)
+		downtime_reason_description
+		other_downtime_reason_attributes
+		
+	Time Dimension Table:
+		time_id (Primary Key)
+		date
+		day_of_week
+		month
+		quarter
+		year
+		holiday_indicator
+		fiscal_period
+
+	Employee Dimension Table:
+		employee_id (Primary Key)
+		employee_name
+		job_role
+		department
+		hire_date
+		contact_information
+
+
+Equipment Downtime Fact Table:
+
+	downtime_id (Primary Key)
+	equipment_id (Foreign Key to Equipment Dimension)
+	downtime_reason_id (Foreign Key to Downtime Reason Dimension)
+	time_id (Foreign Key to Time Dimension)
+	employee_id (Foreign Key to Employee Dimension)
+	downtime_duration
+	downtime_start_timestamp
+	downtime_end_timestamp
+	other_downtime_metrics
+
+
+------------------------------------------------
+3) Production Metric Fact Table:
+
+	Product Dimension Table:
+		product_id (Primary Key)
+		product_name
+		product_type
+		packaging_information
+	
+	Equipment Dimension Table:
+		equipment_id (Primary Key)
+		equipment_name
+		equipment_type
+		manufacturer
+		installation_date
+		maintenance_history
+		operational_status
+
+	Time Dimension Table:
+		time_id (Primary Key)
+		date
+		day_of_week
+		month
+		quarter
+		year
+		holiday_indicator
+		fiscal_period
+
+	Employee Dimension Table:
+		employee_id (Primary Key)
+		employee_name
+		job_role
+		department
+		hire_date
+		contact_information
+
+
+Production Metric Fact Table:
+	production_id (Primary Key)
+	product_id (Foreign Key to Product Dimension)
+	equipment_id (Foreign Key to Equipment Dimension)
+	time_id (Foreign Key to Time Dimension)
+	employee_id (Foreign Key to Employee Dimension)
+	quantity_produced
+	downtime_duration
+	quality_indicator_1
+	quality_indicator_2
+
+-----------------------------------------------
+
+4) Sales Order Fact Table:
+	Customer Dimension Table:
+		customer_id (Primary Key)
+		customer_name
+		customer_type
+		contact_information
+		customer_segmentation
+		
+
+	Product Dimension Table:
+		product_id (Primary Key)
+		product_name
+		product_type
+		packaging_information
+	
+	Time Dimension Table:
+		time_id (Primary Key)
+		date
+		day_of_week
+		month
+		quarter
+		year
+		holiday_indicator
+		fiscal_period
+
+Sales Order Fact Table:
+	order_id (Primary Key)
+	customer_id (Foreign Key to Customer Dimension)
+	product_id (Foreign Key to Product Dimension)
+	time_id (Foreign Key to Time Dimension)
+	order_date
+	order_status
+	order_quantity
+	order_amount
+
+
+-----------------------------------------------------------
+5) Delivery Fact Table:
+	Customer Dimension Table:
+		customer_id (Primary Key)
+		customer_name
+		customer_type
+		contact_information
+		customer_segmentation
+
+	Location Dimension Table:
+		location_id (Primary Key)
+		location_name
+		address
+		city
+		state
+		country
+		postal_code
+
+	Product Dimension Table:
+		product_id (Primary Key)
+		product_name
+		product_type
+		packaging_information
+
+	Time Dimension Table:
+		time_id (Primary Key)
+		date
+		day_of_week
+		month
+		quarter
+		year
+		holiday_indicator
+		fiscal_period
+
+Delivery Fact Table:
+	delivery_id (Primary Key)
+	customer_id (Foreign Key to Customer Dimension)
+	location_id (Foreign Key to Location Dimension)
+	product_id (Foreign Key to Product Dimension)
+	time_id (Foreign Key to Time Dimension)
+	delivery_date
+	delivery_status
+	quantity_delivered
+	delivery_method
+---------------------------------------------------------------------
+6) Payment Fact Table:
+	Customer Dimension Table:
+		customer_id (Primary Key)
+		customer_name
+		customer_type
+		contact_information
+		customer_segmentation
+	
+	Time Dimension Table:
+		time_id (Primary Key)
+		date
+		day_of_week
+		month
+		quarter
+		year
+		holiday_indicator
+		fiscal_period
+		other_time_attributes		
+
+Payment Fact Table:
+
+	payment_id (Primary Key)
+	customer_id (Foreign Key to Customer Dimension)
+	time_id (Foreign Key to Time Dimension)
+	amount_paid
+	payment_method
+	payment_status
+	other_payment_attributes
+---------------------------------------------------------------------------
+
+CREATE TABLE Shift_Assignment (
+    shift_assignment_id NUMBER DEFAULT my_sequence.NEXTVAL PRIMARY KEY,
+    employee_id INT,
+    time_id INT,
+    shift_id INT,
+    assignment_status VARCHAR(20),
+    FOREIGN KEY (employee_id) REFERENCES Employee(employee_id),
+    FOREIGN KEY (time_id) REFERENCES Time(time_id),
+    FOREIGN KEY (shift_id) REFERENCES Shift(shift_id)
+);
+
+

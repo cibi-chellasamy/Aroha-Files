@@ -1,0 +1,21 @@
+lumen interview questions
+1.self introduction
+2. briefly explain roles and responsibilites in project
+3.daily activities.
+4.what is unit testing and which  type of test cases uses
+5.what happens in migration and your doveloper compleated code send to testing what process happening?
+6.what is diffrence between olap and oltp
+7.what is analysis
+8.difference between merge and update?
+9.Write a querry on merge ?(they send some conditions)
+10. WAQ find out dulpicate records
+11.WAQ display like bibek 3 ritesh 5 duplicates, no unique record
+12.waq display  10th record?
+13.what is refcursor?
+14.difference between procedure and functions?
+15.what exception comes in this procedure(they send code)
+16.what is table partitions?why we use
+17.what is hash partition ?
+18.waq on  partition table
+19.how many types of joins?explain briefly 
+20.why  we use dual table?what is  use of dual?

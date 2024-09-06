@@ -1,0 +1,11 @@
+1) Self intoduction
+2) Explaination about project
+3) Sql query to fetch one column that has xyz
+4) Write an insert statement
+5) Difference between functions and procedures
+6) Write a procedure
+7) What the ETL tools you know?
+8) What are the other visualizations tool you know?
+9) How will fill null values in python
+10) Write a code to fill nul values
+11) Challenges that I have faced in project and how did you handled that?

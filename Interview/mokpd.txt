@@ -1,0 +1,57 @@
+create or replace function fun_name(
+	num1 number,
+	num2 number)
+return 
+	results number)
+is
+
+Begin
+	resutls := num1+num2;
+	return results;
+end;
+/
+
+
+begin
+fun_name(10,20)
+end;
+
+
+
+
+
+1) project challenges (1or 2)
+2) data analyst will give me he etl process
+3) like in sql
+4) column names
+5) ticket 
+6) count rows tables
+7) afer trans we used to validation
+8) loading to dest db we will db
+9) busniness req ticket mail id, remove duplicate,
+pincodes 
+10) analysts sending tickets
+11) accorind to business req de dup,null_dele,
+12) change req chagnge from past requsts
+13) no raw_data always 
+14) row_count( imp)
+
+bulk data challenges
+
+
+
+
+(select count(id) from table_a)- 
+select count(id) from table b)
+
+
+
+string unkonown
+metric mean max min avg
+date business rule through which i can replace go to he previouds date or default
+
+
+
+
+
+

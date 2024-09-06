@@ -1,0 +1,7 @@
+select c.state,count(distinct a.a_no) as num_accounts,
+count(distinct t.txn_id) as num_transactions
+from customer c
+join accounts a on c.cust_bkey = a.cust_bkey
+join transaction t on a.a_no = t.a_no
+
+group by c.state;

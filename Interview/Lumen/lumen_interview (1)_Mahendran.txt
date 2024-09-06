@@ -1,0 +1,26 @@
+1.tell me your clinet name?
+2.what type of company?
+3.tell me roles and responsability?
+4.what is scd2?
+5.merge syntax?
+6.types of join?
+7.what is inner join?
+8.   ENAME      TEXT
+	A    	Abc.123
+`	b	bcd.456
+	c	cde.789
+i want output 
+  123
+  456
+  789
+9.difference between primary key and unique key.
+10.display the duplicate record?
+11.count the duplicate record?
+12.syntax for densc_rank?
+13.   empid    name   deptno  job   hiredate
+	100     A      10     CLRK   22.10.19
+        101     B      20     MGR    10.02.20
+        102     C      30     ANST   25.10.21
+        100     A      10     CLRK   24.06.21
+how to find the empid 100 recent data using dense_rank
+14.using another method?

@@ -1,0 +1,169 @@
+create table movie as select * from team9_shobha.movie;
+create table actor as select * from team9_shobha.actor;
+create table role as select * from team9_shobha.role;
+create table movie_type as select * from team9_shobha.movie_type;
+
+select * from movie;
+select * from actor;
+select * from role;
+select * from movie_type;
+/*
+1.)    Display which movie as greater than 150 mins					
+2.)    Display the youngest and the oldest actor name					
+3.)    Display the movies of type action released in the current year					
+4.)    Display all the actor names who are currently not associated with any movies					
+5.)    Extract gmail from email column in actor table					
+6.)    Display movie names that have more than 10 actors					
+7.)    Display movie type wise no of movies and no of roles					
+8.)    Display the movie names that have more no of roles than the movie ‘Top Gun’					
+9.)    Display the movie name wise no of male and female actors					
+10.) Display movie_name,movie_type desc where we have movie_type desc second highest actors					
+11) Display Year wise month wise Movie released count					
+12	Uncommon actor from KGF-1 and KGF-2				
+13	Display which movie we have second highest actor				
+14	Which Movie_type_desc we don’t have any movie		*/
+
+--1.)    Display which movie as greater than 150 mins					
+select movie_name from movie
+where duration_in_min > 150
+-----------------------------------------------------------------------------------
+--2.)Display the youngest and the oldest actor name		
+select actor_name,extract(year from sysdate) - extract(year from dob) as age
+from actor
+where extract(year from sysdate) - extract(year from dob) = (
+select min(extract(year from sysdate) - extract(year from dob)) from actor)
+union
+select actor_name,extract(year from sysdate) - extract(year from dob) as age
+from actor
+where extract(year from sysdate) - extract(year from dob) = (
+select max(extract(year from sysdate) - extract(year from dob)) from actor)
+
+-----------------------------------------------------------------------------------
+
+--3.)Display the movies of type action released in the current year	
+
+select m.movie_name,mt.movie_type_desc,extract(year from m.release_date) as recent_movie
+from movie m join movie_type mt
+on m.movie_type_id = mt.movie_type_id
+where extract(year from m.release_date) = (select max(extract(year from release_date)) from movie)
+-----------------------------------------------------------------------------------
+
+--4.)Display all the actor names who are currently not associated with any movies		
+
+select a.actor_name 
+from actor a join role r
+on a.actor_id = r.actor_id
+where a.actor_id not in(select actor_id from role)
+
+
+select actor_name from actor
+where actor_id not in (select distinct actor_id from role)
+-----------------------------------------------------------------------------------
+--5.)Extract gmail from email column in actor table
+SELECT SUBSTR(email, INSTR(email, '@') + 1),actor_name
+FROM actor ;
+-----------------------------------------------------------------------------------
+--6.) Display movie names that have more than 10 actors
+
+select movie_name from movie 
+where movie_id in (select movie_id from role group by movie_id
+having count(actor_id) >10)
+
+with cnt as(select movie_name,COUNT(DISTINCT r.role_id) AS actor_count
+from movie m join role r on m.movie_id = r.movie_id
+group by m.movie_name)
+select movie_name from cnt
+where actor_count >10;
+-----------------------------------------------------------------------------------
+--7.)Display movie type wise no of movies and no of roles	
+
+select mt.movie_type_desc , count(distinct m.movie_id),count(r.role_id)
+from movie m left join role r 
+on m.movie_id = r.movie_id 
+ right join movie_type mt on m.movie_type_id = mt.movie_type_id
+group by mt.movie_type_desc
+-----------------------------------------------------------------------------------
+--8.)Display the movie names that have more no of roles than the movie ‘Top Gun’	
+
+select movie_name from
+movie m join role r
+on m.movie_id = r.movie_id
+group by m.movie_name
+having count(role_id) >(select count(r2.role_id) from
+movie m2 join role r2
+on m2.movie_id = r2.movie_id
+where m2.movie_name like '%Top Gun%')
+-----------------------------------------------------------------------------------
+--9) Display the movie names that have more no of roles than the movie ‘Top Gun’
+with actor_count as(
+    select movie_name,count(r.role_id)as role_cnt
+    from movie m join role r
+    on m.movie_id = r.movie_id
+    group by  m.movie_name),
+
+top_gun_cnt as 
+    (select count(r.role_id)as role_count
+    from movie m join role r
+    on m.movie_id = r.movie_id
+    where m.movie_name ='Top Gun')
+select  rc.movie_name
+from actor_count rc, top_gun_cnt tgc
+where rc.role_cnt > tgc.role_count;
+
+
+select m.movie_name
+from movie m join role r 
+on m.movie_id = r.movie_id
+group by movie_name
+having count(role_id) > (select count(r2.role_id)
+from role r2 join movie m2
+on r2.movie_id = m2.movie_id
+where m.movie_name = 'Top Gun') ;
+-----------------------------------------------------------------------------------
+--9)Display the movie name wise no of male and female actors	
+
+select m.movie_name,
+count(case when gender = 'M' then 1 end )as male,
+count(case when gender = 'F' then 1 end)as female
+from  actor a join role r
+on a.actor_id = r.actor_id
+join movie m on r.movie_id = m.movie_id
+group by m.movie_name
+-----------------------------------------------------------------------------------
+
+--11) Display Year wise month wise Movie released count
+
+select count(movie_name)as movie_count,
+to_char(release_date,'YYYY') as movie_rel_yr,
+to_char(release_date,'MM') as movie_rel_mon
+from movie 
+group by to_char(release_date,'YYYY'),to_char(release_date,'MM');
+
+-----------------------------------------------------------------------------------
+--12 Uncommon actor from KGF-1 and KGF-2	
+
+select a.actor_name
+from movie m join role r
+on m.movie_id = r.movie_id
+join actor a on a.actor_id = r.actor_id
+where m.movie_name = 'KGF-1'  
+minus
+select a.actor_name
+from movie m join role r
+on m.movie_id = r.movie_id
+join actor a on a.actor_id = r.actor_id
+where m.movie_name = 'KGF-2'  
+
+-----------------------------------------------------------------------------------
+--14	Which Movie_type_desc we don’t have any movie
+
+select movie_type_desc from movie_type
+where movie_type_id not in(select movie_type_id from movie)
+
+select movie_type_desc
+from movie_type mt left join movie m
+on mt.movie_type_id = m.movie_type_id
+where m.movie_type_id is null;
+
+
+

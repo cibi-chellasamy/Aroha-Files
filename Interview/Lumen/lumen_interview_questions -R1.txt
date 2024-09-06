@@ -1,0 +1,50 @@
+lumen questions
+
+1. tell me about yourself?
+2. explain your project?
+3. In which format client send the data?
+4. how to convert excel file to csv file and excel file to txt file?
+5. how to load the data in database. (File --> db then use SQL Loader / ETL) -- source db -- > load it to landing (dblink)
+6. what are the tables in your project? (Dw project -- Tables -- Source Tables, DW tables, Staging and Error tables)
+7. which course have max no of students? -- Analytical query (derived tables) -- group y having (sub query)
+8. which course have no student? -- sub query -- left join with null values
+9. how many seats available for informatica course in batch 2? -- 
+10. write query to how many seats available in batch wise? -- 
+11. what is trigger? why we use? -- 
+12. where you have used trigger in your project? -- DW population (ETL developer... you dont write triggers)
+13. what is your day to day activites? -- 
+				(check the tasks assigned, analyse the tasks, solutioning, developing, testing, code review (Weekly twice), 
+				 meeting (Daily), weekly meeting, working with the team) 
+14. what is the file size (like MB,GB) client will send?
+15. How you get the data from client? (ftp --? they push files into folder) (we get all the files in the input bucket) -- API -- 
+16. how much file they (client) send Daily? -- what is your story (sales_data.txt, currency.txt)
+17. why you want to work in lumen? (lumen, )
+
+
+DW Projects
+
+Source DATA				Landing Zone			ETL			Target
+
+	Python / tool			loadthe db in db
+	File		sql loader	load db in db
+
+csv file (will have less problem)
+input folder
+excel (format problem)
+zip ()...
+
+empno, emname, salary
+1234, Ramesh,50000
+
+empno$empname$salary
+1234$Ramesh$50000
+
+empno	empname	salary
+1234	Ramesh	50000
+
+fixed length file
+-------------
+empno ename salary
+12345     RAMESH              50000   
+
+

@@ -1,0 +1,35 @@
+lumen -1st round interview question
+
+1) where are you from?
+2) what's your current project
+3) tell me about your client company
+4) what module you use in python for downloading data from s3 bucket
+5) what kind of files was in s3 bucket
+6) what problem you have face in work
+7) display employee who got maximum salary
+8) display employee who got maximum salary in each department
+9) write a query to display top 3 max salary in each department
+10) convert columns into row
+given: eno  ename  salary  deptno  start_date  end_date  
+       101   A      1000    10     1-01-21
+       101   A      1200    20     1-04-21
+       101   A      1200    30     1-04-22
+
+OUTPUT: eno  ename   deptno_10   deptno_20   deptno_30  deptno_40   deptno_50
+        101   A       1000         1200       1200       null        null 
+        102   B       1000         null       1200       null        null
+
+11) create sequence seq_name start with 1 cache 10 no cycle
+what is cycle 
+what is cache
+what is curval
+what is nextval
+what happen the sequence is rebooted
+
+12) enter ename or eno and display all detail
+13) procedure and function difference
+14) why we use package
+15) In employee table ename is there view is create on that later ename is split to first and last name in employee table what happen in view now.
+what changes is done in query for reporting.
+16) user_tables, all_tables,dba_table difference
+17) write factorial code in python

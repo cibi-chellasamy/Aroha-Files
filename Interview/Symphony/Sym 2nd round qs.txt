@@ -1,0 +1,248 @@
+1.SQL QUERY QNS :
+INPUT :
+
+
+P_ID	ACCESSORY_ID	ACCESSORY_NAME  		
+P1	1		ABC		
+P1	2		DEF		
+P1	3		EFG		
+P1	4		GHI		
+P1	5		HKG		
+P2	1		ABC		
+P2	2		DEF		
+P2	3		GHI		
+P2	4		HKG		
+P2	5		EFG		
+
+
+OUTPUT :
+P_ID	ACCESSORY_ID	ACCESSORY_NAME THIRD_ACCESSORY_NAME 		
+P1	1		ABC		EFG
+P1	2		DEF		EFG
+P1	3		EFG		EFG
+P1	4		GHI		EFG
+P1	5		HKG		EFG
+P2	1		ABC		GHI
+P2	2		DEF		GHI
+P2	3		GHI		GHI
+P2	4		HKG		GHI
+P2	5		EFG		GHI
+
+ANS:
+
+select p_id,accessory_id,accessory_name,third_accessory_name
+from table1 join(
+	select p_id,accessory_id, accessory_name as third_acessory_name from table2
+	where accessory_id = 3)t
+on table1.p_id = table_2.p_id
+order by table_1.p_id ,table_1.accessory_id
+-------------------------------------------------------------------------------
+
+
+2.FIND THE NUMBER WHICH REPEATS CONSECUTIVELY 3 TIMES 
+INPUT :
+ID	NUM
+1	1
+2	1
+3	1
+4	2
+5	1
+6	2
+7	2
+
+ANS:
+with cte as(
+select id,num,lag(num,1) over(order by id)as prev_num,
+lead(num,1) over(order by id) as newt_num
+from table)
+select distinct num
+from cte
+where num = prev_num and
+num = next_num
+-------------------------------------------------------------------------------
+3)
+INPUT:
+
+COUNTRY 	SALES
+IND	   	1000
+IND	   	2000
+IND	   	3000
+UK	   	4400
+USA	   	500
+IND	  	1000
+
+OUTPUT:
+
+COUNTRY     SALES      %SALES
+IND	       7000	         58.82
+USA	       500	          4.20
+UK	       4400	         36.97
+
+
+
+ANS:
+
+select distinct country,sum(sales) over(partition by country) as sales,
+round((sum(sales) over (partition by country)/sum(sales) over())*100,2) as "%sales"
+from table
+
+-------------------------------------------------------------------------------
+4.Write a query to find the top 5 high value customers based on age from the following tables
+
+Customer Table
+Cust_id
+Name
+Age
+Gender
+D_O_B
+Address
+Email
+Phone
+
+
+Transaction Table
+Txn_id
+Txn_dt
+Prod_id
+Prod_desc
+Qty
+Unit_Price
+Cust_id
+
+ANS:
+select cust_id,c_name,age
+from (	select c.cust_id,c.c_name,c.age,
+	sum(t.qty*t.unit_price),
+	dense_rank() over(partition by age order by sum(t.qty*t.unit_price desc) as dn
+	from customer c join transaction t
+	on c.cust_id = t.cust_id
+	group by c.cust_id,c.cust_name,c.cust_id)
+where dn <= 5;
+-------------------------------------------------------------------------------
+
+5.	Write a SQL Query to achieve the below output based on the input provided
+Input		
+Order ID	Country			Sales
+1		Australia		$1,000
+2		Australia		$500
+3		Canada			$500
+4		USA			$70
+5		USA			$700
+
+Output		
+Country		Sales			%Sales
+Australia	$1,500			54.15
+Canada		$500			18.05
+USA		$770			27.08
+
+
+select  country,sum(sales) over(partition by country) as sales,
+round((sum(sales) over (partition by country)/sum(sales) over())*100,2) as "%sales"
+from table
+
+-------------------------------------------------------------------------------
+
+6.Display top5 customers names based on their purchase amt in each age group
+
+select name,id,age,total_purchae
+from (
+	select c.name,c.id,c.age,
+	sum(s.price*s.purchae) as total_purchae,
+	dense_rank() over(partition by c.age order by sum(s.price*s.qty) desc) as r
+	from cust c inner join sales s
+	on c.id = s.id
+	group by c.name, c.id, c.age)
+where r <=5;
+
+
+-------------------------------------------------------------------------------
+7)write a query to display
+pat-id   gender     city
+1          m        delhi
+2          f        delhi
+3          f        mumbai
+4          m        bangalore
+
+output:
+		city    male_cnt   female_cnt   total_cnt
+		delhi        1           1       2
+                mumbai       0           1       1
+                bangalore    1           0       1
+
+
+select city,
+sum(case when gender = 'm' then 1 else 0 end) as male_count,
+sum(case when gender = 'f' then 1 else 0 end) as female_count,
+count(*) as totat_cnt
+from table 
+group by city
+
+-------------------------------------------------------------------------------
+ID	Salary(lakhs)	Dept
+1	25		ABC
+2	9		ABC
+3	12		DEF
+4	5		DEF
+5	7		ABC
+6	21		DEF
+7	19		DEF
+8	6	ABC
+
+8.	Query to display Maximum salary from each department
+
+
+
+
+select dept,max(salary) from empss
+group by dept;
+
+
+9.	Query to display which department spends the most on salary
+
+select dept,total_sal
+from (select dept,sum(salary)total_sal from empss
+group by dept
+order by sum(salary) desc)
+fetch first 1 rows only;
+
+
+-------------------------------------------------------------------------------
+10)
+Student	
+ID	MARKS
+1	99
+2	80
+3	55
+4	20
+5	35
+Grade		
+Min	Max	Grade
+0	20	E
+21	40	D
+41	60	C
+61	80	B
+81	100	A
+
+
+
+
+select s.ID, s.MARKS,
+ (case
+    when s.marks >= 81 then 'A'
+    when s.marks >= 61 then 'B'
+    when s.marks >= 41 then 'C'
+    when s.marks >= 21 then 'D'
+    else 'E'
+  end) AS grade
+from sudents s;
+-------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+

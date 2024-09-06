@@ -1,0 +1,19 @@
+lumen questions
+
+1. tell me about yourself?
+2. explain your project?
+3. In which format client send the data?
+4. how to convert excel file to csv file and excel file to txt file?
+5. how to load the data in database.
+6. what are the tables in your project?
+7. which course have max no of students?
+8. which course have no student?
+9. how many seats available for informatica course in batch 2?
+10. write query to how many seats available in batch wise?
+11. what is trigger? why we use?
+12. where you have used trigger in your project?
+13. what is your day to day activites?
+14. what is the file size (like MB,GB) client will send?
+15. How you get the data from client?
+16. how much file they (client) send Daily?
+17. why you want to work in lumen?

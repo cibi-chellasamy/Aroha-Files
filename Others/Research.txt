@@ -1,0 +1,40 @@
+I have2 TB of data
+
+
+
+1)Data Sources
+---------------
+External Data Sources: AWS S3 (S3 Standard cost (monthly): 87.24 USD)
+
+
+2)Apache Spark Cluster
+-------------------
+Cluster Manager: 
+----------------	
+	Choose a suitable cluster manager such as Apache YARN, Apache Mesos, or Spark's standalone mode to manage resources and scheduling across the Spark cluster. (open source)
+
+
+------------------- 
+	Configure each node in the cluster with adequate CPU, memory, and disk space based on anticipated workload and data size (e.g., 5 TB).
+
+
+
+
+3)Data Processing with PySpark
+------------------------------
+PySpark Jobs: Develop ETL jobs using PySpark, the Python API for Spark, to perform extraction, transformation, and loading tasks.
+
+Job Development: Use tools like Jupyter Notebook
+
+
+
+4)Data Storage
+Input Data Storage: S3 or Oracle
+Output Data Storage:S3 or Oracle
+
+
+5)Data Integration and Pipeline Orchestration
+---------------------------------------------
+
+ETL Workflow: Orchestrate ETL workflows using tools like Apache Airflow 
+-------------

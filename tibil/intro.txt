@@ -1,0 +1,57 @@
+Hi iam cibi chellasamy
+iam from courtallam
+i have completed my bachleors in computer science engineering from b.s abdur human university
+as a data analyst i have 2+ years of experience in aroha technologies
+i have a good knowledge in power bi sql and python 
+i have created a
+
+
+
+sales by region = summarize(sale,sales[region],"total sales" ,sum[sales])
+
+
+
+sales_by_region = summarize(sales,sales[region],"total_sales",sum[sales])
+
+total sales = sum(orders[sales])
+
+avgx = average
+
+
+refres rls
+calculate
+particular column
+
+----------------------------------------------------
+mill operations optimizaations
+Production Yield:
+Waste Percentage:
+Downtime:
+Profit:
+
+
+visualizations are
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+inventory turnover ration
+stock levels

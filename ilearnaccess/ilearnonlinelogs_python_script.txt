@@ -1,0 +1,52 @@
+import pandas as pd
+import numpy as np
+import warnings as w
+w.filterwarnings('ignore')
+
+master = pd.read_excel('Ilearnonlinelogs_ETL1.xlsx',sheet_name='Ilearnonlinelogs')
+
+master = master[~master.duplicated()]
+
+target = master[master['path'] != '/']
+
+reject = master[master['path'] == '/']
+
+tar = target['path'].str.split('/').apply(lambda x : (' '.join(x)).strip())
+
+course= tar.str.split(expand=True)[[1,2]]
+
+correct_ind,wrong_ind = [],[]
+for index,row in course.iterrows():
+    if row[2] != None:
+        correct_ind.append(index)
+    elif row[2] == None:
+        wrong_ind.append(index) 
+        
+reject_log_unwanted = course.loc[wrong_ind,:]
+
+target['course'] =  course.loc[correct_ind,:][1]
+
+target['chapter'] =  course.loc[correct_ind,:][2]
+
+target = target.loc[target.index.isin(correct_ind)]
+
+names = target.groupby(['first_name'])['last_name'].unique().reset_index()
+
+names['full_name'] = names['first_name']+" "+ names['last_name'].apply(lambda x: x[0] if str(x[0]) != str(np.nan)else '@')
+
+employee = pd.Series(names['full_name'].unique()).str.split(expand=True,n=1).rename({0:'first_name',1:'last_name'},axis=1)
+
+employee['last_name'] = employee['last_name'].apply(lambda x: np.nan if x == '@' else x)
+
+employee.insert(loc=0,column='employee_id',value=[ 200+i for i in range(len(employee))])
+
+ilearnaccess = pd.merge(employee[['first_name','employee_id']],target[['first_name','last_login','course','chapter']],on='first_name').\
+drop('first_name',axis=1).rename({'last_login':'access_date'},axis=1)
+
+ilearnaccess.insert(loc=0,column='access_id',value=[ 1000+i for i in range(len(ilearnaccess))])
+
+ilearnaccess.to_csv('ilearnaccess.csv',index=False)
+employee.to_csv('employee.csv',index=False)
+
+reject.to_csv('log_rejected.txt',index=None,header=None,sep=' ',mode='a')
+log_unwan.to_csv('log_unwanted_courses',index=None,header=None,sep=' ',mode='a')

@@ -1,0 +1,39 @@
+
+1.customer who have purchsed more than 100 qty
+
+select customer_name 
+from superstore
+group by customer_name
+having sum(qty) >100;
+
+2. select city based on profit  in the year 2024
+
+select city, dense_rank() over(order by sum(profit) desc) as rank
+from superstore
+where extract(year from order_date)=2024
+group by city;
+
+
+
+3. select customer who have asles in every year( eg Customer B started purchsasing from year 2016 and last purchase was 2020  between 2016 - 2020 customer
+ 
+SELECT customer_name
+FROM superstore S
+GROUP BY customer_name
+HAVING COUNT(DISTINCT EXTRACT(YEAR FROM order_date))   --3 
+= (
+    SELECT (MAX(EXTRACT(YEAR FROM order_date)) - MIN(EXTRACT(YEAR FROM order_date))) + 1  
+    -- eg. max will return 2020 , min will return 2016 (2020 -2016) =4 total    actual number of sales made is 5 so iam adding +1                      
+    FROM Superstore
+    WHERE customer_name = S.customer_name
+    GROUP BY customer_name
+);
+
+
+4.select cusotmer having done sales in all the segments
+
+SELECT customer_name
+FROM Superstore
+GROUP BY customer_name
+HAVING count(distinct(segment)) = (select count(distinct(segment)) from superstore)); 
+

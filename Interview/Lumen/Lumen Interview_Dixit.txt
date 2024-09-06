@@ -1,0 +1,10 @@
+Asked about my tech skills and what I know.
+Explain your project.
+what are sequences.
+what to do when the loading fails at 50 records when populating 100 records. how to continue a failed process?
+what are the different types of partitions, what is hash Partitioning.
+list the analytical functions we have in oracle.
+query to get the highest salary in each department. If there is a tie then what?
+how to select from a partitoned table, query a particular partition.
+where is the oracle installed in linux. How do you connect to oracle dbms?
+what are db links

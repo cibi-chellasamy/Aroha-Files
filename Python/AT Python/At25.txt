@@ -1,0 +1,253 @@
+1) input any five numbers  (in int variable, not str)
+   find out how many SINGLE digit number are there
+   find the highest and lowest
+========================
+num1 = int(input("Enter the first number: "))
+num2 = int(input("Enter the second number: "))
+num3 = int(input("Enter the third number: "))
+num4 = int(input("Enter the fourth number: "))
+num5 = int(input("Enter the fifth number: "))
+
+numbers = [num1,num2,num3,num4,num5]
+
+single_occ = 0
+
+max_num = float('-inf')
+min_num = float('inf')
+
+for num in numbers:
+    if num<=num<=9:
+        single_occ = single_occ + 1
+    if num > max_num:
+        max_num = num
+    if num < min_num:
+        min_num = num
+print(f"Number of single-digit numbers: {single_occ}")
+print(f"Highest number: {max_num}")
+print(f"Lowest number: {min_num}")
+--------------output--------------------
+Enter the first number: 3
+Enter the second number: 4
+Enter the third number: 55
+Enter the fourth number: 66
+Enter the fifth number: 4
+Number of single-digit numbers: 3
+Highest number: 66
+Lowest number: 3
+
+=================================================================
+
+2)use while loop for it
+   input any 4 numbers (in int variable, not str)
+   all the numbers must be unique
+   find the total, find the avg, find highest , lowest
+=======================
+uniq_number = []
+
+while len(uniq_number) < 4:
+    num = int(input("Enter a unique number: "))
+    if num in uniq_number:
+        print("Number already entered")
+    else:
+        uniq_number.append(num)
+total = sum(uniq_number)
+average = total / len(uniq_number)
+highest = max(uniq_number)
+lowest = min(uniq_number)
+
+print(f"Total: {total}")
+print(f"Average: {average}")
+print(f"Highest number: {highest}")
+print(f"Lowest number: {lowest}")
+
+---------------output-----------------
+Enter a unique number: 4
+Enter a unique number: 5
+Enter a unique number: 6
+Enter a unique number: 7
+Total: 22
+Average: 5.5
+Highest number: 7
+Lowest number: 4
+=======================================================
+
+3)once 3) is working ...find out
+   sum of FIRST and LAST number inputted
+----------------output-------------------
+sum_first_last = uniq_number[0] + uniq_number[-1]
+sum_first_last
+
+11
+
+
+========================================
+
+4) generate 10 negative numbers starting from -35
+   sum all the numbers
+   find the avg
+negative_numbers = []
+for i in range(10):
+    negative_numbers.append(-35 - i)
+summ = sum(negative_numbers)
+avg = sum(negative_numbers)/ len(negative_numbers)
+print('sum of negative numbers:',summ)
+print('average of negative numbers:',avg)
+
+sum of negative numbers: -395
+average of negative numbers: -39.5
+=============================================
+5)print this mul table via for loop and later using while loop
+   4 x 1 = 4
+   4 x 2 = 8
+   4 x 3 = 12
+   ..
+   ..
+   4 x 10 = 40
+
+----------------
+for i in range (1,11):
+    print(i,'x','4','=',i*4)
+
+1 x 4 = 4
+2 x 4 = 8
+3 x 4 = 12
+4 x 4 = 16
+5 x 4 = 20
+6 x 4 = 24
+7 x 4 = 28
+8 x 4 = 32
+9 x 4 = 36
+10 x 4 = 40
+
+
+i = 1
+while i <= 10:
+    result = 4 * i
+    print(f"{i} x 4 = {result}")
+    i += 1
+
+
+1 x 4 = 4
+2 x 4 = 8
+3 x 4 = 12
+4 x 4 = 16
+5 x 4 = 20
+6 x 4 = 24
+7 x 4 = 28
+8 x 4 = 32
+9 x 4 = 36
+10 x 4 = 40
+======================================
+
+
+6) input a sentence
+
+input a word to find
+
+input the word with which the found word to be replaced
+
+find out HOW many replacement done...
+
+sen = input('Enter your Sentence')
+print('Entered Sentence')
+print(sen)
+Replacing_word = input('Enter what word to be replaced? ')
+Replacement_word = input('Type the new word to replace the old word ? ')
+Occurances = int(input('how many occurance you wish to replace ? '))
+new = sen.replace(Replacing_word,Replacement_word,Occurances)
+print('New Sentence',new)
+-------------------output-------------------
+
+Enter your Sentencehello vino how are you vino wha are doing vino 
+Entered Sentence
+hello vino how are you vino wha are doing vino 
+Enter what word to be replaced? vino
+Type the new word to replace the old word ? lk
+how many occurance you wish to replace ? 100
+New Sentence hello lk how are you lk wha are doing lk 
+
+
+======================================================
+
+7)try to replace from the RIGHT side of the sentence ONLY two found words
+
+
+
+
+sen = input('Enter your Sentence: ')
+print('Entered Sentence:')
+print(sen)
+
+Replacing_word = input('Enter what word to be replaced? ')
+Replacement_word = input('Type the new word to replace the old word? ')
+
+words = sen.split()
+words.reverse()
+occurrences_replaced = 0
+
+for i in range(len(words)):
+    if words[i] == Replacing_word and occurrences_replaced < 2:
+        words[i] = Replacement_word
+        occurrences_replaced += 1
+words.reverse()
+new = ' '.join(words)
+print('New Sentence:', new)
+------------------output------------------
+Enter your Sentence: Hello arun how are you arun what are you doing arun what have you studied arun
+Entered Sentence:
+Hello arun how are you arun what are you doing arun what have you studied arun
+Enter what word to be replaced? arun
+Type the new word to replace the old word? dp
+New Sentence: Hello arun how are you arun what are you doing dp what have you studied dp
+
+
+================================================================
+8)
+enter any five names
+
+find the name with max chars
+
+find the name with min chars
+
+
+
+names = []
+for i in range(5):
+    name = input(f"Enter name {i + 1}: ")
+    names.append(name)
+max_length_name = max(names, key=len)
+min_length_name = min(names, key=len)
+print(f"Name with the maximum characters: {max_length_name}")
+print(f"Name with the minimum characters: {min_length_name}")
+
+--------------output------------------
+Enter name 1: Aravindh
+Enter name 2: Basith
+Enter name 3: Deepak
+Enter name 4: lk
+Enter name 5: kanth
+Name with the maximum characters: Aravindh
+Name with the minimum characters: lk
+
+
+========================================
+10) 10) enter a sentence    aaa bb ccc bb xx bb www yyy bb bb ii bb oppp bb
+    enter the word to find bb
+    print the position of the word in the main sentence
+
+
+sentence = input("Enter a sentence: ")
+word_to_find = input("Enter the word to find: ")
+words = sentence.split()
+positions = []
+for i, word in enumerate(words):
+    if word == word_to_find:
+        positions.append(i)
+if positions:
+    print(f"The word '{word_to_find}' is found at position(s): {positions}")
+else:
+    print(f"The word '{word_to_find}' is not found in the sentence.")
+---------------output-----------------
+Enter a sentence: aaa bb ccc bb xx bb www yyy bb bb ii bb oppp bb
+Enter the word to find: bb
+The word 'bb' is found at position(s): [1, 3, 5, 8, 9, 11, 13]

@@ -1,0 +1,17 @@
+1. Display the total sales of Categorey "Jewellary'
+2. Display the  Maximum Sales price of family "Accessories"
+3. Display the No of sales
+4. Display the total sales of skirts
+5. Display the article names that starts with "M" and ends with "T"
+6. Display the articles that have multiple categories XX
+7. Dispaly the articles other than "Accessories"
+8. Display all the details of the "Scraf"
+9. What is the total number of articles in each family?
+10. Which family has the highest average sale price? XX
+11. What is the total number of articles with a sale price greater than 100?
+12. Which article has the highest sale price?
+13. Which article has the longest article label? XX
+14.What is the difference between the maximum and minimum sale price for each family?
+15. What is the total sale price for each category?
+
+

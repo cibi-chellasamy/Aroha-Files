@@ -1,0 +1,93 @@
+1) enter radius   
+   calc the area of circle             area is 3.14 x radius x radius
+   calc the perimeter of the circle    peri is 2 x 3.14 x radius
+   write two functions
+
+def area_of_circle(*args):
+    r = float(input('enter the radius '))
+    area = 3.14 *r*r
+    return (area)
+area_of_circle(4)
+
+-----
+def perimeter_of_circle():
+    perimeter = 2*3.14*r
+    return (perimeter)
+r = float(input('enter the Circumference '))
+
+print('Perimeter of the circle',perimeter_of_circle())
+
+========================================
+2) do the same 1) in one function returning TWO results 
+   call it as calc_area_peri
+
+def calculation(r):
+    perimeter = 2 * 3.14 * r
+    area = 3.14 * r * r
+    return (perimeter, area)
+
+r = float(input('Enter the radius for the first circle: '))
+
+perimeter, area = calculation(r)
+
+print('Perimeter of the circle:', perimeter)
+print('Area of the circle:', area)
+
+====================================================
+
+3) pass a list to the function having few names
+   return from the function how many names start with 'A' or 'B'
+
+
+lst = []
+
+def alpa(names):
+    for i in names:
+        if i[0] == 'A' or i[0] == 'B':
+            lst.append(i)
+    return lst
+
+names = ['Aravind', 'Basith', 'Deepak']
+result = alpa(names)
+
+print(result)
+
+
+=======================================================
+
+
+4) pass a set to the function with numbers like 10,45,199,33,1,145,16,22,134...
+   the function should return a set with TWO digit numbers only
+
+count_two = []
+def count(num):
+    for i in num:
+        if 9 < i < 100:
+            count_two.append(i)
+num = [10,45,199,33,1,145,16,22,134,234]
+count(num)
+print(count_two)
+
+
+=========================================================
+
+5) pass a list and a tuple to a function with numbers
+   the function should create a set and return the newly created set
+   total of all numbers and the avg
+
+
+def num(lst,tp):
+    num_set = set(lst+list(tp))
+    summ = sum(num_set)
+    avg = summ/len(num_set)
+    return num_set,summ,avg
+
+num_set,summ,avg = num(lst,tp)
+
+lst = [55,44,33,22,11]
+tp = (63,45,22,14,56)
+
+print('Set of numbers',num_set)
+print('Sum of numbers ',summ)
+print('Average of numbers ',avg)
+================================================================

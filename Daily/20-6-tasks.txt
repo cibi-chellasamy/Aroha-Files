@@ -1,0 +1,316 @@
+Domain: Retail
+Function: Retail POS
+Scenario: Product Analysis
+------------------------------------------------------------------------------------------
+Domain: Retail
+Function: Sales and Returns
+Scenario: Sales Analysis
+------------------------------------------------------------------------------------------
+Domain: Retail
+Function: Sales and Returns
+Scenario: Promotional Analysis
+------------------------------------------------------------------------------------------
+Python
+
+
+# Comprehension with File Handling:
+
+# 41. Read a file containing numbers and create a list of integers using list comprehension.
+
+file_path = 'num.txt'
+
+with open(file_path,'r') as f:
+    numbers = f.read().split()
+    nl = [int(num) for num in numbers]
+print(nl)
+
+ #42)Generate a dictionary where keys are words from a text file, and values are the number of occurrences using dictionary comprehension.
+
+def clean_toke(text):
+    return text.replace(".", " ").replace(",", " ").replace("\n", " ").split()
+
+file_path = 'num.txt'
+with open(file_path, 'r') as file:
+    text = file.read()
+    words = clean_toke(text)
+
+word_count = {word: words.count(word) for word in words}
+print(word_count)
+
+# 43) Create a set of unique words from a text file using set comprehension.
+
+def clean_toke(text):
+    return text.replace(".", " ").replace(",", " ").replace("\n", " ").split()
+
+file_path = 'num.txt'
+with open(file_path, 'r') as file:
+    text = file.read()
+    words = clean_toke(text)
+
+unique_words = {word for word in words}
+print(unique_words)
+
+
+# 44) Write a list comprehension to filter out lines containing a specific word from a text file.
+
+file_path = 'num.txt'
+specific_word = 'LLC'
+
+with open(file_path, 'r') as file:
+    filtered_lines = [line.strip() for line in file if specific_word in line]
+for line in filtered_lines:
+    print(line)
+
+# 45) Generate a list of tuples, each containing a line number and the corresponding line from a text file using list comprehension.
+file_path = 'num.txt'
+
+with open(file_path, 'r') as file:
+    lines_with_numbers = [(index + 1, line.strip()) for index, line in enumerate(file)]
+for line_number, line in lines_with_numbers:
+    print(f"Line {line_number}: {line}")
+------------------------------------------------------------------------------------------
+# Comprehension with Error Handling:
+
+
+# 46. Read a list of integers from user input, handling exceptions using list comprehension.
+def convert_to_int(value):
+    try:
+        return int(value)
+    except ValueError:
+        return None
+
+usip = input('Enter a int : ')
+sp = usip.split()
+
+l = [convert_to_int(value) for value in sp if convert_to_int(value) is not None]
+print(l)
+
+# 47. Create a dictionary from user input, allowing the user to continue entering key-value pairs until they decide to stop, using dictionary comprehension.
+tp = []
+
+while True:
+    key = input("enter a key (or type 'stop' to finish): ")
+    if key.lower() == 'stop':
+        break
+    value = input('enter a value')
+    tp.append((key,value))
+
+d = {key:value for value in tp}
+print(d)
+
+# 48. Write a list comprehension to filter out non-numeric elements from a list entered by the user.
+def is_numeric(value):
+    try:
+        float(value)
+        return True
+    except ValueError:
+        return False
+
+
+ui = input("Enter a list of elements separated by spaces: ")
+
+il = ui.split()
+
+num = [elem for elem in il if is_numeric(elem)]
+
+print(num)
+
+# 49. Generate a set of valid email addresses from a list of strings using set comprehension and a regular expression for email validation.
+import re
+
+strings_list = [
+    "john.doe@example.com",
+    "jane.doe@example",
+    "info@company.com",
+    "invalid.email@",
+    "support@company",
+    "contact@company.co.uk"
+]
+email_pattern = r'^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$'
+valid_emails = {email for email in strings_list if re.match(email_pattern, email)}
+print(valid_emails)
+
+
+# 50. Create a list of integers from user input, handling invalid inputs using list comprehension and try-except blocks.
+
+def convert_to_int(value):
+    try:
+        return int(value)
+    except ValueError:
+        return None
+
+ui = input("enter a list of int: ")
+
+li = ui.split()
+
+l = [convert_to_int(value) for value in li if convert_to_int(value) is not None]
+
+print(l)
+------------------------------------------------------------------------------------------
+Conditional Statements:
+
+# Check if a number is positive, negative, or zero.
+
+def check_num(num):
+    if num > 0:
+        print(f"{num} is positive.")
+    elif num < 0:
+        print(f"{num} is Negative.")
+    else:
+        print(f"{num} is zero.")
+
+check_num(5)
+check_num(0)
+check_num(-2)
+------------------------------------------------------------------------------------------
+# Determine the largest of three numbers.
+def find_largest(num1, num2, num3):
+    if num1 >= num2 and num1 >= num3:
+        largest = num1
+    elif num2 >= num1 and num2 >= num3:
+        largest = num2
+    else:
+        largest = num3
+    return largest
+
+# Example usage:
+num1 = 10
+num2 = 5
+num3 = 7
+
+largest_number = find_largest(num1, num2, num3)
+print(f"the largest number is: {largest_number}")
+------------------------------------------------------------------------------------------
+# Check if a given year is a leap year.
+
+def is_leap_year(year):
+    if (year % 4 == 0 and year % 100 != 0 ) or(year % 400 == 0 ):
+        return True
+    else:
+        return False
+year = 2004
+
+if is_leap_year(year):
+    print(f"{year} is a leap year.")
+else:
+    print(f"{year} is not a leap year.")
+------------------------------------------------------------------------------------------
+# Implement a basic calculator with addition, subtraction, multiplication, and division.
+
+def add(a, b):
+    return a + b
+
+def subtract(a, b):
+    return a - b
+
+def multiply(a, b):
+    return a * b
+
+def divide(a, b):
+    if b != 0:
+        return a / b
+    else:
+        return "Error: Division by zero"
+
+num1 = float(input("Enter the first number: "))
+num2 = float(input("Enter the second number: "))
+
+print('addition',add(num1,num2))
+print('subraction',subtract(num1,num2))
+print('multiplication',multiply(num1,num2))
+print('division',divide(num1,num2))
+------------------------------------------------------------------------------------------
+# Check if a number is even or odd.
+def odd_even(num):
+    if num % 2 == 0:
+        return True
+    else :
+        return False
+
+num = int(input('Enter a number'))
+if odd_even(num):
+    print(f"{num} is even.")
+else:
+    print(f"{num} is odd.")
+------------------------------------------------------------------------------------------
+# Determine if a person is eligible to vote based on their age.
+def eligible(age):
+    if age >= 18 :
+        return True
+    else :
+        return False
+
+age = int(input('Enter the age : '))
+
+if eligible(age):
+    print(f"{age} person is eligible to vote.")
+else:
+    print(f"{age} person is not eligible to vote.")
+------------------------------------------------------------------------------------------
+# Check if a given character is a vowel or consonant.
+letter = input('Enter a letter : ')
+if letter in 'AEIOUaeiou':
+    print(f"{letter} is a vowel.")
+else :
+    print(f"{letter} is a consonant.")
+
+------------------------------------------------------------------------------------------
+# Determine the quadrant of a point on the Cartesian plane.
+def determine_quadrant(x, y):
+    if x > 0 and y > 0:
+        quadrant = 1
+    elif x < 0 and y > 0:
+        quadrant = 2
+    elif x < 0 and y < 0:
+        quadrant = 3
+    elif x > 0 and y < 0:
+        quadrant = 4
+    else:
+        quadrant = 0  
+
+    return quadrant
+
+x = float(input("Enter the x-coordinate: "))
+y = float(input("Enter the y-coordinate: "))
+quadrant = determine_quadrant(x, y)
+print(f"{quadrant} quadrant ")
+------------------------------------------------------------------------------------------
+# Implement a grading system based on a student's percentage.
+def grading_system(percentage):
+    if percentage >= 90:
+        grade = 'A'
+    elif percentage >= 80:
+        grade = 'B'
+    elif percentage >= 70:
+        grade = 'C'
+    elif percentage >= 60:
+        grade = 'D'
+    else:
+        grade = 'F'
+    
+    return grade
+
+
+percentage = float(input("Enter the student's percentage: "))
+grade = grading_system(percentage)
+print(f"The student's grade based on {percentage}% is: {grade}")
+------------------------------------------------------------------------------------------
+# Check if a number is prime or composite.
+def is_prime(number):
+    if number <= 1:
+        return False
+    for i in range (2,int(number**0.5)+1):
+        if number % i == 0:
+            return False
+    return True
+
+try:
+    num = int(input("Enter a number:  "))
+    if is_prime(num):
+              print(f"{num} is a prime number.")
+    else:
+        print(f"{num} is a composite number.")
+
+except ValueError:
+    print("Error: Please enter a valid integer.")
+------------------------------------------------------------------------------------------

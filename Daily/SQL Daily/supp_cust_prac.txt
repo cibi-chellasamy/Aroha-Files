@@ -1,0 +1,141 @@
+1)diaplay all the suppliers where we placed atleast 8 orders in the month of jan 2021
+
+select supplier_name from supplier
+where extract(month from supply_date) = 01
+and extract (year from supply_date) = 2021
+group by supplier_name
+having count(order_id)>8
+
+
+2)display the cities where we have suppliers but not customers
+
+select city from supplier 
+where city not in (select distinct city from customer)
+
+
+3) select c.cust_name,
+from customer c join sale s
+on c.cust_id = s.cust_id
+join sale_detail sd 
+on s.sale_id = sd.sale_id
+where c.city = 'Banglore'
+and c.name like 'NBC%'
+group by c.cust_name
+having amount = (select sum(amount) from sale_detail sd join sale s
+on sd.sale_id = s.sale_id
+join customer c
+on c.cust_id = s.cust_id
+where cust_name like 'NBC%');
+
+4)
+
+select c.cust_name,p.prod_name,sum(sd.amount)tot_amt,extract(year from s.sale_date)as year
+from customer c join sale s
+on c.cust_id = s.cust_id
+join sale_detail sd 
+on s.sale_id = sd.sale_id
+join product p
+on sd.prod_id = p.prod_id
+group by c.cust_name,p.prod_name,extract(year from s.sale_date)
+order by extract(year from s.sale_date);
+
+5) select p.prod_name,od.qty as order qty,sd.qty as sale_qty,s.sale_date
+from sale join sale_detail sd 
+on s.sale_id = sd.sale_id
+join product p
+on sd.prod_id = p.prod_id
+join order_details od
+on p.prod_id = od.prod_id
+where extract(month from sale_date) = 4
+and extract(year from sale_date) = 2020;
+
+6)
+select p.prod_name,count(o.supp_id)
+from product p join order_detail od
+on p.prod_id = od.prod_id
+join orders o on od.order_id = o.order_id
+join supplier s
+on o.supp_id = s.supp_id
+group by p.prod_name
+having count(o.supp_id) >1;
+
+7)
+select p.prod_name
+from product p join order_detail od
+on p.prod_id = od.prod_id
+join orders o on od.order_id = o.order_id
+join supplier s
+on o.supp_id = s.supp_id
+where s.supp_name = 'ABC'
+
+8)
+select c.cust_anme
+from customer 
+where cust_id not in
+(select cust_id from 
+sale s join sale_detail sd 
+on s.sale_id = sd.sale_id
+join product p
+on sd.prod_id = p.prod_id
+where p.product_family = 'COMPUTER'
+and extract(year from sd.sale_date) = extract(year from sysdate);
+
+
+
+9)
+
+
+
+with cte as(
+select p.prod_name,p.prod_family,sum(amount) as revenue ,
+dense_rank() over(partition by p.prod_name order by sum(amount) desc) as sd
+from sale_detail sd join
+product p
+on sd.prod_id = p.prod_id
+where extract(year from s.sale_date) = extract(year from sys_date)
+group by p.prod_name,p.prod_family,revenue)
+select prod_name,prod_family,revenue from cte
+where dnr <= 3
+order by prod_family,revenue desc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

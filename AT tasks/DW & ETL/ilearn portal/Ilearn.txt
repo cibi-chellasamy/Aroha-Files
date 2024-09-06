@@ -1,0 +1,92 @@
+Employee Table
+---------------
+
+df = pd.read_excel('ilearn.xlsx')
+df_employee = df[['first_name','last_name']]
+df_employee.drop_duplicates(inplace=True)
+df_employee['Employee_id'] = range(100, 100+int(len(df_employee)))
+cols = df_employee.columns.to_list()
+cols = cols[-1:] + cols[:-1] 
+df_employee = df_employee[cols]
+
+df_employee.reset_index(inplace=True)
+df_employee.drop('index', axis=1, inplace=True)
+
+file_path = "Employee xl.xlsx"
+df_employee.to_excel(file_path, index=False)
+====================================================================================================================================
+
+Logs table
+---------
+
+df = pd.read_excel('ilearn.xlsx')
+df_il = pd.DataFrame()
+df_il['access_id'] = df['id']
+df_il['access_date'] = df['timestamp'].dt.strftime('%d-%m-%Y')
+proper_log = []
+imporper_log = []
+
+for i in df['path']:
+    if len(i)>1:
+        proper_log.append(i)
+    if len(i) ==1:
+        imporper_log.append(i)
+
+
+proper_log = df[df['path'].isin(proper_log)].reset_index(drop = True)
+
+df_il['path'] = proper_log['path']
+
+df_il.dropna(inplace=True)
+
+df_logrej = pd.DataFrame()
+
+df_logrej = df[df['path'].isin(imporper_log)].reset_index(drop = True)
+
+
+df_il[['empty', 'empty2', 'Course', 'Chapter', 'empty3']] = pd.DataFrame(df_il['path'].str.split('/').tolist())
+
+df_il[['access_id','access_date','Course','Chapter']]
+
+df_main = df_il[['access_id','access_date','Course','Chapter']]
+
+
+df_main = df_main[df_main['Chapter']!='']
+
+
+df_main = df_main.reset_index(drop=True)
+
+dfe = pd.read_excel('Employee xl.xlsx')
+
+df_main['first_name'] = df['first_name']
+
+df_main = df_main.merge(dfe[['first_name', 'Employee_id']], on='first_name', how='left')
+
+df_main = df_main.drop(['first_name','access_id'],axis=1)
+
+df_main['Access_id'] = range(1000,1000+len(df_main['Employee_id']))
+
+df_main.reset_index(drop=True)
+
+cols = df_main.columns.to_list()
+
+cols = cols[-1:] + cols[:-1] 
+
+df_main = df_main[cols]
+
+
+file_path = "Access log.xlsx"
+df_main.to_excel(file_path, index=False)
+
+file_path = "Rejected logs.xlsx"
+df_logrej.to_excel(file_path, index=False)
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,75 @@
+Friday , March 15th 2024
+
+==================================================================
+
+Yesterday's Quick Glance : Linux Intro
+                           Commands : ls
+                                      pwd
+                                      cd
+                                      cat
+                                      touch
+                                      mkdir
+
+
+===========================================================================================================
+
+in windows- folder but in linux - directory
+
+Today's Concepts : rmdir
+                   whoami,man
+                   Revise yesterday's topics
+
+========================================================================================================================
+     
+1.whoami :: system's username 
+
+2.who :: users logged into system
+
+3.who am i :: current users info
+
+4.man :: system's user manual
+  clear : clear the screen
+  history : to lists commands used
+  echo message ( outputs the message )
+  df -h ( memory usage )
+  du -h ( disk space for each directory)
+  free -h( total memory used which includes swap also ) 
+
+
+===========================================================================================================================
+5.cd :: change directory.
+         cd / : changes to the root directory
+         pwd : present working directory/ current directory
+         cd dir1/dir2/dir3 : to move into sub-directories
+         cd ~ or cd : changes to home directory from any directory
+         cd .. : which is used to move to the parent directory of current directory, or the directory one level up from the current directory. “..” represents parent directory.
+
+=======================================================================================================================================
+6.rmdir :: remove a file.
+           rm file_name : to remove single file name
+           rm file1 file2 : to remove multiple files
+           rm -i file_name : interactive deletion ( asks for confirmation for deletion )
+           rm -f file_name : removes the file forcefully 
+           rm -r/-R directory_name :  delete all the files and sub-directories recursively of the parent directory
+       
+=============================================================================================================================
+7.cat :: create a file with content.
+         syntax : cat > file_name
+                  type the content for the file if not press ctrl+D
+                  cat file_name
+         cat -n file_name : to view contents of the file with line numbers
+         cat file1 >> file2 : appending the content of file1 to the end of file2
+         tac file_name : displaying the content in reverse order
+
+=============================================================================================================================
+
+                   
+Today's Task : 1.  Create a directory named company_website.
+                   Navigate into the company_website directory.
+                   Inside this directory, create subdirectories named css, js, and images.
+                   Generate empty files: index.html, styles.css, script.js, and logo.png within their respective directories (index.html inside the main directory, the rest in their corresponding subdirectories).
+                   Confirm the creation of directories and files at each step.
+                   View the contents of index.html to ensure it's an empty file.
+
+               
+ 

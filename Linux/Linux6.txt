@@ -1,0 +1,124 @@
+Thursday , March 28th 2024
+
+==================================================================================================================================
+
+                                               -----> SHELL SCRIPTING <-----
+
+A SHELL in computing is a command-line interface that allows users to interact with the operating system by entering commands. 
+It's a program that takes commands from the keyboard or from files and executes them. Shell is an environment in which we can run our commands, programs, and shell scripts.
+The shell acts as an intermediary between the user and the operating system, interpreting commands and running programs. 
+
+SHELL SCRIPTING involves writing a series of commands for the shell to execute.
+It's essentially creating a script—a file containing a sequence of commands that can be executed by the shell. 
+These scripts can automate repetitive tasks, perform system administration, manage files, and do many other tasks by executing a series of commands in a particular order.
+
+eg. $date ( command prompt )
+
+In Unix, there are two major types of shells :: 
+
+    BOURNE SHELL − If you are using a Bourne-type shell, the $ character is the default prompt.
+                           Bourne shell (sh) - Bourne shell is usually installed as /bin/sh on most versions of Unix. 
+                                               all the scripts would have the .sh extension.
+                           Korn shell (ksh)
+                           Bourne Again shell (bash)
+                           POSIX shell (sh)
+
+   C SHELL − If you are using a C-type shell, the % character is the default prompt.
+                          C shell (csh)
+                          TENEX/TOPS C shell (tcsh)
+
+====================================================================================================================================
+
+1.#!/bin/bash
+pwd
+ls
+
+OUTPUT :: ubuntu@ip-172-31-15-121:~/shell_scripting$ vi demo2.sh
+ubuntu@ip-172-31-15-121:~/shell_scripting$ chmod +x demo2.sh
+ubuntu@ip-172-31-15-121:~/shell_scripting$ ./demo2.sh
+/home/ubuntu/shell_scripting
+demo2.sh  read_a_user.sh
+ubuntu@ip-172-31-15-121:~/shell_scripting$ ls
+demo2.sh  read_a_user.sh
+
+===================================================================================================================================
+
+2. Reads an input from the user
+
+#!/bin/sh  ( shebang  - This tells the system that the commands that follow are to be executed by the Bourne shell. It's called a shebang because the # symbol is called a hash, and the ! symbol is called a bang.)
+
+# Author : Nandini ( Shell comments )
+# Date of creation : 11-01-2024
+# Script follows here:
+
+echo "What is your name?"
+read PERSON
+echo "Hello, $PERSON"
+
+
+OUTPUT :: ubuntu@ip-172-31-15-121:~$ mkdir shell_scripting
+ubuntu@ip-172-31-15-121:~$ cd shell_scripting/
+ubuntu@ip-172-31-15-121:~/shell_scripting$ ls
+ubuntu@ip-172-31-15-121:~/shell_scripting$ vi read_a_user.sh ( create a file with .sh extension )
+ubuntu@ip-172-31-15-121:~/shell_scripting$ ./read_a_user.sh
+-bash: ./read_a_user.sh: Permission denied
+ubuntu@ip-172-31-15-121:~/shell_scripting$ ls -l read_a_user.sh
+-rw-rw-r-- 1 ubuntu ubuntu 132 Jan 10 05:07 read_a_user.sh
+ubuntu@ip-172-31-15-121:~/shell_scripting$ chmod 755 read_a_user.sh ( make the script executable ) or chmod +x filename.sh
+ubuntu@ip-172-31-15-121:~/shell_scripting$ ./read_a_user.sh ( execute the program in current directory )
+ what is your name ?
+Nandini
+Hello, Nandini
+
+====================================================================================================================================
+
+3. VARIABLE NAMES DEFINING :: The name of a variable can contain only letters (a to z or A to Z), numbers ( 0 to 9) or the underscore character ( _).
+                              Variables are defined as : variable_name =variable_value
+                              eg. NAME="Nandini" ( Scalar Variable - holds only one variable at a time )
+                              To access the value stored in variable, echo $NAME
+
+=====================================================================================================================================
+
+4.CONDITIONAL STATEMENTS :: if statement : if [expression]
+                                           then
+                                              statement
+                                           fi
+                                                                eg.    a=10 
+                                                                       b=20 
+                                                                       #Check whether they are equal 
+ 							               if [ $a == $b ] 
+							               then 
+     								          echo "a is equal to b"
+ 							               fi
+====================================================================================================================================== 
+                           if-else statement :  if [ expression1]
+					        then
+   						  statement1
+					        else
+   						  statement2
+						fi
+								eg.    a=20 
+								       b=20 
+  								       if [ $a == $b ] 
+								       then 
+    									#If they are equal then print this 
+    									echo "a is equal to b"
+									else
+    									#else print this 
+    									echo "a is not equal to b"
+									fi 
+=========================================================================================================================================			  
+                          if..elif..else.fi : if [expression]
+                                              then
+                                                 statement1
+                                                 statement2...
+                                              elif [expression2]
+                                              then
+                                                 statement3
+                                                 statement4..
+					      else
+						 statement5
+   					      fi
+===========================================================================================================================================
+			
+

@@ -1,0 +1,27 @@
+1.Introduce about Yourself?
+2.Tell about your Projects?
+3. How will you rate yourself in SQL and PLSQL
+4.Tables you handle in your projects?
+5. Technique you used in your projects
+6. Select Duplicate Records from the table
+7. Technique to delete duplicate records from the table.
+8.Difference between Rowid and Rownum
+9. Can we delete duplicate records using rowid.
+10. Why we are using cursor?
+11. Without cursor can we attain the required output? If so then why we are going for cursor?
+12.Write PLSQL code to find whether the given string Palindrome or not
+13. Find the number of sundays between 1 Jan 2022 -1 FEB 2022 using PLSQL code
+14. Display current day of today's date using SQL code.
+15. Have you worked on any ETL tools?
+16. Explain the transformation you have done on Power BI
+17. Have you used partition in your project?
+18. Types of Partitions
+19 Explain in deep about each partitions.
+20. Write a code for range partition.
+21. You are doing range partion in monthwise, can we do it by date also?
+23. Explain in details about Hash Partition?
+22.What is ref-cursor?
+23. Have you worked on Unix?
+24. Why should I hire you?
+25.What is pragma exception_init?
+26. what is sqlcode and sqlerrm?

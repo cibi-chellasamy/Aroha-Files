@@ -1,0 +1,160 @@
+Thursday, Jan 25th 2024
+========================
+typically the code seems to be fine !!
+
+data = "100010010001110011"
+how = int(input('enter the number of 0\'s to count ' ))
+count=0
+ctr=0
+length = len(data)
+length = length -1
+while  True:
+     print(data[ctr],end='')
+     if data[ctr] == '0':
+            count+=1
+     if count == how  or ctr == length:
+        break
+     ctr = ctr + 1
+print()
+print("The count is",count,"So The loop is stop")
+
+but there is a VITAL catch !!
+===================
+a =10
+b = 22
+a,b = b,a
+HOW the numbers are swapped in Python....
+
+=====
+another way of executing the code to print the highest and the lowest...
+
+num=0
+maxi_num=0
+mini_num=0
+count=0
+while True:
+    number=int(input("enter number = "))
+    if number == -1:
+        break
+    if count == 0:
+       maxi_num,mini_num = number,number
+      
+    if number>maxi_num:
+        maxi_num=number
+        
+    if number<mini_num:
+        mini_num=number
+        
+    count=count+1    
+
+    num=num+number
+if count != 0:
+  avg=num/ count
+  print('higest number is ',maxi_num)
+  print('lowest number is ',mini_num)
+  print("total is ",num)
+  print("avg is ",avg)
+else:
+  print ('brother you did not enter ANY number !! ')
+
+==========================================
+type('Srikanth')    str
+type(90)            int
+type(-104)          int
+type(12.55)         float 
+type(-16.55)        float
+type(True)          bool
+type(False)         bool
+type(16+4j)         complex
+type(-12-3j)        complex
+type(None)          NoneType
+....
+type(e1)            it can be also object type (class,object) LATER
+<class '__main__.Employ'>
+            \
+             \
+          starting point of the Python code to execute
+
+qs) find the position of the word in the sentence
+answer) use index() of the str
+how???
+sentence = 'all that glitters is not Gold. Gold is a noble metal'
+word = 'Gold'
+p = sentence.index(word)
+print(p)
+===
+Fuzzy Wuzzy was a bear. Fuzzy Wuzzy had no hair. Fuzzy Wuzzy wasn’t fuzzy, was he?
+
+Ajay AAA AAA Ajay AA AAAA Ajay AAAAAAAA Ajay AAAAAAAAAAAA AAAAAA Ajay AAAAAAAAAAAAAAA AAAAAAAAAAAA AAAAA Ajay AjayAAA AA A AA A Ajay
+
+VIJAY KUMAR RANGARAJAN AAA AAA VIJAY KUMAR RANGARAJAN AA AAAA VIJAY KUMAR RANGARAJAN AAAAAAAA VIJAY KUMAR RANGARAJAN AAAAAAAAAAAA AAAAAA VIJAY KUMAR RANGARAJAN AAAAAAAAAAAAAAA AAAAAAAAAAAA AAAAA VIJAY KUMAR RANGARAJAN VIJAY KUMAR RANGARAJANAAA AA A AA A VIJAY KUMAR RANGARAJAN
+
+====working code ======
+sentence = input('enter some sentence ... ')
+print('you entered ... ')
+print(sentence)
+word_replace = input('enter the word you wish to replace ')
+new_word = input('with what WORD you wish to replace ? ')
+how = int(input('how many occurance you wish to replace ? '))
+result = sentence.replace(word_replace,new_word,how)
+print('ORIGINAL ',sentence)
+print()
+print('NEW SENT ... ',result)
+
+===commonly used str methods ====
+s1 = "HarishKumar"
+s2 = "3535633"
+s3 = "RX7812BV991"
+s4 =  "1256"
+r1 = s1.isalpha()
+r2 = s2.isdigit()
+r3 = s3.isalnum()
+r4 = s4.isdecimal()
+print(r1,' all ALPHABETS ONLY ',s1)
+print(r2,' all DIGITS  ONLY ',s2)
+print(r3,' ALPHA-NUMERIC ONLY ',s3)
+print(r4,' has decimal ?  ',s4)
+s5 = "HX-3335^2383288*@7262363::PPWW"
+r5 = s5.isascii()
+print(r5,' has decimal ?  ',s5)
+
+str to number .... int(s1)
+str to decimal .... float(s2)
+
+====working code =====
+'''
+input ANY five POSITIVE INT numbers (use str for inputting)
+if it is not number IGNORE it
+'''
+count = 0
+total = 0
+int_count = 0
+real_count = 0
+while True:
+  data = input('enter POSITIVE INT number ')
+  if data.isdigit():
+     total = total + int(data)
+     print('number is ',data)
+     int_count = int_count + 1 
+     count = count + 1 
+  if count == 5:
+    break 
+print ('total ',total)
+
+====
+ABC.EERR..
+[][][].5.6-8
+RESEARCH on how 
+to handle the input having str methods ONLY
+
+-15353
+56.22
+-769.22
+
+
+
+
+
+
+
+

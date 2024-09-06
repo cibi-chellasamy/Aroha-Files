@@ -1,0 +1,13 @@
+1.  introduction
+2.  you have 3 years of experience. for 3 years what have you done(from getting requirement) 
+3.  after development of code to whom you'll deploy
+4.  do you know about informatica
+5.  are you willing to learn informatica
+6.  i'll give 1000 tables. i want to know the number of columns.what you'll do
+7.  select * from emp where hiredate='01-01-2022 10:30';(table is having huge number of records)
+    how will you do performance tuning on above query
+8.  difference between procedure and function
+9.  give some example tables from your project
+10. what kind data you have in project
+11. Which SDLC you are using?S
+12.What is the beauty of merge?

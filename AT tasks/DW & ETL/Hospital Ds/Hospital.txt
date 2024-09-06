@@ -1,0 +1,39 @@
+Hspital Master
+
+df = pd.read_excel('market equipment data of HealthCare V1 - Copy.xlsx')
+
+df_hm = pd.DataFrame(df[['businessname','practicename','participationbegindate']])
+
+df_h = df_hm.groupby(['businessname','participationbegindate'])['practicename'].unique().reset_index()
+
+df_h['Hospital_Id'] = range(500, 500+int(len(df_h)))
+
+file_path = "Hospital Master xl.xlsx"
+df_h.to_excel(file_path, index=False)
+
+----------------------------------
+
+Hospital Branch
+
+df = pd.read_excel('market equipment data of HealthCare V1 - Copy.xlsx')
+
+df_h = pd.DataFrame(df[['businessname','practicename','practiceaddress1','practiceaddress2','practicecity','practicestate','practicezip9code','telephonenumber']])
+
+df_hm = pd.read_excel('Hospital Master xl.xlsx')
+
+df_branch = pd.merge(left=df_hm, right=df_h, left_on='businessname', right_on='businessname')
+df_branch = df_branch.drop(['businessname'], axis=1)  
+
+
+df_branch.drop('participationbegindate',inplace=True,axis=1)
+df_branch.drop('practicename_x',inplace=True,axis=1)
+
+
+
+df_branch['Branch_Id'] = range(1500, 1500+int(len(df_branch)))
+
+
+file_path = "Hospital Branch xl.xlsx"
+df_branch.to_excel(file_path, index=False)
+
+

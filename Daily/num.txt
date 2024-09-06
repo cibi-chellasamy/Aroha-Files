@@ -1,0 +1,2 @@
+
+Create a list of fruits and use a loop to print each fruit on a new line.Functions:Define a function that calculates the square of a number and then use it to calculatethe square of 5.String Manipulation.Write a program that takes a user's input and prints the input in uppercase.ists and Sorting.Create a list of numbers and sort them in ascending order.File Handling.Write a program to read a text file and print its content to the console.

@@ -1,0 +1,24 @@
+1) Introduce about yourself with project
+2) Do you aware of RDBMS?
+3) Have you worked on SQL Server?
+4) Which version of Oracle are you using?
+5) What are indexes?
+6) What are the different types of indexes?
+7) How many indexes can be created on a table?
+8) What analytical functions have you used?
+9) What is ROW_NUMBER(), RANK() and DENSE_RANK()?
+10) Explain about your professional experience
+11) What are you doing in Aroha?
+12) What technology do you use for SQL and PL/SQL?
+13) How do you implement changes to the code so it reflects across all servers?
+14) I have a CR: Add new column to Customer Dim by tomorrow. Explain step by step how do you achieve this (Dev, test & client server).
+15) Customer has three addresses. How do you implement this in dimension? (Not SCD, current three offices)
+16) How do you receive flat file from client? Do you directly access his server? Or do you have a platform for that?
+17) How do you integrate two CRs on the same code? Like same table is to be changed in two places, but it's done by 2 people. How do you implement this?
+18) Do you have knowledge on aggregated facts? Where do you use them in your project?
+19) How many tables do you have? How many facts? How many kinds of dimensions are you using?
+20) What schema are you using? Do you think you can achieve every logic only through star schema? Have you thought of moving to other schemas? Give example.
+21) How do you backup?
+22) Talk about your typical day at work - what you do for 8 hours.
+23) What code repository you use? Do you know how to migrate code?
+24) Can you take full responsibility from start to finish and implement your code/work on client server?

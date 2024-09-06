@@ -1,0 +1,26 @@
+All_dax = CALCULATE(sum(Orders[Sales]),all(Orders[Sub-Category]))
+
+All_selected = CALCULATE(sum(Orders[Sales]),all(Orders[Sub-Category]))
+
+COUNTROWS without filter = CALCULATE(COUNTROWS(Orders),Orders[Region]="East")
+
+C&R sale = CALCULATE(sum(Orders[Sales]),OR(Orders[region] = "Central",Orders[region] = "East"))
+
+SUM with filter = calculate(sum(Orders[Sales]),Filter(Orders, Orders[Region] ="central"))
+
+SUM with filter = calculate(sum(Orders[Sales]),Filter(Orders, Orders[Region] ="central"))
+
+SUMX with filter multi = 
+
+SUMX(
+
+Filter(Orders, Orders[Region]="Central" || Orders[Region]="East"),
+
+Orders[Sales])
+
+COUNTROWS with filter = CALCULATE(COUNTROWS(Orders),filter(Orders,Orders[Region]="East"))
+
+COUNTROWS without filter = CALCULATE(COUNTROWS(Orders),Orders[Region]="East")
+
+
+Sales Last 6 Months = CALCULATE(SUM(Sales[SalesAmount]),DATESINPERIOD('Date'[Date],TODAY(),-6,MONTH))

@@ -1,0 +1,115 @@
+Tuesday, 02 April 2024
+
+==================================================================================
+
+Comparisons::
+-eq	equal to for numbers
+==	equal to for letters
+-ne	not equal to
+!===	not equal to for letters
+-lt	less than
+-le	less than or equal to
+-gt	greater than
+-ge	greater than or equal to
+
+====================================================================================
+
+1.switch statement :: case statement works as a switch statement if specified value match with the pattern then it will execute a block of that particular pattern.
+                                            
+
+                                            case  in
+   				            Pattern 1) Statement 1;;
+   					    Pattern n) Statement n;;
+					    esac
+
+                                           eg.
+							CARS="bmw"
+  							#Pass the variable in string 
+							case "$CARS" in 
+    								#case 1 
+    									"mercedes") echo "Headquarters - Affalterbach, Germany" ;; 
+      
+    								#case 2 
+    									 "audi") echo "Headquarters - Ingolstadt, Germany" ;; 
+      
+    								#case 3 
+    									"bmw") echo "Headquarters - Chennai, Tamil Nadu, India" ;; 
+							esac 
+
+
+===================================================================================================================================================================
+
+2.LOPPING STATEMENTS :: while statement :: 	#/bin/bash
+						while <condition>
+						do
+    							<command 1>
+    							<command 2>
+    							<etc>
+						done
+                                                                            eg. 	#/bin/bash
+											a=0
+											# lt is less than operator
+											#Iterate the loop until a less than 10
+											while [ $a -lt 10 ]
+											do
+											# Print the values
+											echo $a
+											# increment the value
+											a=`expr $a + 1`
+											done
+=============================================================================================================================================================
+			for statement :: #/bin/bash
+                                         for <var> in <value1 value2 value3....valuen>
+                                         do
+                                           <command1>
+                                           <command2>
+                                           <etc>
+                                         done
+									eg. #/bin/bash
+                 							    for i in { 1..5 }; 
+                                                                            do
+                                                                            echo " Number : $i "
+ 									    done
+
+
+Examples :: 
+   
+    #/bin/bash
+    COLORS=”red green blue”
+    # the for loop continues until it reads all the values from the COLORS
+    for COLOR in $COLORS
+    do
+    echo “COLOR: $COLOR”
+    done
+
+=======================================================================================
+Examples :: #!/bin/bash
+
+Check if a variable value is met
+-----------------------------------------
+# Get the current day using the 'date' command and extract the first field using 'awk'
+a=`date | awk '{print $1}'`
+
+# Check if the value of the 'a' variable is equal to "Mon"
+if [ "$a" == Mon ]
+then
+    echo Today is $a
+else
+    echo Today is not Monday
+fi
+
+=========================================================================================
+Check if a file error.txt exist
+--------------------------------------
+#!/bin/bash
+
+clear
+if [ -e /home/devops/error.txt ]
+
+        then
+        echo "File exist"
+        else
+        echo "File does not exist"
+fi
+
+========================================================================================

@@ -1,0 +1,53 @@
+10/05/24  PLSQL
+-------------------------------------------------------------------
+Oracle has 2 engines
+1)SQL engine   - If there is select,delete and insert it runs on sql engine 
+Basic data retrieval and manipulation tasks will be done in sql engine
+
+2)PLSQL engine - If it cannot runs on sql it runs on plsql.
+It is used for implementing business logic, data validation and  complex data processing
+
+-----------------------------------------------------------------
+PLSQL
+If we need to run consecutive sql queries we need PLSQL.
+Procedural Language extensions to the SQL
+Extends the limitation of SQL
+---------------------------------------------------------------
+View
+Virtual table used to restrict the access of data to end users
+Can aggregate datas from multiple table to single table
+Partition large datas into small parts
+Allow users to query data in a simplified and structured manner.
+
+2 types of view
+Simple and materialized view
+
+Transactions table will be on simple view it needs load on very less time interval (OLTP)
+
+Where OLAP use materialized view 
+
+---------------------------------------------------------
+
+Stored Procedures
+blocks of code that are stored in the database and can be executed repeatedly
+
+can accept input parameters, perform operations such as querying or modifying data in the database, and may or maynot return results.
+
+Stored procedures can be called inside and outside plsql
+
+
+
+
+Functions
+Function is a named block that returns a value
+
+Functions can be called inside plsql or block 
+
+may have zero or more than one parameter
+
+
+
+
+
+
+

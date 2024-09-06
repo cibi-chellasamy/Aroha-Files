@@ -1,0 +1,185 @@
+Vithya's Session
+
+find all the customers who did not make any sales from last two months
+
+select cust_id,cust_nm from customer
+where cust_id not in (select distinct cust_id from sales 
+ where sale_date >= ADD_MONTHS(TRUNC(SYSDATE, 'MM'), -2)
+      AND sale_date < TRUNC(SYSDATE, 'MM')
+);
+-----------------------------------------------------------------------
+
+find top 10 customers in terms of sales in the current year
+
+select c.cust_nm,sum(amount) as yearly_sales
+from customer c join sales s
+on c.cust_id = s.cust_id
+where extract(year from sale_date) = extract(year from sysdate)
+group by cust_id,cust_nm
+order by yearly_sales desc
+fetch first 10 rows only
+
+
+with cte as(
+select cust_id,sum(amount) as total_sales,
+dense_rank() over(order by sum(amount) desc)as rnk
+from sales
+where extract(year from sale_date) = extract(year from sysdate)
+group by cust_id)
+select cust_id,total_sales
+from cte 
+where rnk <=10;
+
+-----------------------------------------------------------------------
+how many different cities from which we have our customers
+
+select count(distinct city )from customer
+-----------------------------------------------------------------------
+find how many different customers we got yesterday
+
+select c.cust_nm,c.cust_id as
+from customer c join sales s
+on c.cust_id = s.cust_id
+where trunc(sale_date) = trunc(sysdate)-1
+-----------------------------------------------------------------------
+create a view which gives customer_name ,month and total revenue we got
+
+create view as cus_det(
+select c.cust_nm,extract(month from sale_date)as month,
+sum(amount) as total_revenue
+from customer c join sales s
+on c.cust_id = s.cust_id
+group by cust_nm,extract(month from sale_date))
+-----------------------------------------------------------------------
+
+create an index (non cluster index ) on cust_name column in customer table
+
+
+create index cust_ind on customer(cust_nm)
+-----------------------------------------------------------------------
+
+find the customers who has more number of transactions
+
+select cust_id from sales
+group by cust_id
+having count(sale_id) = select max(transaction_count)
+from (select count(sale_id) as transaction_count from sales
+group by cust_id))
+
+
+
+select cust_id 
+from (select cust_id,
+count(sale_id),
+dense_rank() over(order by count(sale_id) desc) as rnk
+from sales
+group by cust_id)
+where rnk  = 1
+
+-----------------------------------------------------------------------
+LeetCode
+--------
+
+
+Write a solution to find for each date the number of different products sold and their names.
+
+The sold products names for each date should be sorted lexicographically.
+
+Return the result table ordered by sell_date.
+
+
+select to_char(a.sell_date, 'yyyy-mm-dd') sell_date,
+count(a.product) num_sold,
+listagg(a.product, ',') within group (order by a.product) products
+from (select distinct * from activities) a
+group by a.sell_date
+order by a.sell_date
+-----------------------------------------------------------------------
+Write a solution to fix the names so that only the first character is uppercase and the rest are lowercase.
+
+Return the result table ordered by user_id.
+
+select user_id,concat(upper(substr(name,1,1)),lower(substr(name,2))) as name
+from users
+order by user_id
+-----------------------------------------------------------------------
+Write a solution to get the names of products that have at least 100 units ordered in February 2020 and their amount.
+
+select p.product_name, sum(unit) as unit 
+from products p 
+join orders o on p.product_id = o.product_id 
+where to_char(order_date, 'MON-YYYY') = 'FEB-2020' 
+group by p.product_name 
+having sum(unit ) >= 100
+
+-----------------------------------------------------------------------
+Write a solution to find the users who have valid emails.
+
+A valid e-mail has a prefix name and a domain where:
+
+The prefix name is a string that may contain letters (upper or lower case), digits, underscore '_', period '.', and/or dash '-'. The prefix name must start with a letter.
+The domain is '@leetcode.com'.
+
+select *from Users
+where regexp_like(mail,'^[A-Za-z][A-Za-z0-9_.-]*@leetcode.com') and mail not like '%?%' and mail not like '%AVD'
+
+
+-----------------------------------------------------------------------
+Write a solution to find the prices of all products on 2019-08-16. Assume the price of all products before any change is 10.
+
+
+with all_p as(
+    select distinct product_id from products
+),
+last_od as(
+    select product_id,max(change_date) as change_date
+    from products
+    where change_date<= to_date('2019-08-16','YYYY-MM-DD')
+    group by product_id
+)
+select a.product_id,NVL(p.new_price,10) as price
+from all_p a left join last_od l
+on a.product_id = l.product_id
+left join products p on
+p.product_id = l.product_id
+and p.change_date = l.change_date
+-----------------------------------------------------------------------
+Write a solution to find the person_name of the last person that can fit on the bus without exceeding the weight limit. The test cases are generated such that the first person does not exceed the weight limit.
+
+
+select person_name
+from (select person_name,sum(weight)over(order by turn)as sum_weight
+from queue
+order by sum_weight desc)
+where sum_weight <= 1000
+and rownum = 1;
+-----------------------------------------------------------------------
+Write a solution to calculate the number of bank accounts for each salary category. The salary categories are:
+
+"Low Salary": All the salaries strictly less than $20000.
+"Average Salary": All the salaries in the inclusive range [$20000, $50000].
+"High Salary": All the salaries strictly greater than $50000.
+The result table must contain all three categories. If there are no accounts in a category, return 0.
+
+
+
+
+select  'Low Salary' as category ,count(*) as accounts_count from Accounts
+where income <20000
+union
+select 'Average Salary' as category ,count(*) as accounts_count from Accounts
+where income >=20000 and income <=50000
+union
+select 'High Salary' as category ,count(*) as accounts_count from Accounts
+where income >50000;
+     
+
+-----------------------------------------------------------------------
+Find the IDs of the employees whose salary is strictly less than $30000 and whose manager left the company. When a manager leaves the company, their information is deleted from the Employees table, but the reports still have their manager_id set to the manager that left.
+
+
+select employee_id
+from employees 
+where manager_id not in (select employee_id from employees)
+and salary < 30000
+order by employee_id

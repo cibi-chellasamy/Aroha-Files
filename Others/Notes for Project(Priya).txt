@@ -1,0 +1,16 @@
+src to stage dev enviroinment (validation) 
+to stg production (transformation will be done) to destination dev environment (data validation done in between ) 
+to destination production db
+
+
+data dictionary is from  src table
+
+ETL mapping
+
+Data mapping is where the particular column comes from 
+
+
+
+For data model we prepare data mapping
+
+forti client for production and staging

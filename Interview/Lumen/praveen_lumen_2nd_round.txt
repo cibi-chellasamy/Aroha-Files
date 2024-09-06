@@ -1,0 +1,13 @@
+1. introduce your self.
+2. explain your project and roles and responsibilities.what types of developments
+   you did in your project.
+3. i can load records to target table with cursor as well
+   as by writing select statement. what is the difference between them.
+4. i gave one scenario on trigger. i have a trigger to update the product status as expired
+   when that product is expired and inserting those records into rejection table.
+   if the record is doesn't inserted into rejection table what will happen.
+5. tell about collection. can you load millions of records into cllection.
+6. what is materialized view. why we use it.what is the difference between mat view and table.
+7. what is procedure and fuction, difference between procedure & function.
+8. what is partitions and types.
+9.what is context switching.

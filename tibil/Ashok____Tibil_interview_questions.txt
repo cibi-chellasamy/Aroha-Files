@@ -1,0 +1,23 @@
+------------------------------------------ Tibil Interview Questions -----------------------------------
+1) Tell me about yourself ?
+2) What is the difference between the import mode and direct mode ?
+3) When we will you use data in import mode ?
+4) already You Published report in the power bi service but after publishing the report the data should get    updated in the reports, what will you do ? 
+5) what is the difference between power BI pro version and premium version ? 
+6) what is your currenct project ? 
+7) which mode you used in your project import or direct, disadvantages of direct mode? 
+
+------------> DAX AND SQL [the below question asked to write in both SQL and DAX.]
+8) write a dax to find the sales of pacific[there are 6 catogories, it is one ofthe catogories]  
+9) finalcial year starts from april, but the year starts from january how to show the sales of month  from april?
+
+10) what is RLS and types of RLS ?
+11) what is rankx() in dax, when do you use it ?
+12) why will we use dens parameter in rankx() ? 
+13) when do you choose pie chat ?
+14) there is time table and sales table and you are doing analysis.... what type of charts do you choose ?
+15) what is the difference between the union and union all in SQL ?
+16) do you knowledge in python ?
+
+
+ 

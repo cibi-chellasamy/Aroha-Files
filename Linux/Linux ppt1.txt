@@ -1,0 +1,114 @@
+Thursday,March 14 2024
+======================================================================
+
+------------------ LINUX OPERATING SYSTEM--------------------------------------
+
+1.Linux is an open-source operating system and it is built upon the Linux kernel. It is like Windows, Mac, Android etc.
+2.The Linux Kernel is like the brain of the operating system because it manages how the computer interacts with its hardware and resources.
+3.The Linux Kernel is combined with a collection of software packages and utilities, which are together called Linux distributions ( Ubuntu,Debian,openSUSE etc).
+  These distributions make the Linux Operating System ready for users to run their applications and perform tasks on their computers securely and effectively. 
+4.Linux is a multi-programming, multi-user operating system, it means the same system can be used by different users with different access rights and simultaneously many applications can be run on it. 
+
+Linux Architecture ::
+----------------------
+1.Kernel 
+2.System Library : System libraries act as an interface between applications and the kernel, providing a standardized and efficient way for applications to interact with the underlying system.
+3.Shell :  The shell serves as a bridge between the user and the kernel, forwarding the user’s requests to the kernel for processing.
+4.Hardware Layer : RAM (Random Access Memory), HDD (Hard Disk Drive), CPU (Central Processing Unit), and input/output devices.It is responsible for interacting with the Linux Operating System and providing the necessary resources for the system and applications to function properly.  
+5.System Utility : to perform tasks such as installing software, configuring network settings, monitoring system performance, managing users and permissions, and much more. 
+
+
+Advantages of Linux ::
+------------------------
+1.open-source operating system
+2.more secure than other OS
+3.it maintains the privacy of the user
+4.easy to install 
+
+
+Difference b/w Linux and Windows ::
+------------------------------
+           Linux                                                                                       Windows
+1.Linux is a open source operating system.                                       1.While windows are the not the open source operating system.
+
+2.Linux is free of cost.                                                         2.While it is costly.
+
+3.There is forward slash is used for Separating the directories.                 3.While there is back slash is used for Separating the directories.
+
+4.Root user is the super user and has all administrative privileges.             4.Administrator user has all administrative privileges of computers.
+
+========================================================================================================================================================
+
+FILE STRUCTURE ::
+
+In Linux, the filesystem is organized in a hierarchical structure, resembling an inverted tree. 
+This structure starts from the root directory, denoted by a forward slash (/), which is the base of the filesystem.
+All other files and directories are contained within this root directory.       
+
+Root Directory (/): The top-most level of the filesystem. Every file and directory starts from here.
+Subdirectories: Directly under the root directory, there are several important subdirectories, each serving a specific purpose. For example:
+
+    /bin - Contains essential user command binaries (programs).
+    /etc - Contains system configuration files.
+    /home - Contains personal directories for users.
+    /usr - Contains user utilities and applications.
+    /var - Contains variable data like logs and databases.
+
+User Directories: Within /home, each user has a directory (e.g., /home/username) containing their personal files, documents, and settings.
+Pathnames: Files and directories are accessed by their pathnames. An absolute pathname starts from the root (/) and describes the exact location of a file or directory. A relative pathname starts from the current directory.       
+
+==============================================================================================================================================================================================
+Linux commands ::
+--------------------------------
+1. ls :: lists directory contents of files and directories.
+         ls -l : displays detailed information about files and directories.
+         ls -a : includes hidden file and directories.
+         ls -t : displaying the most recently modified ones first.
+         ls -r : reverse order of the string.
+         ls -S : sort files and directories by thier size.
+         ls -R : List files and directories recursively, including subdirectories.
+         
+                     -rw-r--r-- 1 Dell 197121        316 Dec 21 22:09  fibonacci.txt
+          1st field    : File type --- - ( normal file ), d ( directory file ), s ( socket file ), l (link file)
+                         File permissions --- read,write,execute for user(root),group,others
+                         Number of links 
+                         Owner -- owner of the file
+                         Group -- group of he file
+                         Size -- size in bytes
+                         Last modified date and time 
+                         File name
+
+Question :: 1. Order Files Based on Last Modified Time (In Reverse Order)
+
+=========================================================================================================================================
+
+2. cd :: change directory.
+         cd / : changes to the root directory
+         pwd : present working directory/ current directory
+         cd dir1/dir2/dir3 : to move into sub-directories
+         cd ~ or cd : changes to home directory from any directory
+         cd .. : which is used to move to the parent directory of current directory, or the directory one level up from the current directory. “..” represents parent directory.
+
+=========================================================================================================================================
+
+3.pwd :: present working directory.
+         
+========================================================================================================================================
+4.mkdir :: create directory. ( mkdir dir_name )
+
+=======================================================================================================================================
+5.touch :: create a file without any content.
+           syntax : touch file_name
+
+=======================================================================================================================================
+6.cat :: create a file with content.
+         syntax : cat > file_name
+                  type the content for the file if not press ctrl+D
+                  cat file_name
+         cat -n file_name : to view contents of the file with line numbers
+         cat file1 >> file2 : appending the content of file1 to the end of file2
+         tac file_name : displaying the content in reverse order
+
+======================================================================================================================================
+
+             

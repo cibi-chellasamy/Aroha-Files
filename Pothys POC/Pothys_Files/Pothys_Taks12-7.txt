@@ -1,0 +1,323 @@
+
+
+
+
+
+
+CREATE TABLE Employee (
+    Employee_id NUMBER PRIMARY KEY,
+    Employee_Name VARCHAR2(100),
+    Role VARCHAR2(50),
+    Department VARCHAR2(50),
+    Manager_id NUMBER,
+    DOB DATE,
+    Gender CHAR(1),
+    Hire_Date DATE,
+    Address VARCHAR2(255),
+    Phone VARCHAR2(15),
+    Salary NUMBER,
+    Store_id NUMBER
+);
+
+INSERT INTO Employee (Employee_id, Employee_Name, Role, Department, Manager_id, DOB, Gender, Hire_Date, Address, Phone, Salary, Store_id)
+VALUES (2001, 'Arjun', 'Sales Floor', 'Sales', 2004, TO_DATE('12-Jan-1985', 'DD-Mon-YYYY'), 'M', TO_DATE('15-Feb-2010', 'DD-Mon-YYYY'), 'No. 12, Gandhi Nagar, Palayamkottai, Tirunelveli, Tamil Nadu 627002', '9876543210', 30000, 2);
+
+INSERT INTO Employee (Employee_id, Employee_Name, Role, Department, Manager_id, DOB, Gender, Hire_Date, Address, Phone, Salary, Store_id)
+VALUES (2002, 'Kavya', 'Cashier', 'Sales', 2004, TO_DATE('24-Mar-1992', 'DD-Mon-YYYY'), 'F', TO_DATE('27-May-2014', 'DD-Mon-YYYY'), '45/2, Trivandrum Road, Vannarpettai, Tirunelveli, Tamil Nadu 627003', '8765432109', 35000, 2);
+
+INSERT INTO Employee (Employee_id, Employee_Name, Role, Department, Manager_id, DOB, Gender, Hire_Date, Address, Phone, Salary, Store_id)
+VALUES (2003, 'Nandini', 'Sales Floor', 'Sales', 2004, TO_DATE('08-Jun-1978', 'DD-Mon-YYYY'), 'F', TO_DATE('03-Aug-2018', 'DD-Mon-YYYY'), 'Plot No. 78, 4th Street, Sathyanagar, KTC Nagar, Tirunelveli, Tamil Nadu 627011', '7654321098', 30000, 2);
+
+INSERT INTO Employee (Employee_id, Employee_Name, Role, Department, Manager_id, DOB, Gender, Hire_Date, Address, Phone, Salary, Store_id)
+VALUES (2004, 'Surya', 'Store Manager', 'Operations', NULL, TO_DATE('17-Sep-2001', 'DD-Mon-YYYY'), 'M', TO_DATE('22-Oct-2011', 'DD-Mon-YYYY'), '22A, Perumalpuram, New Colony, Tirunelveli, Tamil Nadu 627007', '6543210987', 50000, 2);
+
+INSERT INTO Employee (Employee_id, Employee_Name, Role, Department, Manager_id, DOB, Gender, Hire_Date, Address, Phone, Salary, Store_id)
+VALUES (2005, 'Priya', 'Cashier', 'Sales', 2004, TO_DATE('05-Nov-1963', 'DD-Mon-YYYY'), 'F', TO_DATE('09-Dec-2016', 'DD-Mon-YYYY'), '3/15, South Car Street, Melapalayam, Tirunelveli, Tamil Nadu 627005', '5432109876', 35000, 2);
+
+INSERT INTO Employee (Employee_id, Employee_Name, Role, Department, Manager_id, DOB, Gender, Hire_Date, Address, Phone, Salary, Store_id)
+VALUES (2006, 'Arun', 'Cashier', 'Sales', 2004, TO_DATE('07-Dec-1998', 'DD-Mon-YYYY'), 'M', TO_DATE('09-Jan-2016', 'DD-Mon-YYYY'), 'Plot No. 78, 4th Street, Melapalayam, Tirunelveli, Tamil Nadu 627005', '8870292229', 35000, 2);
+
+CREATE TABLE Counter (
+    Counter_id NUMBER PRIMARY KEY,
+    Cashier NUMBER,
+    Store_id NUMBER,
+    CONSTRAINT fk_Cashier FOREIGN KEY (Cashier) REFERENCES Employee(Employee_id)
+);
+
+INSERT INTO Counter (Counter_id, Cashier, Store_id)
+VALUES (21, 2002, 2);
+
+INSERT INTO Counter (Counter_id, Cashier, Store_id)
+VALUES (22, 2006, 2);
+
+INSERT INTO Counter (Counter_id, Cashier, Store_id)
+VALUES (23, 2005, 2);
+
+
+
+
+CREATE TABLE Product (
+    Product_table_id NUMBER,
+    Product_id NUMBER,
+    SKU VARCHAR2(20),
+    Product_Name VARCHAR2(100),
+    Category VARCHAR2(50),
+    Subcategory VARCHAR2(50),
+    Brand VARCHAR2(50),
+    Description VARCHAR2(200),
+    Stock_Quantity NUMBER,
+    Unitprice NUMBER
+);
+
+-- Insert data into the table
+INSERT INTO Product (Product_table_id, Product_id, SKU, Product_Name, Category, Subcategory, Brand, Description, Stock_Quantity, Unitprice)
+VALUES (1, 501, 'SR-PS-SM-01', 'Samudrika Pattu', 'Sarees', 'Pure Silk Sarees', 'Pothys', 'Traditional silk saree', 50, 15000);
+
+INSERT INTO Product (Product_table_id, Product_id, SKU, Product_Name, Category, Subcategory, Brand, Description, Stock_Quantity, Unitprice)
+VALUES (2, 502, 'SR-PS-PR-02', 'Parampara Pattu', 'Sarees', 'Pure Silk Sarees', 'Pothys', 'Wedding silk saree', 30, 18000);
+
+INSERT INTO Product (Product_table_id, Product_id, SKU, Product_Name, Category, Subcategory, Brand, Description, Stock_Quantity, Unitprice)
+VALUES (3, 503, 'SR-PS-KW-03', 'Kancheepuram Wedding Silks', 'Sarees', 'Pure Silk Sarees', 'Pothys', 'Bridal silk saree', 20, 25000);
+
+INSERT INTO Product (Product_table_id, Product_id, SKU, Product_Name, Category, Subcategory, Brand, Description, Stock_Quantity, Unitprice)
+VALUES (4, 504, 'WR-RM-RS-04', 'Readymade Suits', 'Women', 'Readymade Suits', 'Avasa', 'Casual wear suits set', 40, 12000);
+
+INSERT INTO Product (Product_table_id, Product_id, SKU, Product_Name, Category, Subcategory, Brand, Description, Stock_Quantity, Unitprice)
+VALUES (5, 505, 'WR-LG-LH-05', 'Lehenga and Ghagra', 'Women', 'Lehenga and Ghagra', 'Melange', 'Ethnic wear lehenga', 25, 18000);
+
+INSERT INTO Product (Product_table_id, Product_id, SKU, Product_Name, Category, Subcategory, Brand, Description, Stock_Quantity, Unitprice)
+VALUES (6, 506, 'MR-PS-SS-06', 'Pure Silk Shirts', 'Men', 'Pure Silk Shirts', 'Ramraj', 'Formal silk shirts', 35, 8000);
+
+INSERT INTO Product (Product_table_id, Product_id, SKU, Product_Name, Category, Subcategory, Brand, Description, Stock_Quantity, Unitprice)
+VALUES (7, 507, 'MR-CS-XXXL-01', 'Casual shirts', 'Men', 'Casual shirts', 'Otto', 'Everyday wear cotton shirts', 60, 2500);
+
+INSERT INTO Product (Product_table_id, Product_id, SKU, Product_Name, Category, Subcategory, Brand, Description, Stock_Quantity, Unitprice)
+VALUES (8, 508, 'KR-AP-APR-08', 'Art Silk and Cotton Pavadai Readymade', 'Kids', 'Art Silk and Cotton Pavadai Readymade', 'CoolK', 'Traditional kids wear', 50, 5000);
+
+INSERT INTO Product (Product_table_id, Product_id, SKU, Product_Name, Category, Subcategory, Brand, Description, Stock_Quantity, Unitprice)
+VALUES (9, 509, 'WR-CM-CH-09', 'Chudidhar Material', 'Women', 'Chudidhar Material', 'Melange', 'Unstitched dress material', 70, 3000);
+
+INSERT INTO Product (Product_table_id, Product_id, SKU, Product_Name, Category, Subcategory, Brand, Description, Stock_Quantity, Unitprice)
+VALUES (10, 507, 'MR-CS-L-04', 'Casual shirts', 'Men', 'Casual shirts', 'Otto', 'Everyday wear cotton shirts', 45, 2500);
+
+DESC SalesHeader;
+
+CREATE TABLE SalesHeader (
+    Sale_id NUMBER PRIMARY KEY,
+    Sales_date DATE,
+    Counter_id NUMBER,
+    Sale_emp_id NUMBER,
+    Customer_id NUMBER,
+    Total_Amount NUMBER,
+    Payment_Method VARCHAR2(50),
+    CONSTRAINT fk_counter_id FOREIGN KEY (Counter_id) REFERENCES Counter(Counter_id),
+    CONSTRAINT fk_sale_emp_id FOREIGN KEY (Sale_emp_id) REFERENCES Employee(Employee_id)
+);
+
+INSERT INTO SalesHeader (Sale_id, Sales_date, Counter_id, Sale_emp_id, Customer_id, Total_Amount, Payment_Method)
+VALUES (700, TO_DATE('07-Dec-2024', 'DD-Mon-YYYY'), 21, 2002, 400, 45000, 'Cash');
+
+INSERT INTO SalesHeader (Sale_id, Sales_date, Counter_id, Sale_emp_id, Customer_id, Total_Amount, Payment_Method)
+VALUES (701, TO_DATE('07-Dec-2024', 'DD-Mon-YYYY'), 22, 2006, 401, 72000, 'Credit Card');
+
+INSERT INTO SalesHeader (Sale_id, Sales_date, Counter_id, Sale_emp_id, Customer_id, Total_Amount, Payment_Method)
+VALUES (702, TO_DATE('07-Dec-2024', 'DD-Mon-YYYY'), 23, 2005, 402, 54000, 'Cash');
+
+INSERT INTO SalesHeader (Sale_id, Sales_date, Counter_id, Sale_emp_id, Customer_id, Total_Amount, Payment_Method)
+VALUES (703, TO_DATE('07-Dec-2024', 'DD-Mon-YYYY'), 22, 2002, 403, 90000, 'Cash');
+
+INSERT INTO SalesHeader (Sale_id, Sales_date, Counter_id, Sale_emp_id, Customer_id, Total_Amount, Payment_Method)
+VALUES (704, TO_DATE('07-Dec-2024', 'DD-Mon-YYYY'), 23, 2006, 404, 36000, 'Credit Card');
+
+INSERT INTO SalesHeader (Sale_id, Sales_date, Counter_id, Sale_emp_id, Customer_id, Total_Amount, Payment_Method)
+VALUES (705, TO_DATE('07-Dec-2024', 'DD-Mon-YYYY'), 21, 2005, 405, 60000, 'Cash');
+
+INSERT INTO SalesHeader (Sale_id, Sales_date, Counter_id, Sale_emp_id, Customer_id, Total_Amount, Payment_Method)
+VALUES (706, TO_DATE('07-Dec-2024', 'DD-Mon-YYYY'), 22, 2002, 406, 20000, 'Cash');
+
+INSERT INTO SalesHeader (Sale_id, Sales_date, Counter_id, Sale_emp_id, Customer_id, Total_Amount, Payment_Method)
+VALUES (707, TO_DATE('07-Dec-2024', 'DD-Mon-YYYY'), 21, 2006, 407, 15000, 'Credit Card');
+
+INSERT INTO SalesHeader (Sale_id, Sales_date, Counter_id, Sale_emp_id, Customer_id, Total_Amount, Payment_Method)
+VALUES (708, TO_DATE('07-Dec-2024', 'DD-Mon-YYYY'), 23, 2005, 408, 21000, 'Cash');
+
+INSERT INTO SalesHeader (Sale_id, Sales_date, Counter_id, Sale_emp_id, Customer_id, Total_Amount, Payment_Method)
+VALUES (709, TO_DATE('07-Dec-2024', 'DD-Mon-YYYY'), 22, 2002, 409, 48000, 'Cash');
+
+CREATE TABLE SalesDetails (
+    Sale_Details_id NUMBER PRIMARY KEY,
+    Sales_id NUMBER,
+    Product_id NUMBER,
+    UnitPrice NUMBER,
+    Quantity_Sold NUMBER,
+    Sales_Amount NUMBER,
+    Discount_Applied NUMBER,
+    Net_Amount NUMBER,
+    CONSTRAINT fk_sales_id FOREIGN KEY (Sales_id) REFERENCES SalesHeader(Sale_id)
+);
+
+
+INSERT INTO SalesDetails (Sale_Details_id, Sales_id, Product_id, UnitPrice, Quantity_Sold, Sales_Amount, Discount_Applied, Net_Amount)
+VALUES (1, 700, 501, 15000, 1, 15000, 0, 15000);
+
+INSERT INTO SalesDetails (Sale_Details_id, Sales_id, Product_id, UnitPrice, Quantity_Sold, Sales_Amount, Discount_Applied, Net_Amount)
+VALUES (2, 700, 502, 18000, 2, 36000, 6000, 30000);
+
+INSERT INTO SalesDetails (Sale_Details_id, Sales_id, Product_id, UnitPrice, Quantity_Sold, Sales_Amount, Discount_Applied, Net_Amount)
+VALUES (3, 701, 503, 25000, 2, 50000, 8000, 42000);
+
+INSERT INTO SalesDetails (Sale_Details_id, Sales_id, Product_id, UnitPrice, Quantity_Sold, Sales_Amount, Discount_Applied, Net_Amount)
+VALUES (4, 701, 504, 12000, 3, 36000, 6000, 30000);
+
+INSERT INTO SalesDetails (Sale_Details_id, Sales_id, Product_id, UnitPrice, Quantity_Sold, Sales_Amount, Discount_Applied, Net_Amount)
+VALUES (5, 702, 505, 18000, 3, 54000, 0, 54000);
+
+INSERT INTO SalesDetails (Sale_Details_id, Sales_id, Product_id, UnitPrice, Quantity_Sold, Sales_Amount, Discount_Applied, Net_Amount)
+VALUES (6, 703, 506, 8000, 5, 40000, 0, 40000);
+
+INSERT INTO SalesDetails (Sale_Details_id, Sales_id, Product_id, UnitPrice, Quantity_Sold, Sales_Amount, Discount_Applied, Net_Amount)
+VALUES (7, 703, 507, 2500, 20, 50000, 0, 50000);
+
+INSERT INTO SalesDetails (Sale_Details_id, Sales_id, Product_id, UnitPrice, Quantity_Sold, Sales_Amount, Discount_Applied, Net_Amount)
+VALUES (8, 704, 508, 5000, 7, 35000, 0, 35000);
+
+INSERT INTO SalesDetails (Sale_Details_id, Sales_id, Product_id, UnitPrice, Quantity_Sold, Sales_Amount, Discount_Applied, Net_Amount)
+VALUES (9, 705, 509, 3000, 10, 30000, 0, 30000);
+
+INSERT INTO SalesDetails (Sale_Details_id, Sales_id, Product_id, UnitPrice, Quantity_Sold, Sales_Amount, Discount_Applied, Net_Amount)
+VALUES (10, 706, 501, 15000, 2, 30000, 10000, 20000);
+
+INSERT INTO SalesDetails (Sale_Details_id, Sales_id, Product_id, UnitPrice, Quantity_Sold, Sales_Amount, Discount_Applied, Net_Amount)
+VALUES (11, 707, 502, 18000, 1, 18000, 3000, 15000);
+
+INSERT INTO SalesDetails (Sale_Details_id, Sales_id, Product_id, UnitPrice, Quantity_Sold, Sales_Amount, Discount_Applied, Net_Amount)
+VALUES (12, 708, 503, 25000, 1, 25000, 4000, 21000);
+
+INSERT INTO SalesDetails (Sale_Details_id, Sales_id, Product_id, UnitPrice, Quantity_Sold, Sales_Amount, Discount_Applied, Net_Amount)
+VALUES (13, 709, 504, 12000, 4, 48000, 0, 48000);
+
+INSERT INTO SalesDetails (Sale_Details_id, Sales_id, Product_id, UnitPrice, Quantity_Sold, Sales_Amount, Discount_Applied, Net_Amount)
+VALUES (14, 705, 505, 18000, 1, 18000, 0, 18000);
+
+INSERT INTO SalesDetails (Sale_Details_id, Sales_id, Product_id, UnitPrice, Quantity_Sold, Sales_Amount, Discount_Applied, Net_Amount)
+VALUES (15, 702, 506, 8000, 2, 16000, 0, 16000);
+
+INSERT INTO SalesDetails (Sale_Details_id, Sales_id, Product_id, UnitPrice, Quantity_Sold, Sales_Amount, Discount_Applied, Net_Amount)
+VALUES (16, 701, 507, 2500, 4, 10000, 0, 10000);
+
+INSERT INTO SalesDetails (Sale_Details_id, Sales_id, Product_id, UnitPrice, Quantity_Sold, Sales_Amount, Discount_Applied, Net_Amount)
+VALUES (17, 703, 508, 5000, 2, 10000, 0, 10000);
+
+INSERT INTO SalesDetails (Sale_Details_id, Sales_id, Product_id, UnitPrice, Quantity_Sold, Sales_Amount, Discount_Applied, Net_Amount)
+VALUES (18, 704, 509, 3000, 2, 6000, 0, 6000);
+
+INSERT INTO SalesDetails (Sale_Details_id, Sales_id, Product_id, UnitPrice, Quantity_Sold, Sales_Amount, Discount_Applied, Net_Amount)
+VALUES (19, 708, 501, 15000, 1, 15000, 0, 15000);
+
+INSERT INTO SalesDetails (Sale_Details_id, Sales_id, Product_id, UnitPrice, Quantity_Sold, Sales_Amount, Discount_Applied, Net_Amount)
+VALUES (20, 707, 502, 18000, 1, 18000, 0, 18000);
+
+commit;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import pandas as pd
+import cx_Oracle
+
+def fetch_table_data(query, conn):
+    cursor = conn.cursor()
+    cursor.execute(query)
+    columns = [col[0] for col in cursor.description]
+    data = cursor.fetchall()
+    df = pd.DataFrame(data, columns=columns)
+    cursor.close()
+    return df
+
+def connect_to_oracle(username, password, dsn):
+    conn = cx_Oracle.connect(user=username, password=password, dsn=dsn)
+    return conn
+
+username = 'team24_cibi'
+password = 'team24_cibi'
+dsn = 'orcl-aws.c8sefhobaih4.ap-south-1.rds.amazonaws.com/orcl'
+
+conn = connect_to_oracle(username, password, dsn)
+
+connection = cx_Oracle.connect(user=username, password=password, dsn=dsn)
+print(connection.version)
+
+queries = {
+    'Employee': 'SELECT * FROM Employee',
+    'Counter': 'SELECT * FROM Counter',
+    'Product': 'SELECT * FROM Product',
+    'SalesHeader': 'SELECT * FROM SalesHeader',
+    'SalesDetails': 'SELECT * FROM SalesDetails'
+}
+
+dfs = {}
+for table, query in queries.items():
+    dfs[table] = fetch_table_data(query, conn)
+
+for table, df in dfs.items():
+    print(f"\n{table} DataFrame:")
+    print(df.head())
+
+conn.close()
+
+employee_df = dfs['Employee']
+counter_df = dfs['Counter']
+product_df = dfs['Product']
+sales_header_df = dfs['SalesHeader']
+sales_details_df = dfs['SalesDetails']
+
+
+
+with pd.ExcelWriter("Pothys_tirunelveli_transactions.xlsx") as writer:
+    employee_df.to_excel(writer, sheet_name="employee_df", index=False)
+    counter_df.to_excel(writer, sheet_name="counter_df", index=False)
+    product_df.to_excel(writer, sheet_name="product_df", index=False)
+    sales_header_df.to_excel(writer, sheet_name="sales_header_df", index=False)
+    sales_details_df.to_excel(writer, sheet_name="sales_details_df", index=False)
+
+
+
+
+
+pip install boto3 botocore
+
+import boto3
+
+s3 = boto3.resource(
+    service_name = 's3',
+    region_name = 'ap-south-1',
+    aws_access_key_id = 'AKIAXDWNNDBU3XL6JYEG',
+    aws_secret_access_key = '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')
+
+for bucket in s3.buckets.all():
+    print(bucket.name)
+
+bucket_name = 'shobha123'
+file_name = 'Pothys_tirunelveli_transactions.xlsx'
+
+s3.Bucket('shobha123').upload_file(Filename = file_name,Key = 'Tirunelveli')
+
+for bucket in s3.buckets.all():
+    print(bucket.name)
+
+for obj in s3.Bucket('shobha123').objects.all():
+    print(obj)
+

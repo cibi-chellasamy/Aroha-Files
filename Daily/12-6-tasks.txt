@@ -1,0 +1,29 @@
+Productivity
+Domain: Human Resource
+Function: Client and Projects Ops
+Scenario: Client and Projects -- 
+-----------------------------------------------------------
+Domain: Human Resource
+Function: Client and Projects Ops
+Scenario: Project Employee linking--
+-----------------------------------------------------------
+Domain: HealthCare
+Function: Doctor Patient
+Scenario: Healthcare Analysis
+-----------------------------------------------------------
+Domain: HealthCare
+Function: Doctor Patient
+Scenario:Doctor Patient Analysis
+-----------------------------------------------------------
+Domain: Human Resource
+Function: Department Employee Jobs
+Scenario: Employee Management
+-----------------------------------------------------------
+Partially completed
+Human Resource
+Department Employee Jobs
+Emp and Dept analysis
+
+
+
+

@@ -1,0 +1,21 @@
+select to_char(ExpectedMonth, 'Month') as monthname,nvl(sum(ExpectedAmount), 0) as expectedamount,nvl(sum(ActualAmount), 0) as actualamountreceived
+from 
+    (select  ExpectedMonth, ExpectedAmount, 0 as ActualAmount
+        from 
+            Policy_Premium_Expected_Fact
+        where 
+            extract(year from ExpectedMonth) = extract(year from sysdate)
+        union all
+        select 
+            ActualMonth,
+            0 as ExpectedAmount,
+            ActualAmount
+        from 
+            Policy_Premium_Paid_Fact
+        where 
+            extract(year from ActualMonth) = extract(year from sysdate)
+    ) as combined_data
+group by 
+    to_char(ExpectedMonth, 'MM')
+order by 
+    min(ExpectedMonth);

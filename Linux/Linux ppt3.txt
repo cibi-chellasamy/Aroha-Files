@@ -1,0 +1,146 @@
+Monday, March 18th 2024
+
+
+=====================================================================================
+
+Today's Concepts : vi,mv,cp,grep,pipe,users permissions,less,top,head,tail,wc
+
+======================================================================================
+
+1. grep :: to search for particular string/word in a text file
+           syntax : grep string/word file_name
+                    grep -i string/word file_name ( case insensitive strings/word)
+                    grep -n string/word file_name ( along with line numbers )
+                     
+=====================================================================================================
+
+2. | :: output the result of one command as input to another command 
+        ls -l | grep word/string filename
+
+=====================================================================================================
+
+                         File type --- - ( normal file ), d ( directory file ), s ( socket file ), l (link file)
+                         File permissions --- read,write,execute for user(root),group,others
+                         Number of links 
+                         Owner -- owner of the file
+                         Group -- group of he file
+                         Size -- size in bytes
+                         Last modified date and time 
+                         File name
+
+3.Users permissions :: read (4), write (2), execute (1)
+                       user (u), group (g), others (o), all (a)
+
+                       chmod : to change access permissions of files and directories
+                               eg : chmod g+wx filename
+                                    chmod u=rwx,o-wx filename
+                                    chmod 755 filename rwx == r 4 + w 2 + x 1 = 7 ( user)
+                                                       rwx == r 4 + x 1 = 5 ( group)
+                                                       rwx == r 4 + x 1 = 5 ( others )
+                                                 
+                       chown : to change the owner of files and directories
+                               eg : chown username filename
+                                    chown username:groupname filename
+
+                       chgrp : to change the group ownership of files and directories 
+			       eg : chgrp groupname filename      
+
+=========================================================================================================
+
+4. less :: to read the starting content from a very big data
+           Syntax : less file_name
+                    and press down arrow key ( to view the content downwards )
+
+=========================================================================================================
+
+5.top :: view of the running system 
+         Syntax : top ( it gets refreshed after ever 3s )
+
+========================================================================================================
+
+6.head :: it outputs the first part of the file (usually 10lines )
+          Syntax : head file_name
+                   head -nhow_many_lines filename
+
+=======================================================================================================    
+
+7.tail :: it outputs the last part of the file
+          Syntax : tail -nhow_many_lines file_name
+
+=========================================================================================================
+
+8.wc :: word count ( prints the count of each word, lines etc )
+        wc filename
+             number_of_lines number_of_words number_of_characters filename
+              (wc -l fname )  (wc -w fname)	(wc -c fname)	
+
+=========================================================================================================
+9.mv :: 1) Renaming a file or directory.
+        2) Moving a file or directory to another location.
+        mv source_file_name destination_file_name : to rename a file
+        mv source_file_name destination_path : to move a file
+
+==========================================================================================================
+10.cp :: copy files.
+        syntax : cp source_file destination_file
+                 cp -i source_file destination_file ( confirmation )
+        copy multiple files to directory : cp src_file1 src_file2 src_file3 dest_directory_name/   
+        copy files between two directories :  cp -R source_directory dest_directory
+
+==========================================================================================================
+11.vi :: vi file_name 
+         enter insert_mode (press i )
+         type the content
+         press esc 
+         type :wq and press enter (w for save and q for quit )
+
+===========================================================================================================
+
+find Main_Directory/Sub_Directory_2 -type f -name "File_2" -delete
+ [ to delete only file in a sub-directory without deleting the sub-directory]
+
+rm -r Main_Directory/Sub_Directory_2
+ [remove entire directory from main directory]
+
+
+
+read (4), write(2), execute(1)
+r+w = 4+2 = 6 rw-
+w+x = 2+1 = 3 -wx
+
+   -rw-rw-r-- 1 ubuntu ubuntu   21 Jan  8 10:36 demo_file
+    user ( created file permissions ) -- rw
+    group ( which group belongs it ) -- rw
+    others ( anybody else other than user ) -- r
+
+
+
+content to a file ::     Nature's beauty is a gift that cultivates appreciation and gratitude.
+    A walk in nature walks the soul back home.
+    The earth has music for those who listen.
+    Every flower is a soul blossoming in nature.
+    Nature does not hurry, yet everything is accomplished.
+    The mountains are calling, and I must go.
+    In every walk with nature, one receives far more than he seeks.
+    Look deep into nature, and then you will understand everything better.
+    The ocean stirs the heart, inspires the imagination, and brings eternal joy to the soul.
+    Nature is not a place to visit. It is home.
+    Trees are the earth's endless effort to speak to the listening heaven.
+    Sunset is still my favorite color, and rainbow is second.
+    The poetry of the earth is never dead.
+    Nature always wears the colors of the spirit.
+    To sit in the shade on a fine day and look upon verdure is the most perfect refreshment.
+    In nature, light creates the color. In the picture, color creates the light.
+    Nature is the art of God.
+    Adopt the pace of nature: her secret is patience.
+    In the spring, at the end of the day, you should smell like dirt.
+    Wilderness is not a luxury but a necessity of the human spirit.
+    The best thing one can do when it's raining is to let it rain.
+    The beauty of the natural world lies in the details.
+    I believe in God, only I spell it Nature.
+    Nature gives to every time and season some beauties of its own.
+    The earth laughs in flowers.
+    Let us take our hearts for a walk in the woods and listen to the magic whispers of old trees.
+    There is something infinitely healing in the repeated refrains of nature—the assurance that dawn comes after night, and spring after winter.
+    To forget how to dig the earth and to tend the soil is to forget ourselves.
+    Nature is not a place to visit; it is home.

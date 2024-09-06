@@ -1,0 +1,45 @@
+
+Lumen Question											Date:=16/12/2022
+---------------------
+
+
+1) From How many months your  working in Aroha?
+2) How you get placed in Aroha?
+3) Where is Aroha (location)?
+4) What is inline view? Where you have used inline view in your project?
+
+5)What is cursor?
+6)Types of Cursor?
+7)Difference between Cursor and collection?
+8)On which scenario you use refcursor and collection?
+9)Difference between primary key and Unique key?
+10)What is datawarehouse?
+11)Difference between oltp,olap,ods.
+12)What is sqlldr? In sqlldr  can you load data from mutliple source data to one target?
+13) What if the table structure is different?
+14)Queries 
+====================
+A) Delete duplicate record using subquery  and corelated query.
+
+
+B) Find the missing values for the below sequence
+
+1000
+1001
+1005
+1006
+1007
+
+===============================================================================
+
+
+15) What is cache?
+
+16) How you will find  object_type?
+
+17) Difference between user_objects and all_objects?
+
+18)Do you know about informatica?
+
+
+

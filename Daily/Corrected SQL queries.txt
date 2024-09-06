@@ -1,0 +1,48 @@
+--1) Find the top 2 months of sales in the year 2023
+
+SELECT * FROM
+(dense_rnk() over(partition by total_cost order by yyyy) d_rnk
+FROM sales_fact sf
+INNER JOIN date_id d
+ON sf.date_id = d.date_id)
+WHERE d_rnk >= 2 and yyyy = 2023;
+
+corrected 
+select * from(
+select dense_rank() over(partition by sf.total_cost order by extract(year from d.date_colum)) d_rank
+from sales_fact sf
+inner join
+date d
+ON sf.date_id = d.date_id)sub_q sub
+WHERE sub.d_rnk >= 2 and extract(year from d.date_column) = 2023;
+
+
+
+--Dense_rank is not inside the select statement
+-- dense_rank() correct the spelling
+-- date function is not used in order by 
+-- the date tables name is mentioned as date_id and the column is also date_id
+--year should be mentioned inside date function
+--No alias for sub query and column names
+------------------------------------------------------------------------------------------------------------
+2) List the product name, year, total qty sold. I should see only one record per product in each year.
+SELECT DISTINCT(prod_name,yyyy), (tot_qty * total_cost) as total_qty_sold
+FROM sales_fact sf
+INNER JOIN date_id d
+ON sf.date_id = d.date_id
+INNER JOIN prod_sur_id ps
+ON sf.prod_sur_id = ps.prod_sur_id
+
+
+corrected_query
+select distinct product_name,extract(year from date_column),(tot_qty * total_cost) as tot_qty_sold
+from sales_fact sf
+inner join date d
+on sf.prod_sur_id = ps.prod_sur_id
+group by product_name,extract(year from date_column);
+
+--distinct cannot be used with multiple columns 
+-- Alias names for columns
+-- group by if we use aggregate function
+-- Instead of table name id is used
+-- date function is not used in 

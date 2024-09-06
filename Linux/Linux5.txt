@@ -1,0 +1,87 @@
+Wednesday,March 27th 2024
+
+====================================================================================
+
+What is a PROCESS ???
+
+Whenever you issue a command in Unix, it creates, or starts, a new process.
+When you tried out the ls command to list the directory contents, you started a process.
+A PROCESS, in simple terms, is an instance of a running program.
+
+The operating system tracks processes through a five-digit ID number known as the PID or the PROCESS ID. 
+Each process in the system has a UNIQUE PID.
+
+When you start a process (run a command), there are two ways you can run it ::
+
+1.FOREGROUND PROCESSES
+2.BACKGROUND PROCESSES
+
+FOREGROUND PROCESSES :: By default, every process that you start runs in the foreground.
+                        It gets its input from the keyboard and sends its output to the screen.
+                        eg. $ls ch*.doc ( lists all the files starting with ch and ending with .doc )
+                        Disadvantage : While a program is running in the foreground and is time-consuming, 
+                                        no other commands can be run (start any other processes) because the prompt would not be available until the program finishes processing and comes out.
+
+BACKGROUND PROCESSES :: A background process runs without being connected to your keyboard.
+                        eg.$ls ch*.doc & ( add ampersand at the end of the command ) , once done press the enter key.
+                        Advantage : we can run other commands; you do not have to wait until it completes to start another!
+
+================================================================================================================================================
+
+LISTING RUNNING PROCESSES :: to check the running processes , run the command ps ( process status ) or ps -f ( displays detailed info )
+                             1.UID : USER ID that this process belongs to ( the person who is running it )
+                             2.PID : process ID
+                             3.PPID : parent process ID
+                             4.C : CPU utilization of process
+                             5.STIME : process start time
+                             6.TTY : terminal type associated with the process
+                             7.TIME : CPU time taken by the process
+                             8.CMD : the command that started this process 
+
+        TTY: Teletypewriter originally and also means any terminal on Linux/Unix systems.  
+        PTS: Stands for the pseudo-terminal slave.
+
+        The difference between TTY and PTS is the type of connection to the computer. 
+        TTY ports are direct connections to the computer such as a keyboard/mouse or a serial connection to the device. 
+        PTS connections are SSH connections or telnet connections. All of these connections can connect to a shell which will allow you to issue commands to the computer.
+
+=====================================================================================================================================================
+
+OTHER OPTIONS WITH PS COMMAND :: ps -a ( info about all users )
+                                 ps -x ( info about processes without terminals )
+                                 ps -u ( its like -f option )
+                                 ps -e ( lists all the processes running on the system regardless of the user )
+
+=====================================================================================================================================================
+
+STOPPING PROCESSES :: CTRL + C ( ONLY WHEN PROCESS IS RUNNING IN FOREGROUND )
+                      IF PROCESS IS RUNNING IN BACKGROUND ( get its JOB ID using PS command , and use KILL command to kill the process ) 
+                      eg. ps -f 
+                          kill processID
+                              (or)
+                          kill -9 processID ( forcefully terminate the process )
+
+====================================================================================================================================================
+
+PARENT AND CHILD PROCESSES :: processes are organized in a hierarchical manner where each process, except for the very first process called the "init" process, has a parent process.
+                              When a process creates another process, the one that initiated the creation becomes the parent, and the new process becomes its child.
+           For example, imagine you start a terminal session. The terminal process becomes the parent process. 
+           Now, if you run a command within that terminal, say, open a text editor, the text editor process becomes a child process of the terminal.
+           If you then decide to run another command, say, a file compression tool from within the text editor, that compression tool process becomes a child process of the text editor process and a grandchild process of the terminal.
+
+===================================================================================================================================================
+
+ZOMBIE AND ORPHAN PROCESSES :: A zombie process is a terminated process that has completed its execution, but its entry still remains in the process table because its parent process hasn't yet read its exit status. 
+                               Essentially, it's a dead process that is waiting for its parent process to acknowledge its termination and retrieve its exit status.
+                       
+                               An orphan process is a process whose parent has terminated or finished while the child process is still running. 
+                               When the parent process ends before the child, the orphaned child process gets re-parented to the init process (PID 1), which becomes its new parent.
+
+===================================================================================================================================================
+
+DAEMON PROCESSES :: a daemon is a process that runs in the background, usually waiting for something to happen that it is capable of working with. For example, a printer daemon waiting for print commands.
+
+===================================================================================================================================================
+
+
+                                                     

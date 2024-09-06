@@ -1,0 +1,188 @@
+1. Power BI services?
+Ans:- Power BI services is a cloud based business analytics service that enable
+any one to visualize and data analysis will generator speed efficient and
+understanding. It will give a single view of your most critical data.
+Power BI support wide support wide range of data sources. Power BI has
+several components that helps users created and share data reports.
+
+2. What are the Limitations of Power BI?
+Ans:- Schedule refresh is not there. We can’t share it with any one, through
+power bi desktop
+
+3. What is Power Pivot?
+Ans:- It will allows us to connect multiple sources. We can load the data. We
+can create relationship between the data and here we will create measure.
+
+4. What is Power View?
+Ans:- With the help of power view we can create visualization
+
+5. What is Power Query?
+Ans:- It will perform transformations, SQL operations can be performed in
+power bi with query. Direct query is a direct connection to data source, data
+will not be stored in power bi model.
+Power bi will be a visualizations layer, then query the data from data source
+every time(Table name, Column Name, Relationship) but not the data.
+Example:- SQL SERVER, SAP HANA, AZURA SQL DATABASE, AMAZON REDSHIFT
+
+6. Name some Commonly used tasks in the query editor?
+Ans:- 1. Connect to data 
+          2. Shape and combine data
+          3. Group rows 
+          4. Pivot columns
+          5. Create custom columns 6. Query formulas
+
+
+7. What are the components of Power Bi?
+Ans.) Components of Power BI are
+1. Power query:- In power query we can able to do transformation like
+changing data types, deleting duplicates etc.
+2. Power pivot :- In Power pivot will do modelling and will connect to different
+sources and also can view the data.
+3. Power view:- In Power view we can able to generate the visuals.
+4. Power Map:- Lets you create geospatial representation of your data.
+5. Power Q & A:- Lets you use natural language to get answer to query.
+
+8. What are the building blocks of Power BI?
+Ans.)  Following are the building blocks of power BI
+1. Visualization:- Visualization is a charts, graphs or similar visual
+representation of data.
+2. Dataset:- A dataset is the group of data used to create a visualization, such
+as a column of sales figures. Dataset can be combine and filtered from
+different source using built in connectors
+3. Reports:- A report is a group of visualization on one or more pages
+4. Dashboard:- Dashboard is a collection of tiles.
+5. Tile:- Tile is single visual pin from report.
+
+9. What is data size in power BI.
+Ans:- The file size limit is 1GB in PRO and 10GB for premium members/users.
+
+10. What is Direct Query?
+Ans:- Direct query is a direct connection to data source. Data will not be stored
+in power BI model. Power BI will be a visualization layer, then query the data
+from data source every time. Power BI only store metadata of table (Table
+Name, Column name, relationship......) but not the data.
+Example:- SQL SERVER, SAP HANA, AZURE SQL database, Amazon Redshift.
+
+
+11. How many records we are able to see in your power bi desktop.
+Ans:- 1 Million
+
+12. What are the difference sources that you worked on?
+Ans:- Excel, SQL Server, CSV Files and Azure SQL Server.
+
+13. What is dashboard?
+Ans:- A dashboard is a collections tiles. Tile is nothing but a visual pin from the
+report
+
+14. Can we delete datasets in pro from works space?
+Ans:- Yes
+
+15. What are the power BI services?
+Ans:- It can do all admin activities of power bi, It is a web based server.
+1. We can schedule refresh 2. We can create dashboard
+3. We can share the reports 4. We can apply securities
+
+16. What is Relationship? How many types of relationship?
+Ans:-
+ ->When you import multiple tables, you are going to do some analysis
+using data from all those tables.
+-> Relationship between those table are necessary in order to accurate
+calculate result and display the correct information in your reports.
+->Power BI desktop makes creating those relationship easy. The auto
+detect feature can do it for you.
+->If you query two or more table at the sometime, when the data is
+loaded, power bi desktop attempts to find and create relationship for
+you.
+->Cardinality, cross filter direction and active properties are automatically
+set
+Types of Relationships
+1. Active Relationship.
+2. De-active Relationship.
+
+
+Active Relationship:-
+This means the relationship service as the active, default relationship. Where
+there is more than one relationship provides a way of power bi desktop to
+automatically create visualizations that include both table.
+
+17. What is Cardinality?
+Ans:- The cardinality of the relationship means having unique or multiple
+instances per value for the joining field between two tables.
+Cardinality defined by the relationship. Cardinality refers to the relationship
+between two tables. Cardinality can be of 3 types
+1. Many to One
+2. One to Many
+3. Many to Many
+The cardinality refers to the uniqueness of a columns in a table. The columns
+with all unique values would be having the high cardinality and the columns
+with all duplicates values would be having the low cardinality.
+
+18. What is Bi-Directional Cross filters/ What is Cross Filter?
+Ans:- Cross filtering is nothing but relationship between two tables. Cross
+filtering, filters the data in two ways
+1. Single
+2. Both
+Single:- If we have parent and child table, If I can apply single direction filter
+the data in parent table automatically it will effect /filter the child table.
+
+If I can filter the data in child table it will not filter the parent table.
+Both:- if we apply both directions filtering then the data get changes in both
+the tables even if we modify in single table.
+
+Edit RelationshipCross Filter Direction  Select both and Apply security
+filter in both directions.
+
+Parent Table Child Table
+
+Parent Table Child Table
+
+
+19. Can we delete report/dataset from workspace?
+Ans:- Yes, Once the app get published we cannot delete it until unless we
+un-publish the app.
+
+20. Is dataset and report different?
+Ans:- At desktop level both are same but in the service we can see at different
+levels.
+
+21. What is Dashboard?
+Ans:- A dashboard is a collections tiles. Tile is nothing but a visual pin from the
+report
+
+22. Can we create a dashboard from visual from multiple page with the
+report or multiple report?
+Ans:- Yes
+
+23. What is Dataset?
+Ans:- A data set is a collection of related, discrete items of related data that
+may be accessed individually or in combination or managed as a whole entity.
+
+24. Can we import data direct power BI service?
+Ans:- Yes (Through get data)
+
+25. What is difference b/w Dataset and Power BI dataset?
+Ans:- No, Both are same.
+
+26. Can connect direct query excel?
+Ans:- Yes
+
+27. Can we can get the data through need to SQL Script?
+Ans:- Yes
+
+28. What are Reports?
+Ans:- A power BI report is a series of visualizations, filters and static elements
+on a canvas. Power BI reports are saved as a single PBIX file and connect to a
+single dataset.
+
+
+29. What are the different types of sharing we have
+Ans:- By App, Through Content packs, By email
+
+30. How can you import local images in to power BI desktop?
+Ans:- Using BASE64 code we will convert to local image to binary code then we
+will use images in required reports.
+Go to Get data-> select More Options and Choose Folder option-> Give path
+of Image folder->Click Edit
+And Select Invoke Custom functions and select Given Folder Name (It will
+convert image to BASE64 code as separate column)->Close and apply.
+Than Change data category (above created column)-> Image URL

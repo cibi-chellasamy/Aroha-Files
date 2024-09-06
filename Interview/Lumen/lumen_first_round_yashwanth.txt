@@ -1,0 +1,14 @@
+1.how will you  login to the client
+2.in which timezone u will upload data
+3.diffrence between datetime and datetimestamp
+4.diffrence between materialized view and view
+5.in which format date  will store
+6.diffrence between correlated subquery and subquerry 
+7.what is collection and types of collections
+8.what is the size the varchar2 can hold in sql and plsql
+9.partition tables?. types 
+10.do you know about unix or linux
+11.i have miliions of records in a table i want to delete 2 records 
+    how will u increase perfomamance?
+12.presently  are you on notice period?
+

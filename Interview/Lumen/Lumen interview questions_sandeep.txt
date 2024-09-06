@@ -1,0 +1,35 @@
+----------LUMEN INTERVIEW QUESTIONS-----------
+
+1. Indroduce about yourself.
+2. Explain about your project.
+3. What are all the cursors used in your Project.
+4. What are all the tables available in your project.
+5. How you will load the file to the data base.
+6. What are all the SQLLOADER files.
+7. Which format file are you getting to extract the file.
+7. Difference between Cursor and Refcursor.
+8. How comfortable with writing the querries.
+9. Which course is having a maximum number of students.
+10. Display the customer_name who doesnt done any transaction from last 6months.  
+11. What is your daily work routine.
+12. what are all the commands used in control file.
+13. Consider there is one table in that there is an on serial no table i.e
+
+sl.no.
+1
+2
+4
+5
+7
+8
+10
+write a querry to display the missing numbers from this sl.no.
+
+14. Assume There is two columns i.e
+
+NAME  FRIENDS_NAME
+A	B
+B	C
+C	D
+
+Write a querry to display the friends name for each name.

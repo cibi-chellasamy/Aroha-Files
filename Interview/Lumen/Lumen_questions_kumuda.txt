@@ -1,0 +1,17 @@
+								------Lumen 1st round Interview Questions 27/01/2023--------						
+1)Introduction
+2)'28/01/2023' in this date display only year
+3)Difference between view and materialized view
+4)difference between %type and %rowtype
+5)explain scd1,scd2,scd3
+6)Display total number of employees based on city
+7)Select all the duplicate records in the table
+8)Delete all the duplicate records in the table
+9)what is substring and instring
+10)What is rtrim and ltrim
+11)Suppose I have billion records in source table and i have to populate to target table how you will populate
+12)What is the use of cursor?
+13)I am in database A and i want the data from database B , what's your way to reach the database B?
+14)Explain your project
+15)In target table i have a column call first_name when i populate it to target table if the names are changed means(ex - 'aroha' in source but 'aroha11' in target)
+how will you get to know?

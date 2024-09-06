@@ -1,0 +1,21 @@
+df = pd.read_excel('market equipment data of HealthCare V1 - Copy.xlsx')
+
+df['supplieslist'] = df['supplieslist'].str.split('|')
+new_supplies_list = []
+
+for supplies in df['supplieslist']:
+    if isinstance(supplies, list):
+        for supply in supplies[1:]:
+            new_supplies_list.append([supply])
+
+new_df = pd.DataFrame({'supplieslist': new_supplies_list})
+new_df
+new_df = new_df.drop_duplicates()
+new_df.reset_index(drop=True, inplace=True)
+new_df['supplieslist'] = new_df['supplieslist'].apply(lambda x: x[0])
+new_df['equipment_id'] = range(1, len(new_df) + 1)
+new_df.set_index('equipment_id',inplace=True)
+new_df['equipment_code'] = new_df.index.astype(str)  + new_df['supplieslist'].str.split().apply(lambda x: ''.join([word[0] for word in x]))
+
+file_path = "Market equipment data xl.xlsx"
+new_df.to_excel(file_path, index=False)

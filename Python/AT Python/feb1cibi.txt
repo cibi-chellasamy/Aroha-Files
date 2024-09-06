@@ -1,0 +1,107 @@
+1) enter any 10 numbers in a list
+   convert list to tuple
+   iterate the tuple and display all the elements
+   sort the tuple in DESC order, display the highest and sec highest 
+   element using the INDEX position
+   (no max() to be used)
+-------------------------------------------
+numbers_list = [33,44,55,66,77,11,23,45,67,98]
+numbers_tuple = tuple(numbers_list)
+
+print("Numbers in the tuple:")
+for Numbers in numbers_tuple:
+    print(Numbers)
+    
+sorted_tuple = tuple(sorted(numbers_tuple, reverse=True))
+
+if len(sorted_tuple) >= 2:
+    highest = sorted_tuple[0]
+    second_highest = sorted_tuple[1]
+    
+    print("Highest element:", highest)
+    print("Second highest element:", second_highest)
+else:
+    print("Tuple must contain at least two elements to find highest and second-highest.")
+==========================================================
+2) enter any 10 numbers (use while) in a set
+   if the inputted number is already there in set
+   then ignore counting that number and re-enter NEW number
+   after 10 numbers are entered, find the following
+   total of all elements
+   highest element, lowest element
+   avg value
+   (use max(),min(),sum() - ONLY for verification, write your onw logic)
+
+
+
+numbers_set = set()
+
+count = 0
+
+while count <10:
+    num = int(input('Enter the number {count +1}: '))
+    
+    if num not in numbers_set:
+        numbers_set.add(num)
+        count = count +1
+    else:
+        print("number already exists in the set. enter a new number.")
+        
+total = 0
+highest = float('-inf')
+lowest = float('inf')
+
+for num in numbers_set:
+    total = total+num
+    if num > highest:
+        highest = num
+    if num < lowest:
+        lowest = num
+average = total / len(numbers_set)
+
+print("\nResults:")
+print("set of numbers:", numbers_set)
+print("total of all numbers:", total)
+print("highest numbers:", highest)
+print("lowest numbers:", lowest)
+print("average numbers:", average)
+===========================================
+
+3) data1 = [56,12,89,10,12,5,99,19,89,56,11,11,5,20,25,56,17,29,4,5,10]
+   how many unique elements are there
+   find which numbers are duplicate
+   replace all 12 with 13 and all 25 with 35 - when data1 is converted to set
+
+data1 = [56, 12, 89, 10, 12, 5, 99, 19, 89, 56, 11, 11, 5, 20, 25, 56, 17, 29, 4, 5, 10]
+
+unique_count = len(set(data1))
+
+duplicates = []
+
+for item in data1:
+    if data1.count(item) > 1 and item not in duplicates:
+        duplicates.append(item)
+        
+modified_set = set(data1)
+modified_set.discard(12)
+modified_set.discard(25)
+modified_set.add(13)
+modified_set.add(35)
+
+print("number of unique elements:", unique_count)
+print("duplicate numbers:", duplicates)
+print("modified set after replacing 12 with 13 and 25 with 35:\n", modified_set)
+
+===================================================================================
+
+
+
+
+
+
+
+
+
+
+
+

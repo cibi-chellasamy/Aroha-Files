@@ -1,0 +1,89 @@
+import datetime
+import pandas as pd
+import calendar
+import numpy as np
+from datetime import timedelta
+import warnings
+warnings.filterwarnings('ignore')
+
+df_cpt = pd.DataFrame({'CPT_ID':[100, 101, 102, 103],
+                       'FREQ_OF_PMT':['Monthly','Quaterly','Half_yearly','Yearly']})
+
+ data = {
+    'CONTRACT_ID':[12345, 12879, 12987, 12346, 12348],
+    'CONTRACT_TYPE':['government', 'individual', 'individual', 'government', 'government'],
+    'CONT_S_DATE':['10-Jan-10', '03-FEB-11', '15-Feb-11', '13-MAR-09', '6-Apr-12'],
+    'CONT_E_DATE':['10-JAN-12', '15-Feb-12', '15-SEPT-11', '14-MAR-11', '22-May-13'],
+    'CPT_ID':[100, 101, 100, 102, 103, ],
+    'CONT_AMT':[700000, 489938, 289456, 200000, 200000],
+    'INS_DATE':['10-Jan-10', '3-Feb-11', '3-Feb-11', '13-Mar-09', '6-Apr-12'],
+    'UPD_DATE':[np.nan, np.nan, '10-Apr-09', np.nan,np.nan ]
+}
+
+df_contract = pd.DataFrame(data)
+df_contract['CONT_S_DATE'] = pd.to_datetime(df_contract['CONT_S_DATE'])
+df_contract['CONT_E_DATE'] = pd.to_datetime(df_contract['CONT_E_DATE'])
+df_contract['INS_DATE'] = pd.to_datetime(df_contract['INS_DATE'])
+df_contract['UPD_DATE'] = pd.to_datetime(df_contract['UPD_DATE'])
+
+df_contract['CONT_S_DATE'] = df_contract['CONT_S_DATE'].dt.strftime('%d/%m/%Y')
+df_contract['CONT_E_DATE'] = df_contract['CONT_E_DATE'].dt.strftime('%d/%m/%Y')
+df_contract['INS_DATE'] = df_contract['INS_DATE'].dt.strftime('%d/%m/%Y')
+df_contract['UPD_DATE'] = df_contract['UPD_DATE'].dt.strftime('%d/%m/%Y')
+
+df_receivable = pd.DataFrame({'EXPECTED_REC_ID':[],'EXPECTED_REC_DATE':[],'CONTRACT_ID':[],'AMOUNT':[]})
+
+
+
+
+def ins_dates(start_date, end_date, freq):
+    dates = pd.date_range(start=start_date, end=end_date, freq=freq)
+    return dates
+
+for index, row in df_contract.iterrows():
+    contract_id =row['CONTRACT_ID']
+    freq_of_pmt =df_cpt.loc[df_cpt['CPT_ID'] ==row['CPT_ID'], 'FREQ_OF_PMT'].iloc[0]
+    cont_amt =row['CONT_AMT']
+    ins_date_start =row['CONT_S_DATE']
+    ins_date_end =row['CONT_E_DATE']
+    
+    if freq_of_pmt=='Monthly':
+        freq ='MS'
+    elif freq_of_pmt=='Quaterly':
+        freq ='QS'
+    elif freq_of_pmt=='Half_yearly':
+        freq ='6MS'
+    else:  
+        freq ='YS'
+    
+    installment_dates =ins_dates(ins_date_start, ins_date_end, freq)
+    amount_per_payment =cont_amt /len(installment_dates)
+    for date in installment_dates:
+        expected_rec_id = 100 +len(df_receivable) +1
+        df_receivable =df_receivable.append({'EXPECTED_REC_ID':expected_rec_id,
+                                              'EXPECTED_REC_DATE':date,
+                                              'CONTRACT_ID':contract_id,
+                                              'AMOUNT':amount_per_payment},ignore_index=True)
+
+
+
+df_receivable['EXPECTED_REC_DATE'] =df_receivable['EXPECTED_REC_DATE'].dt.strftime('%d/%m/%Y')
+
+
+df_receivable['EXPECTED_REC_ID'] =df_receivable['EXPECTED_REC_ID'].astype(int)
+df_receivable['CONTRACT_ID'] =df_receivable['CONTRACT_ID'].astype(int)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

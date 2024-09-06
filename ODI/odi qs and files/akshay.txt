@@ -1,0 +1,41 @@
+Akshay
+self introduction
+why you shifted from non-IT to IT
+
+SQL
+Indexes in sql ?
+indexes are database object which are used fetch data retrive faster.
+how it works ?
+i have taken b-tree index explained using an example like 
+when i have 1000 records i want retrive 999 th record that time index will divide the total records into 2 halves 0-500 and 500-1000 then itll compare to 999th record   999th is greater than 500 now again it will divide the records from 500-750 and 750-1000 so on itll compare and gives the result. 
+
+
+PL/SQL
+Cursors , how will you use cursors in plsql?
+cursors are used to fetch multiple rows.
+in declare section ill declare the cursor with select statement. then loop that in begin section.
+
+types of triggers?
+dml , ddl , compund, instead of triggers.
+
+ODI
+what is interface?
+interface are working area here we can design mappings, we can drag the source table and target table to this area.
+what is topology manager?
+topology manager is consists of physical architecture, context, logical architecture, loadplans and scenario.
+here we will create an data server then physical schema for that data server and then logical schema for that physical schema through context physical schema and logical schema are connected.
+
+what are knowledge modules?
+knowledge modules form the basis of plugins for odi and helps to generate releavent execution code across multiple technologies .
+
+types of knowledge modules and explain what journalizing knowledge module will do?
+we have INTEGRATION KM,LOADING KM,CHECKING KM,JOURNALIZING KM, REVERSE ENGINEERING MODULE , SERVICE KNOWLEDGE MODULE
+JOURNALIZING module will records the changed and newly inserted data of an cdc enabled table.
+
+how you will run any procedure/interface parallely?
+in packages i have option like sequnece or parallel ill choose the paralle option for my procedure/mappings
+and in load plans also we have option like steps in that steps we can use serial or parallel step.
+
+you need to load source data to target how will you do data validations?
+first ill drag the source table to working area then ill use split transformation in this transformation i have an option to give condition there ill give my condition for validation then ill load the data.
+

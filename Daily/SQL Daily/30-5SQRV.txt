@@ -1,0 +1,124 @@
+emp_id,emp_name,sal,doj,dob gender
+-------------------------------------
+
+Second max salary of an employee
+
+select max(salary) from employees
+where salary <(select max(salary) from employees)
+
+---------------------------------------------------------------------------
+
+recent salaries of all employees
+
+tables:emp:emp_id,emp_name,gender,doj,dob
+salary:emp_id,sal_date,amount
+
+select e.emp_name,s.amount,s.sal_date
+from employees e join salary s
+on e.emp_id = s.emp_id
+where sal_date = (select max(sal_date) from salary)
+---------------------------------------------------------------------------
+
+find many ' a' there in 'AROHA"
+select regexp_count('AROHA','a',1) as count_of_a
+from dual
+
+---------------------------------------------------------------------------
+generate next 7days
+
+SELECT TRUNC(SYSDATE) + LEVEL - 1 AS next_date
+FROM dual
+CONNECT BY LEVEL <= 7;
+---------------------------------------------------------------------------
+
+DISPLAY TOP 3 STUDENTS BASED ON MARKS IN EACH SUBJECTS
+select name ,marks,subjects from
+(select name,subjects,marks,dense_rank() over(partition by subjects order by marks desc) from table as rnk)
+where rnk <=3
+---------------------------------------------------------------------------
+
+
+Display the emps whose name starts and ends in a vowel.
+
+select name from table
+where lower(substr(name,1,1)) in ('a','e','i','o','u')
+and lower(substr(name,-1)) in ('a','e','i','o','u')
+
+---------------------------------------------------------------------------
+
+select gender,
+case 
+	when gender = 'F' then 'FEMALE
+ 	when gender = 'M' then 'MALE' 
+end
+from employees
+
+
+---------------------------------------------------------------------------
+
+
+select 
+sum(case when gender = 'F' then 1 else 0 end)as female_count,
+sum(case when gender = 'M' then 1 else 0 end)as male_count,
+count(*) as total_employees,
+extract(year from hire_date)as year
+from employees
+group by extract(year from hire_date)
+---------------------------------------------------------------------------
+
+
+
+create sequence cust
+start with 1
+increment by 1;
+
+select 'cust' ||to_char(cust.nextval,'fm000') as cust_id
+from dual
+connect by level<=3;
+
+---------------------------------------------------------------------------
+3)Display the output as																	
+Dname	      Existence																
+Sales	      emp's exist																
+HR	      emp's exist																
+Accounts     emp's not exist
+
+
+SELECT 
+    d.Dname,
+    CASE 
+        WHEN e.emp_id IS NOT NULL THEN 'emp''s exist'
+        ELSE 'emp''s not exist'
+    END AS Existence
+FROM 
+    departments d
+LEFT JOIN 
+    employees e ON d.department_id = e.department_id;
+
+
+---------------------------------------------------------------------------
+
+Python
+
+
+Given the participants' score sheet for your University Sports Day, you are required to find the runner-up score. You are given  scores. Store them in a list and find the score of the runner-up.
+Python
+
+n = int(input())
+arr = list(map(int,input().split()))
+s = []
+
+for i in arr:
+    if i not in s:
+        s.append(i)
+s.sort()
+print(s[len(s)-2])
+---------------------------------------------------------------------------
+
+
+
+
+
+
+
+

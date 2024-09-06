@@ -1,0 +1,25 @@
+1.tell me about yourself
+2.tell me daily routine activites
+3.tell me roles and responsbilities 
+4.who given the task in jira tool
+5.how many days to take complete your sprints
+6.what is data base link
+7.types of database links
+8.i have a table A in one database and table B in another database how to access the data from table A
+9.explain triggers
+10.difference between procedure and function
+11.what is cursor and types of cursors
+12.what is ref cursor
+13.what is dynamic sql
+14.can we do ddl operations in procedure
+15.tell me a procedure how you will truncate the given table.
+16.i have a table A in database and you have a another table B in same database how to access the table A
+17.how many rows function will return
+18.how many parameters you can pass in procedure
+19.how many parameters you can pass in cursor
+20. 123.abc
+    3456.tyf
+    tyfnh.abc
+   i want output like this (abc tyf abc)
+21.difference between primary key and unique key.
+22.which attribute is used to find the if the cursor is open or no 

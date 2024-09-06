@@ -1,0 +1,64 @@
+SKU stock keeping unit
+
+
+CREATE TABLE Counter (
+    Counter_id NUMBER PRIMARY KEY,
+    Cashier_emp_id,
+    Store_id number
+);
+
+
+CREATE TABLE Product (
+    Product_id NUMBER PRIMARY KEY,
+    SKU VARCHAR2(50) NOT NULL UNIQUE,
+    Product_Name VARCHAR2(200) NOT NULL,
+    Category VARCHAR2(100),
+    Subcategory VARCHAR2(100),
+    Brand VARCHAR2(100),
+    Description VARCHAR2(500)
+    Stock_Quantity number,
+    Unitprice number
+);
+
+
+CREATE TABLE Employee (
+    Employee_id NUMBER PRIMARY KEY,
+    Employee_Name VARCHAR2(200) NOT NULL,
+    Role VARCHAR2(100),
+    Department VARCHAR2(100),
+    Manager_id number,
+    DOB DATE,
+    Gender varchar2(10),
+    Hire_Date DATE,
+    Address varchar(200)
+    Phone VARCHAR2(200)
+    Salary number,
+    Store_id number
+    
+);
+
+
+CREATE TABLE SalesHeader (
+    Sales_id NUMBER PRIMARY KEY,
+    Sales_date DATE NOT NULL,
+    Counter_id NUMBER NOT NULL,
+    Sale_emp_id NUMBER NOT NULL,
+    Customer_id NUMBER,
+    Total_Amount NUMBER(10, 2),
+    Payment_Method VARCHAR2(50),
+);
+
+
+CREATE TABLE SalesDetails (
+    Sales_Details_id NUMBER PRIMARY KEY,
+    Sales_id NUMBER NOT NULL,
+    Product_id NUMBER NOT NULL,
+    UnitPrice number,
+    Quantity_Sold NUMBER NOT NULL,
+    Sales_Amount NUMBER(10, 2) NOT NULL,
+    Discount_Applied NUMBER(10, 2),
+    Net_Amount number
+);
+
+
+Designing the tables transforming and loading in s3 bucket

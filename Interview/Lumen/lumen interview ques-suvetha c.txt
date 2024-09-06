@@ -1,0 +1,20 @@
+1.what is your role?
+2.you have 3 years of experience.what type of developement you done?
+3.what is your resposibility?
+4. after development of code to whom you'll deploy?
+5.how will tou get the requirement?
+6.after writting the code how'll you find developement is over?
+7.select * from emp where empid=123675';(table is having huge number of records)
+how will you do performance tuning on above query
+8. I have a table with billions of records. In that I have column with 'y' and 'n' . Now I have to change all into 'y'. what is your suggestion.
+9. diff between table and mview
+10. diff between target table and dimension
+11. diff between dimension and fact table
+12. what are the modules you have used in data warehousing
+13. I have billions of records. how'll you populate
+14. what is execution plan
+15. what is cardinality
+16. who is stack holder
+17.to schedule a job which tool you'll use
+18.what is task manager?
+19. explain your project?

@@ -1,0 +1,42 @@
+1.tell me about your self?
+2.tell me roles and responsability?
+3.tell me day to day activity?
+4.what is sql loader?
+5.how many data you get from client?
+6.how many columns in rejection table?
+7.how many fact tables you have?
+8.how many dimension tables you have?
+9.disp the most rejection part yesterday?(project)
+10.how many types of rejection?(project)
+11.where are you working?
+12.did you sent mail to client?
+13.how many team member in your project?
+14.what kind of mail you used?
+15.what is your company mail id?
+16.what is ref cursor?
+17.In your project used ref cursor?
+18.advantage of ref cursor?
+19.what is sequence?
+20.maximum value of sequence?
+21.delect the duplicate record using with clause?
+22. A
+    1
+    2
+    4
+    5
+    7
+   10
+find the missing value?
+23.  A
+    1001
+    1002
+    1003
+     .
+     .
+     .
+    1099
+    1100
+find the mising value?
+24.what about lumen?
+25.why you want job change?
+   

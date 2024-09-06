@@ -1,0 +1,47 @@
+lumen 2nd_round   
+---------------
+
+1).introduce your self.
+2).explain project.
+3).which format you get data.
+4).how you get data?
+5) what kind of data you get.
+6) how you track the asset.
+   how you generate barcodes.
+7) which asset you are tracking.
+8) what are the  dimensions tables in your project explain.
+9) what are fact table in your project explain.
+10) columns in fact and dimension ?
+11) how you populate target table.
+12) what is scd,and types of scd.explain.
+13) what kind of development did recently in your project.
+14) what is refcursor, where you used ref cursor explain senario?
+15) why you used ref cursor in function.
+16) can we create partitions on existing table.
+17) what are all partitions have explain.
+
+19) 		table1
+	name    friend_name
+	----	  -----------
+	A		B
+	B		C
+	C		D
+
+output:-
+--------
+		A 
+		C 
+		D
+
+20) find the missing numbers below data.
+
+	101
+	102
+	104
+	106
+	109
+
+
+
+
+	

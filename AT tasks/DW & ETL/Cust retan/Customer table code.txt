@@ -1,0 +1,72 @@
+import pandas as pd
+import warnings
+warnings.filterwarnings('ignore')
+
+df_cc = pd.read_csv('Call_center.csv')
+df_ic = pd.read_csv('Instore_customer.csv')
+df_wc = pd.read_excel('Web_customer.xlsx')
+
+df_cc['Source'] = 'call_center'
+df_ic['Source'] = 'in_store'
+df_wc['Source'] = 'web'
+
+df_rejectedcc =df_cc [df_cc.isna().any(axis = 1)]
+df_rejectedcc['Reason'] = ''
+
+if 'Phone' in df_rejectedcc.columns:
+    df_rejectedcc.loc[df_rejectedcc['Phone'].isnull(), 'Reason'] = 'Phone number missing'
+
+if 'Rep_name' in df_rejectedcc.columns:
+    df_rejectedcc.loc[df_rejectedcc['Rep_name'].isnull(), 'Reason'] = 'Representative name missing'
+
+df_rejectedic =df_ic [df_ic.isna().any(axis = 1)]
+
+df_rejectedic['Reason'] = ''
+
+if 'Cust_name' in df_rejectedic.columns:
+    df_rejectedic.loc[df_rejectedic['Cust_name'].isnull(), 'Reason'] = 'Customer name missing'
+
+if 'City' in df_rejectedic.columns:
+    df_rejectedic.loc[df_rejectedic['City'].isnull(), 'Reason'] = 'City missing'
+    
+if 'Store_name' in df_rejectedic.columns:
+    df_rejectedic.loc[df_rejectedic['Store_name'].isnull(), 'Reason'] = 'Store name missing'    
+
+
+df_rejectedwc = pd.DataFrame()
+for index, row in df_wc.iterrows():
+    if '@' not in row['Email']:
+        df_rejectedwc = df_rejectedwc.append(row)
+df_merged = pd.concat([df_rejectedcc, df_rejectedic, df_rejectedwc], ignore_index=True)
+df_merged = df_merged.loc[:, ~df_merged.columns.duplicated()]
+
+df_rejected = df_merged[['Cust_Id','Source','Reason']]
+
+df_wc.dropna(inplace=True)
+df_ic.dropna(inplace=True)
+df_cc.dropna(inplace=True)
+
+merged = pd.merge(df_wc, df_rejectedwc, how='outer', indicator=True)
+dfw = merged[merged['_merge'] == 'left_only'].drop(columns='_merge')
+dfw.drop('Reason',axis=1,inplace=True)
+df_master = pd.concat([df_ic,df_cc,dfw],ignore_index=True)
+df_master = df_master.drop_duplicates(subset=['Cust_Id'], keep='first')
+df_master = df_master.drop_duplicates(subset=['Cust_name'])
+df_master.rename(columns = {'Cust_Id':'Source_Id'}, inplace = True) 
+df_master['Cust_Id'] = range(100,100+len(df_master))
+file_path = "Customer master xl.xlsx"
+df_master.to_excel(file_path, index=False)
+file_path = "Rejected Customers.xlsx"
+df_rejected.to_excel(file_path, index=False)
+
+
+
+
+
+
+
+
+
+
+
+

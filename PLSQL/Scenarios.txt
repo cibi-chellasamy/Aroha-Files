@@ -1,0 +1,210 @@
+
+SCENARIO 1
+
+CREATE TABLE Guests (
+    Name VARCHAR2(50),
+    Phone VARCHAR2(20),
+    City VARCHAR2(50),
+    Pro_Flg VARCHAR2(1)
+);
+
+INSERT INTO Guests (Name, Phone, City, Pro_Flg) VALUES ('Rajesh', '783738', 'Blr', NULL);
+INSERT INTO Guests (Name, Phone, City, Pro_Flg) VALUES ('Bala', '8939', 'Chn', NULL);
+INSERT INTO Guests (Name, Phone, City, Pro_Flg) VALUES ('Aruh', '892393', 'Del', NULL);
+INSERT INTO Guests (Name, Phone, City, Pro_Flg) VALUES ('Akash', '887029', 'Chn', NULL);
+
+
+select * from custm
+
+CREATE TABLE custm (
+    c_id NUMBER,
+    c_nm VARCHAR2(50),
+    c_phone VARCHAR2(20),
+    c_city VARCHAR2(50)
+);
+INSERT INTO custm (c_id, c_nm, c_phone, c_city) VALUES (1, 'raj', '12345', 'blr');
+INSERT INTO custm (c_id, c_nm, c_phone, c_city) VALUES (2, 'uma', '89389', 'del');
+INSERT INTO custm (c_id, c_nm, c_phone, c_city) VALUES (3, 'Aruh', '892393', 'Del');
+INSERT INTO custm (c_id, c_nm, c_phone, c_city) VALUES (4,'Akash', '887029', 'Chn');
+
+COMMIT;
+
+CREATE TABLE Call_plan (
+    Call_plan_id NUMBER,
+    Guest_name VARCHAR2(50),
+    Guest_city VARCHAR2(50),
+    Guest_phone VARCHAR2(20)
+);
+--------------------------------------------------------------------------------
+/*
+1. Process all the Guest Records.
+2. If the Guest name, phone and city exits in customer, then delete that record
+3. If that Guest does not exists, then insert that guest record to call_plan table so that call center resources call them
+4. After inserting the Guest record into call_pan table, update the pro_flg of Guest table to "y" */
+
+CREATE SEQUENCE call_plan_seq;
+
+
+CREATE OR REPLACE PROCEDURE PROCESS_GUSEST_RECORDS AS
+
+BEGIN
+    FOR GUEST_REC  IN (SELECT * FROM GUESTS) LOOP
+        DECLARE V_CUST_COUNT NUMBER;
+        BEGIN   
+            SELECT COUNT(*) INTO V_CUST_COUNT
+            FROM CUSTM
+            WHERE C_NM = GUEST_REC.NAME
+            AND C_PHONE = GUEST_REC.PHONE
+            AND C_CITY = GUEST_REC.CITY;
+            
+            
+            IF V_CUST_COUNT = 0 THEN
+                INSERT INTO CALL_PLAN(Call_plan_id, Guest_name, Guest_city, Guest_phone)
+                VALUES (call_plan_seq.nextval, guest_rec.name, guest_rec.city, guest_rec.phone);
+            
+                UPDATE GUESTS
+                SET PRO_FLG = 'Y'
+                WHERE NAME = GUEST_REC.NAME
+                AND PHONE = GUEST_REC.PHONE
+                AND CITY = GUEST_REC.CITY;
+            END IF;
+        END;
+    END LOOP;
+    DELETE FROM Guests G
+    WHERE EXISTS (
+        SELECT 1
+        FROM custm C 
+        WHERE C.c_nm = G.Name
+        AND C.c_phone = G.Phone
+        AND C.c_city = G.City
+    );
+
+    COMMIT;
+EXCEPTION 
+     WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('An error occurred: ' || SQLERRM);
+END;
+
+SELECT * FROM CUSTM
+SELECT * FROM GUESTS
+SELECT * FROM CALL_PLAN
+
+-- TRUNCATE TABLE CALL_PLAN
+
+EXEC PROCESS_GUSEST_RECORDS
+
+DROP PROCEDURE PROCESS_GUSEST_RECORDS
+
+------------------------------------------------------------------------------------
+--EXPLICT CURSOR
+
+CREATE OR REPLACE PROCEDURE PROCESS_GST_RECD AS
+    CURSOR GUEST_CUR IS 
+    SELECT NAME,PHONE,CITY FROM GUESTS;
+    
+    V_CUST_COUNT NUMBER;
+    V_GST_NAME GUESTS.NAME%TYPE;
+    V_GST_PHONE GUESTS.PHONE%TYPE;
+    V_GST_CITY GUESTS.CITY%TYPE;
+BEGIN
+    OPEN GUEST_CUR;
+    LOOP
+        FETCH GUEST_CUR INTO V_GST_NAME,V_GST_PHONE,V_GST_CITY;
+        EXIT WHEN GUEST_CUR %NOTFOUND;
+    
+        SELECT COUNT(*) INTO V_CUST_COUNT
+        FROM CUSTM
+        WHERE C_NM = V_GST_NAME
+        AND C_PHONE = V_GST_PHONE
+        AND C_CITY = V_GST_CITY;
+    
+        IF V_CUST_COUNT = 0 THEN
+            INSERT INTO Call_plan(CALL_PLAN_ID, GUEST_NAME, GUEST_CITY, GUEST_PHONE) VALUES (call_plan_seq.nextval, V_GST_NAME, V_GST_CITY, V_GST_PHONE);
+    
+            UPDATE GUESTS
+            SET PRO_FLG = 'Y'
+            WHERE NAME = V_GST_NAME
+            AND PHONE = V_GST_PHONE
+            AND CITY = V_GST_CITY;
+        END IF;
+    END LOOP;
+    CLOSE GUEST_CUR;
+    
+DELETE FROM GUESTS G
+    WHERE EXISTS (
+        SELECT 1
+        FROM CUSTM C 
+        WHERE C.C_NM = G.Name
+        AND C.C_PHONE = G.PHONE
+        AND C.C_CITY = G.CITY);
+        COMMIT;
+EXCEPTION 
+     WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('An error occurred: ' || SQLERRM);
+END;
+
+
+EXEC PROCESS_GST_RECD
+    
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SCENARIO 2
+
+CREATE TABLE cust (
+    cust_name VARCHAR(50),
+    cust_phone VARCHAR(20),
+    cust_city VARCHAR(50),
+    cust_since DATE
+);
+insert into cust values('raj',12345,'blr','21-jan-19');
+insert into cust values('kiran',989734,'hyd','19-mar-18');
+insert into cust values('kimm',878384,'chn','29-apr-19');
+insert into cust values('rajesh',783738,'blr','31-jan-18');
+insert into cust values('arun',892393,'del','23-aug-18');
+insert into cust values('rajesh',783738,'blr','31-jan-18');
+insert into cust values('arun',892393,'del','23-aug-18');
+
+CREATE TABLE cust_target (
+    cust_name VARCHAR2(50),
+    cust_phone VARCHAR2(20),
+    cust_city VARCHAR2(50),
+    cust_since DATE
+);
+
+CREATE TABLE cust_duplicate (
+    cust_name VARCHAR2(50),
+    cust_phone VARCHAR2(20),
+    cust_city VARCHAR2(50),
+    cust_since DATE,
+    no_of_instances NUMBER
+);
+
+--------------------------------------------------------------------------------
+
+CREATE OR REPLACE PROCEDURE FIND_DUP AS
+    V_INSTANCE_NO NUMBER;
+BEGIN   
+    FOR I IN (SELECT DISTINCT CUST_NAME, CUST_PHONE, CUST_CITY, CUST_SINCE FROM CUST) LOOP
+        SELECT COUNT(*) INTO V_INSTANCE_NO
+        FROM CUST
+        WHERE CUST_NAME = I.CUST_NAME
+        AND CUST_PHONE = I.CUST_PHONE
+        AND CUST_CITY = I.CUST_CITY
+        AND CUST_SINCE = I.CUST_SINCE;
+    
+        IF V_INSTANCE_NO >= 1 THEN 
+            INSERT INTO CUST_TARGET VALUES (I.CUST_NAME, I.CUST_PHONE, I.CUST_CITY, I.CUST_SINCE);
+        END IF;
+
+        IF  V_INSTANCE_NO > 1 THEN
+            INSERT INTO CUST_DUPLICATE VALUES (I.CUST_NAME, I.CUST_PHONE, I.CUST_CITY, I.CUST_SINCE, V_INSTANCE_NO);
+        END IF;
+    END LOOP;
+END;
+
+
+
+
+
+
+
+

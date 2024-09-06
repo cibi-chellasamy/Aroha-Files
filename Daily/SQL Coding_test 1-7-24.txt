@@ -1,0 +1,68 @@
+1. DCL (GRANT and REVOKE)
+Question 1: Create a user new_user and grant them SELECT and INSERT privileges on a table employees.
+
+grant select,insert on employees to 'user_id';
+select * from employees;
+
+revoke insert on employees from user_id;
+---------------------------------------------------------------------------------
+
+Question : Create a view employee_view that shows employee id, name, and department
+
+
+create view emp_v as (select emp_id,emp_name from employees);
+---------------------------------------------------------------------------------
+Question : Create a materialized view employee_mview that shows the total number of employees in each department.
+
+
+create MATERIALIZED view mat_emp as (
+select count(emp_id)as total_number_of_employees 
+from employees 
+group by dept_id);
+---------------------------------------------------------------------------------
+
+Synonyms
+Question: Create a synonym emp for the table employees.
+
+create synonym emp_syno for employees;
+---------------------------------------------------------------------------------
+
+Question: Retrieve the top 3 highest-paid employees in each department.
+
+
+with cte as(
+select department_id,count(employee_id)as employee_count,dense_rank()over(order by count(employee_id) desc)as dept_rank
+from employees
+group by department_id)
+select department_id,employee_count,dept_rank
+from cte
+where dept_rank >= 1;
+---------------------------------------------------------------------------------
+
+
+Find the top 3 departments with the highest number of employees.
+
+select dept_id,rank_dept,cnt_emp from (select dept_id ,count(emp_id) as cnt_emp, dense_rank () over (order by count(emp_id) desc) as rank_dept from employee group by dept_id)
+where rank_dept<=3;
+
+---------------------------------------------------------------------------------
+Question: Find employees who have salaries greater than the average salary of their respective job titles.
+
+select emp_name,job_id, emp_sal from employee e1 where emp_sal > (select avg(emp_sal) from employee e2 where e2.job_id=e1.job_id);
+---------------------------------------------------------------------------------
+
+list all the product that have the price higher than th average price in a same category.
+
+with cte as(select m_code,avg(p_price)as avg_price from products
+group by m_code),
+cte2 as(select p_name,m_code,p_price
+from products)
+select c.m_code,d.p_name,d.p_price,round(c.avg_price ,2)as avg_price
+from cte c join cte2 d
+on c.m_code = d.m_code
+where d.avg_price > c.p_price;
+---------------------------------------------------------------------------------
+Question  Retrieve all employees and their department names. If an employee is not assigned to any department, show NULL for the department name.
+
+select emp_name,nvl(department_id,0) from empsp
+

@@ -1,0 +1,90 @@
+Monday, March 25th,2024
+
+	
+Today's topics :: Regular expressions,sort,awk,sed			
+	
+==============================================================================================================
+1.sort :: used to sort a file, arranging the records in a particular order.
+          syntax : sort filename
+                   sort -r filename(reverse order)
+                   sort -n filename(numeric sort)
+                   sort -c filename(checks whether a file is sorted or not)
+
+=============================================================================================================
+                
+2.Regular Expressions :: regular expressions are patterns used to match character combinations in strings.
+            
+            ==> .(dot) : matches any single character.
+                         eg. b.t will match bat,bit,but etc.
+                          
+            ==> *(asterisk) : allows for zero or more occurrences of the preceding character.
+                              eg. ca*t will match ct,cat,caaat etc.
+
+            ==> ? : matches the preceding character or group zero or one times, making it optional.
+                    eg. colou?r will match color,colour etc.
+
+            ==> `[ABC]` :  matches any single character within the brackets. 
+                           eg.`[aeiou]` will match any vowel.
+                              `[123]` will match any digit 1, 2, or 3.
+
+            ==> `^[XYZ]` : matches the start of a string followed by any character within the brackets.
+                           eg. `^[abc]` will match strings that start with 'a', 'b', or 'c'.
+
+            ==> ^ : 1.Start of Line Anchor: When ^ is placed at the beginning of a regular expression pattern, it anchors the pattern to the start of a line.
+                                            eg. ^start will match any line that starts with "start".
+                     
+                    2.Negation Within Character Set: matching any character not listed within the brackets.
+                                                     eg. [^0-9]
+               
+===============================================================================================================================================
+
+In Linux, regular expressions are commonly used with command-line tools like grep, sed, and awk for searching, manipulating text, and pattern matching within files or streams.
+
+1. grep :: to search for particular string/word in a text file
+           syntax : grep string/word file_name
+                    grep -i string/word file_name ( case insensitive strings/word)
+                    grep -n string/word file_name ( along with line numbers ) 
+
+
+2. sed ( stream editor) :: most common use of SED command in UNIX is for substitution or for find and replace. 
+                           synatx : sed options 'command' filename
+                                    1.sed 's/word_to_search/word_to_be_replaced/' sed_demo ( search and replaces the first occurrence)
+                                    2.sed -i 's/word_to_search/word_to_be_replaced/g' sed_demo ( search and replace all occurances )
+                                    3.sed -n '/pattern/p' sed_demo ( printing lines matching a pattern)
+                                    4.sed '/pattern/d' sed_demo ( deleting lines matching a patter)
+
+
+3.awk :: searches one or more files to see if they contain lines that matches with the specified patterns and then perform the associated actions.
+         Syntax : awk options 'pattern {action}' filename
+                         awk '{print}' filename ( prints whole content )
+                         awk '/pattern/ {print}' filename
+                        
+
+================================================================================================================================================
+
+Scenario based question ::  1.set up a directory named "CompanyProjects".                  
+                            2.Inside "CompanyProjects," create three subdirectories: "ProjectA," "ProjectB," and "ProjectC."
+                            3.Within "ProjectA," create files named "Task1.txt," "Task2.txt," and "Readme.md" using the touch command.
+                            4.Populate "Task1.txt" and "Task2.txt" with some dummy text using cat > filename command.
+                            5.Use ls to confirm the contents of "ProjectA" after creating the files.
+                              Utilize pwd to confirm your current directory at different stages of this task.
+                            6.Edit the "Readme.md" file in "ProjectA" by adding a brief description.
+                            7.view the contents of "Task1.txt" to ensure the text has been added correctly.
+                            8.Move "Task2.txt" from "ProjectA" to "ProjectB".
+                            9.Remove the "ProjectC" directory along with its contents.
+                            10.Provide a summary of the remaining contents in the "CompanyProjects" directory.
+
+Scenario based question :: 1.create a text file named "story.txt" containing a narrative that involves elements of mystery, adventure, and characters named "Alice" and "Bob."
+                           2.filter and display all lines containing "mystery," "adventure," "Alice," or "Bob" from "story.txt."
+                           3.Count the occurrences of each of these keywords ("mystery," "adventure," "Alice," "Bob").
+                           4.Create a summary file named "summary.txt" that lists the counts of each keyword in "story.txt" with their respective line numbers and content.
+                           
+
+Scenario based question :: 1.Create a directory named "ProjectData" that should allow full access to the owner and read/write permissions for a specific group. 
+                           2.Inside "ProjectData," create subdirectories where only the owner can create or delete files, but group members can read and edit them.
+                           3.Create a file with name, notes.txt and modify the permissions such that the owner retains full access, while the group members only have read permissions, and others are entirely restricted.
+                           4.Display the updated permissions for the file notes.txt
+
+
+           
+

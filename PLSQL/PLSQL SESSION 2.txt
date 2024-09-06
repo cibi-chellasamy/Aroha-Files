@@ -1,0 +1,63 @@
+
+CREATE OR REPLACE PROCEDURE pr_dept_update_insert (VAR_DEPT_ID DEPT.DEPT_ID%TYPE, VAR_DEPT_NAME_IP DEPT.DEPT_NAME%TYPE)
+IS
+    VAR_DEPT_NAME VARCHAR(40);
+BEGIN
+    -- GETTING DEPT_NAME FROM THE TABLE
+    SELECT DEPT_NAME INTO VAR_DEPT_NAME
+    FROM DEPT
+    WHERE DEPT_ID = VAR_DEPT_ID;
+    -- SELECT GIVES ME DATA THE CONTROL GOES TO NEXT LINE
+    IF VAR_DEPT_NAME <> VAR_DEPT_NAME_IP THEN
+        UPDATE DEPT SET DEPT_NAME = VAR_DEPT_NAME_IP
+        WHERE DEPT_ID = VAR_DEPT_ID;
+        COMMIT;
+    END IF;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        INSERT INTO DEPT VALUES (VAR_DEPT_ID, VAR_DEPT_NAME_IP, 'UNKNOWN');
+        COMMIT;
+END;
+
+SELECT * FROM USER_PROCEDURES
+
+SELECT * FROM DEPT
+
+EXEC pr_dept_update_insert (80,'FINANCE');
+
+
+plsql block     Vs      Procedure
+Un Named Block          Named Block
+No compliation          Code is in compiled format
+Resuse the Code         Reusability
+per low                 performance better
+anonymous block
+
+select * from employee
+update employee set emp_name = 'RAM' where emp_id = 108;
+commit;
+
+
+-- Read emp_name and display his / her salary if exists. If emp_name does not exists, display a message no such employee
+DECLARE
+    VAR_EMP_NAME EMPLOYEE.EMP_NAME%TYPE;
+    VAR_EMP_SAL EMPLOYEE.EMP_SAL%TYPE;
+BEGIN
+    VAR_EMP_NAME := & EMP_NAME;
+    -- SELECT SALARY
+    SELECT EMP_SAL INTO VAR_EMP_SAL
+    FROM EMPLOYEE
+    WHERE EMP_NAME = VAR_EMP_NAME;
+    -- SUCCESSFUL
+    DBMS_OUTPUT.PUT_LINE ('EMPLOYEE ' || VAR_EMP_NAME || ' SALARY IS ' || VAR_EMP_SAL);
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE ('NO SUCH EMPLOYEE ' || VAR_EMP_NAME);
+    WHEN TOO_MANY_ROWS THEN
+        DBMS_OUTPUT.PUT_LINE ('MORE THAN ONE EMPLOYEE EXISTS WITH THE NAME ' || VAR_EMP_NAME);
+END;
+
+-- eXCEPTIONS COVERED
+
+NO_DATA_FOUND
+TOO_MANY_ROWS
